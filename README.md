@@ -1,6 +1,6 @@
 # DiplomaInAppleDevelopment 2024/2025
 
-Lecture slides, wiki and examples from the [Creative Computing Institute](https://www.arts.ac.uk/creative-computing-institute)'s 2024/2025 [Diploma in Apple Development 🍎👩🏻‍💻](https://www.arts.ac.uk/subjects/creative-computing/undergraduate/ual-diploma-in-apple-development)
+Lecture slides, wiki and examples from the [Creative Computing Institute](https://www.arts.ac.uk/creative-computing-institute)'s 2024/2025 [Diploma in Apple Development 🍎👩🏻‍💻](https://www.arts.ac.uk/subjects/creative-computing/undergraduate/ual-diploma-in-apple-development).
 
 ## Information
 
@@ -9,20 +9,20 @@ Lecture slides, wiki and examples from the [Creative Computing Institute](https:
 - Location: [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London and online!
 - Led by Senior Lecturer in Creative Computing and Course Leader, Apple Development: [Joel Gethin Lewis](https://joelgethinlewis.com/), who teaches Coding One and Two as well as Spatial One and Two. ML One and Two units are taught by [Xiaowan Yi](https://xiaowan-yi.com). Contact either of us via the [UAL CCI Slack](https://ual-cci.slack.com).
 - Weekly schedule:
-  - Monday: 1030-1300: Slack 1-1 tutorials. For more information and detailed schedule, see [the course wiki tutorial page](https://github.com/JGL/DiplomaInAppleDevelopment-SpringSummer2024/wiki/Tutorial-Schedule). If **your next** tutorial is too far away, or you have a more urgent question, please message me on the [UAL CCI Slack](https://ual-cci.slack.com).
-  - Tuesday: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-01, taught by [Joel Gethin Lewis](https://joelgethinlewis.com).
+  - Monday: 1030-1300: Slack 1-1 tutorials. For more information and detailed schedule, see [the course wiki tutorial page](https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025/wiki/Tutorial-Schedule). If **your next** tutorial is too far away, or you have a more urgent question, please message Joel on the [UAL CCI Slack](https://ual-cci.slack.com)!
+  - Tuesday: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-01, taught by [Joel](https://joelgethinlewis.com).
     - Block 1: Coding One: Swift and Swift UI
     - Block 2: Coding Two: Further Apple Frameworks
-  - Thursday: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-03, taught by [Xiaowan Yi](https://xiaowan-yi.com).
+  - Thursday: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-03, taught by [Xiaowan](https://xiaowan-yi.com).
     - Block 1: ML One: Introducing Machine Learning with Core ML
     - Block 2: ML Two: Making Models with Create ML
-  - Friday: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-03, taught by [Joel Gethin Lewis](https://joelgethinlewis.com).
-    - Block 1: Product One: Individual App Design and Launch
-    - Block 2: Product Two: Further Apple Frameworks
+  - Friday: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-03, taught by [Joel](https://joelgethinlewis.com).
+    - Block 1: Spatial One: Individual App Design and Launch
+    - Block 2: Spatial Two: Further Apple Frameworks
 - _**You are expected to undertake independent study of about 25 hours per week - spread across all the units of the Diploma in Apple Development.**_
 - [Course Moodle link (UAL access only)TBC](TBC)
-- [Lecture and Workshop slides](https://jgl.github.io/DiplomaInAppleDevelopment-SpringSummer2024/)
-- Please see the [course wiki for all non-lecture notes, reading lists and other resources](https://github.com/JGL/DiplomaInAppleDevelopment-SpringSummer2024/wiki).
+- [Lecture and Workshop slides](https://jgl.github.io/DiplomaInAppleDevelopment-2024-2025/)
+- Please see the [course wiki for all non-lecture notes, reading lists and other resources](https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025/wiki).
 
 ## Code of Conduct
 
@@ -69,47 +69,35 @@ As mentioned above, The [Diploma in Apple Development](https://www.arts.ac.uk/su
 
 Block 1 consists of three units, studied in parallel:
 
-- **Coding One: Swift and SwiftUI**. Drawing on Apple’s "Develop in Swift Fundamentals" curriculum, this unit gives you the opportunity to develop coding skills in the Swift language and introduces the Swift GUI frameworks key to the practice of Apple application development and prototyping. The unit is delivered in weekly coding classes that start with an introduction to coding practice for creatives using Swift. This unit recognises varying levels of coding experience in the diploma cohort and will provide a solid grounding in key computational concepts key to the work in the other units of the diploma. This unit also contains an introduction to assessment via practical exams and tests through formative mock exams and test prior to the final assessment. Unit taught by [Joel Gethin Lewis](https://joelgethinlewis.com).
-  - Learning outcomes:
-    1. Code application development assets in Swift (Knowledge, Process)
-    2. Demonstrate the use of the Swift GUI frameworks for application development (Knowledge, Process)
-    3. Use Xcode and online repository tools to collaborate and support your development process and manage your code (Knowledge, Process)
-  - [Coding One Moodle link (UAL access only) TBC](TBC)
-- **Spatial One: Team App Design, User Experience Research and Rapid prototyping**. Drawing on Apple’s "Develop in Swift Explorations" curriculum, this unit explores the process of designing apps for the visionOS platform and introduces UX methodologies, collaborative development approaches and high-fidelity prototyping using Apple tools. From this exploration you will be able to move from initial wireframes to interactive prototypes that make use of the affordances of the Apple platform and serve your intended users well. This unit will include an introduction to the history of Spatial Computing. This unit also includes an introduction to concepts of inclusivity and ethical practice within the design of digital systems as well as an introduction to assessment via design presentation through formative presentations prior to the final assessment. Unit taught by [Joel Gethin Lewis](https://joelgethinlewis.com).
-  - Learning outcomes:
-    - 1. Describe and communicate an visionOS app concept (Knowledge, Communication)
-    - 2. Employ relevant methods of user research (Enquiry, Process)
-    - 3. Produce visionOS application prototypes (Realisation)
-  - [Spatial One Moodle link (UAL access only) TBC](TBC)
-- **ML One**: Introducing Machine Learning with CoreML. The unit is a mix of practical tasks introducing the core Apple Machine Learning (ML) frameworks and seminars that look at emerging practice across the arts and creative industries that employ some level of artificial intelligence. This unit also critically and ethically explores ML and its potential impact on culture and society. From this exploration you will use your new understanding of ML methods and your critical framework to develop ML applications on the Apple platform. Unit taught by [Xiaowan Yi](https://xiaowan-yi.com).
-  - Learning outcomes:
-    - 1. Describe how machine learning works in practice (Knowledge)
-    - 2. Discuss artificial Intelligence as a cultural concept (Enquiry)
-    - 3. Construct applications with the CoreML framework (Process)
-  - [ML One Moodle link (UAL access only) TBC](TBC)
+1. **Coding One: Swift and SwiftUI**. Drawing on Apple’s "Develop in Swift Fundamentals" curriculum, this unit gives you the opportunity to develop coding skills in the Swift language and introduces the Swift GUI frameworks key to the practice of Apple application development and prototyping. The unit is delivered in weekly coding classes that start with an introduction to coding practice for creatives using Swift. This unit recognises varying levels of coding experience in the diploma cohort and will provide a solid grounding in key computational concepts key to the work in the other units of the diploma. This unit also contains an introduction to assessment via practical exams and tests through formative mock exams and test prior to the final assessment. Unit taught by [Joel](https://joelgethinlewis.com). [Coding One Moodle link (UAL access only) TBC](TBC). Learning outcomes:
+   1. Code application development assets in Swift (Knowledge, Process)
+   2. Demonstrate the use of the Swift GUI frameworks for application development (Knowledge, Process)
+   3. Use Xcode and online repository tools to collaborate and support your development process and manage your code (Knowledge, Process)
+2. **ML One**: Introducing Machine Learning with CoreML. The unit is a mix of practical tasks introducing the core Apple Machine Learning (ML) frameworks and seminars that look at emerging practice across the arts and creative industries that employ some level of artificial intelligence. This unit also critically and ethically explores ML and its potential impact on culture and society. From this exploration you will use your new understanding of ML methods and your critical framework to develop ML applications on the Apple platform. Unit taught by [Xiaowan](https://xiaowan-yi.com). [ML One Moodle link (UAL access only) TBC](TBC). Learning outcomes:
+   1. Describe how machine learning works in practice (Knowledge)
+   2. Discuss artificial Intelligence as a cultural concept (Enquiry)
+   3. Construct applications with the CoreML framework (Process)
+3. **Spatial One: Team App Design, User Experience Research and Rapid prototyping**. Drawing on Apple’s "Develop in Swift Explorations" curriculum, this unit explores the process of designing apps for the visionOS platform and introduces UX methodologies, collaborative development approaches and high-fidelity prototyping using Apple tools. From this exploration you will be able to move from initial wireframes to interactive prototypes that make use of the affordances of the Apple platform and serve your intended users well. This unit will include an introduction to the history of Spatial Computing. This unit also includes an introduction to concepts of inclusivity and ethical practice within the design of digital systems as well as an introduction to assessment via design presentation through formative presentations prior to the final assessment. Unit taught by [Joel](https://joelgethinlewis.com). [Spatial One Moodle link (UAL access only) TBC](TBC). Learning outcomes:
+   1. Describe and communicate an visionOS app concept (Knowledge, Communication)
+   2. Employ relevant methods of user research (Enquiry, Process)
+   3. Produce visionOS application prototypes (Realisation)
 
 ### Block 2 Structure
 
 Block 2 consists of three units, studied in parallel:
 
-- **Coding Two: Further Apple Frameworks**. This unit explores further Apple frameworks for developing on visionOS. With this introduction you will be able to create engaging experiences on the visionOS platform and explore some of the advanced features of the Apple platform such as RealityKit, ARKit and Vision. Unit taught by [Joel Gethin Lewis](https://joelgethinlewis.com).
-  - Learning outcomes:
-    - 1. Identify how games are developed on visionOS (Process)
-    - 2. Employ game development tools and frameworks for visionOS (Enquiry)
-    - 3. Demonstrate foundational concepts of app design (Knowledge)
-  - [Coding Two Moodle link (UAL access only) TBC](TBC)
-- **Spatial Two: Individual App Design and Launch**. In this unit you will develop the app concept for Apple’s visionOS. This will give you both an understanding of the development process using the standard Apple development tools and build on your Swift learning in an applied context. This unit will also introduce content creation methods for visionOS - including scene creation in Reality Composer Pro and photogrammetry to create 3D content for your apps from real world objects and spaces. The aim of the unit is to expose you to the full App development process including launching on the Apple App Store. Unit taught by [Joel Gethin Lewis](https://joelgethinlewis.com).
-  - Learning outcomes:
-    - 1. Describe what makes a successful app (Knowledge, Process, Communication)
-    - 2. Describe the process of launching on the Apple App store (Enquiry)
-    - 3. Solve common development problems in app production (Realisation)
-  - [Spatial Two Moodle link (UAL access only) TBC](TBC)
-- **ML Two: Making Models with CreateML**. This unit explores the creation of bespoke Machine Learning models using Apple tools and specifically the CreateML framework. You will explore common ML and AI methods building from scratch functional ML prototypes rather than relying on ones pre-supplied by Apple. This is to give you a functional understanding of the data requirements of ML models, the use of computer vision systems and the process converting models to the Apple platform. The unit will also introduce you to ways of evaluating your models for potential issues of bias and discrimination. Unit taught by [Xiaowan Yi](https://xiaowan-yi.com).
-  - Learning outcomes:
-    - 1. Describe how to build ML models (Knowledge, Communication)
-    - 2. Demonstrate how to use the CreateML framework (Process)
-    - 3. Describe approaches to evaluate your model for bias and discrimination (Enquiry)
-  - [ML Two Moodle link (UAL access only) TBC](TBC)
+1. **Coding Two: Further Apple Frameworks**. This unit explores further Apple frameworks for developing on visionOS. With this introduction you will be able to create engaging experiences on the visionOS platform and explore some of the advanced features of the Apple platform such as RealityKit, ARKit and Vision. Unit taught by [Joel](https://joelgethinlewis.com). [Coding Two Moodle link (UAL access only) TBC](TBC). Learning outcomes:
+   1. Identify how games are developed on visionOS (Process)
+   2. Employ game development tools and frameworks for visionOS (Enquiry)
+   3. Demonstrate foundational concepts of app design (Knowledge)
+2. **ML Two: Making Models with CreateML**. This unit explores the creation of bespoke Machine Learning models using Apple tools and specifically the CreateML framework. You will explore common ML and AI methods building from scratch functional ML prototypes rather than relying on ones pre-supplied by Apple. This is to give you a functional understanding of the data requirements of ML models, the use of computer vision systems and the process converting models to the Apple platform. The unit will also introduce you to ways of evaluating your models for potential issues of bias and discrimination. Unit taught by [Xiaowan](https://xiaowan-yi.com). [ML Two Moodle link (UAL access only) TBC](TBC). Learning outcomes:
+   1. Describe how to build ML models (Knowledge, Communication)
+   2. Demonstrate how to use the CreateML framework (Process)
+   3. Describe approaches to evaluate your model for bias and discrimination (Enquiry)
+3. **Spatial Two: Individual App Design and Launch**. In this unit you will develop the app concept for Apple’s visionOS. This will give you both an understanding of the development process using the standard Apple development tools and build on your Swift learning in an applied context. This unit will also introduce content creation methods for visionOS - including scene creation in Reality Composer Pro and photogrammetry to create 3D content for your apps from real world objects and spaces. The aim of the unit is to expose you to the full App development process including launching on the Apple App Store. Unit taught by [Joel](https://joelgethinlewis.com). [Spatial Two Moodle link (UAL access only) TBC](TBC). Learning outcomes:
+   1. Describe what makes a successful app (Knowledge, Process, Communication)
+   2. Describe the process of launching on the Apple App store (Enquiry)
+   3. Solve common development problems in app production (Realisation)
 
 ## Assessment
 
@@ -135,14 +123,14 @@ Please read [UAL's guidance for students on how they will be assessed](https://w
   1. Multiple Choice Test: students will be presented with a series of questions relating explicitly to course content. They must choose between up to 4 potential correct answers per question. Test will be sat on TBC, duration two hours. This test will be worth 50% of your overall unit mark.
   2. Practical Exam: students will be individually asked to write a basic program to demonstrate the application of creative coding to a set problem. Exam will be sat on Tuesday TBC, duration two hours. This exam will be worth 50% of your overall unit mark.
 
-- **Spatial One: Team App Design, User Experience Research and Rapid prototyping**:
-
-  1. Presentation: You will present your creative work to your peers and upload the 'slide deck' from the presentation. Presentation will be given on TBC, duration 30 minutes. This presentation will be worth 100% of your overall unit mark.
-
 - **ML One: Introducing Machine Learning with CoreML**:
 
   1. Multiple Choice test: students will be presented with a series of questions relating explicitly to course content. They must choose between up to 4 potential correct answers per question. Test will be sat on TBC, duration two hours. This test will be worth 50% of your overall unit mark.
   2. Presentation: You will give a presentation around a Apple ML model to your peers and the upload of the ‘slide deck’ from the presentation. Presentation will be given on TBC, duration 30 minutes. This presentation will be worth 50% of your overall unit mark.
+
+- **Spatial One: Team App Design, User Experience Research and Rapid prototyping**:
+
+  1. Presentation: You will present your creative work to your peers and upload the 'slide deck' from the presentation. Presentation will be given on TBC, duration 30 minutes. This presentation will be worth 100% of your overall unit mark.
 
 ### Block 2 Assessment
 
@@ -151,14 +139,14 @@ Please read [UAL's guidance for students on how they will be assessed](https://w
   1. Multiple Choice test: students will be presented with a series of questions relating explicitly to course content. They must choose between up to 4 potential correct answers per question. This test will be sat on TBC, duration two hours, 1000-1200. This test will be worth 50% of your overall unit mark.
   2. Practical Exam: students will be individually asked to write a basic program to demonstrate the application of creative coding to a set problem. This exam will be sat on TBC, duration two hours, 1000-1200. This exam will be worth 50% of your overall unit mark.
 
-- **Spatial Two: Individual App Design and Launch**:
-
-  1. Presentation: You will present your creative work to your peers and upload the 'slide deck' from the presentation. This presentation will be given on TBC, duration 30 minutes, 1000-1300. This presentation will be worth 100% of your overall unit mark.
-
 - **ML Two: Making Models with CreateML**:
 
   1. Multiple Choice test: students will be presented with a series of questions relating explicitly to course content. They must choose between up to 4 potential correct answers per question. This test will be sat on TBC. This test will be worth 50% of your overall unit mark.
   2. Presentation: You will give a presentation around a bespoke ML model to your peers and upload the ‘slide deck’ from the presentation. This presentation will be given on TBC, duration 30 minutes, 1000-1300. This presentation will be worth 50% of your overall unit mark.
+
+- **Spatial Two: Individual App Design and Launch**:
+
+  1. Presentation: You will present your creative work to your peers and upload the 'slide deck' from the presentation. This presentation will be given on TBC, duration 30 minutes, 1000-1300. This presentation will be worth 100% of your overall unit mark.
 
 Finally, some tips about how to get the best grades possible:
 
