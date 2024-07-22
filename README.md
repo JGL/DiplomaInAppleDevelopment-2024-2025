@@ -71,9 +71,9 @@ Block 1 consists of three units, studied in parallel:
 
 - **Coding One: Swift and SwiftUI**. Drawing on Apple’s "Develop in Swift Fundamentals" curriculum, this unit gives you the opportunity to develop coding skills in the Swift language and introduces the Swift GUI frameworks key to the practice of Apple application development and prototyping. The unit is delivered in weekly coding classes that start with an introduction to coding practice for creatives using Swift. This unit recognises varying levels of coding experience in the diploma cohort and will provide a solid grounding in key computational concepts key to the work in the other units of the diploma. This unit also contains an introduction to assessment via practical exams and tests through formative mock exams and test prior to the final assessment. Unit taught by [Joel Gethin Lewis](https://joelgethinlewis.com).
   - Learning outcomes:
-    - 1. Code application development assets in Swift (Knowledge, Process)
-    - 2. Demonstrate the use of the Swift GUI frameworks for application development (Knowledge, Process)
-    - 3. Use Xcode and online repository tools to collaborate and support your development process and manage your code (Knowledge, Process)
+    1. Code application development assets in Swift (Knowledge, Process)
+    2. Demonstrate the use of the Swift GUI frameworks for application development (Knowledge, Process)
+    3. Use Xcode and online repository tools to collaborate and support your development process and manage your code (Knowledge, Process)
   - [Coding One Moodle link (UAL access only) TBC](TBC)
 - **Spatial One: Team App Design, User Experience Research and Rapid prototyping**. Drawing on Apple’s "Develop in Swift Explorations" curriculum, this unit explores the process of designing apps for the visionOS platform and introduces UX methodologies, collaborative development approaches and high-fidelity prototyping using Apple tools. From this exploration you will be able to move from initial wireframes to interactive prototypes that make use of the affordances of the Apple platform and serve your intended users well. This unit will include an introduction to the history of Spatial Computing. This unit also includes an introduction to concepts of inclusivity and ethical practice within the design of digital systems as well as an introduction to assessment via design presentation through formative presentations prior to the final assessment. Unit taught by [Joel Gethin Lewis](https://joelgethinlewis.com).
   - Learning outcomes:
