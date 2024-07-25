@@ -22,7 +22,7 @@ Lecture slides, wiki and examples from the [Creative Computing Institute](https:
 - _**You are expected to undertake independent study of about 25 hours per week - spread across all the units of the Diploma in Apple Development.**_
 - [Course Moodle link (UAL access only)TBC](TBC)
 - [Lecture and Workshop slides](https://jgl.github.io/DiplomaInAppleDevelopment-2024-2025/)
-- Please see the [course wiki for all non-lecture notes, reading lists and other resources](https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025/wiki).
+- Please see the [course wiki for all non-lecture notes, list of people on the course and other resources](https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025/wiki).
 
 ## Code of Conduct
 
