@@ -1,4 +1,4 @@
-# DiplomaInAppleDevelopment 2024/2025
+# Diploma In Apple Development 2024/2025
 
 Lecture slides, wiki and examples from the [Creative Computing Institute](https://www.arts.ac.uk/creative-computing-institute)'s 2024/2025 [Diploma in Apple Development 🍎👩🏻‍💻](https://www.arts.ac.uk/subjects/creative-computing/undergraduate/ual-diploma-in-apple-development).
 
