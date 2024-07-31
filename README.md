@@ -63,7 +63,7 @@ You can find our code of conduct here: [code_of_conduct.md](CODE_OF_CONDUCT.md),
 
 As mentioned above, The [Diploma in Apple Development](https://www.arts.ac.uk/subjects/creative-computing/undergraduate/ual-diploma-in-apple-development) is split into two Blocks of teaching. **Block 1** takes up the entire Autumn term and half of the Spring term. **Block 2** follows on, taking the second half of Spring term and the entire Summer term.
 
-![Course Structure Image](/CourseDiagram.png)
+![Course Structure Image](/AppleDiplomaCourseDiagram.png)
 
 ### Block 1 Structure
 
