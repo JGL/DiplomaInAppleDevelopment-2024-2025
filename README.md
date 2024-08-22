@@ -23,6 +23,7 @@ Lecture slides, wiki and examples from the [Creative Computing Institute](https:
 - [Course Moodle link (UAL access only)TBC](TBC)
 - [Lecture and Workshop slides](https://jgl.github.io/DiplomaInAppleDevelopment-2024-2025/)
 - Please see the [course wiki for all non-lecture notes, list of people on the course and other resources](https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025/wiki).
+- Please email CCI Undergraduate Programme Admin for help with any administrative matters such as ID access, finance, timetable issues, etc. Their email is cci.ug@arts.ac.uk.
 
 ## Code of Conduct
 
