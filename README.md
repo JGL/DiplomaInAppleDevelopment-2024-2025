@@ -9,16 +9,22 @@ Lecture slides, wiki and examples from the [Creative Computing Institute](https:
 - Location: [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London and online!
 - Led by Senior Lecturer in Creative Computing and Course Leader, Apple Development: [Joel Gethin Lewis](https://joelgethinlewis.com/), who teaches Coding One and Two as well as Spatial One and Two. ML One and Two units are taught by [Xiaowan Yi](https://xiaowan-yi.com). Contact either of us via the [UAL CCI Slack](https://ual-cci.slack.com).
 - Weekly schedule:
-  - Monday: 1030-1300: Slack 1-1 tutorials. For more information and detailed schedule, see [the course wiki tutorial page](https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025/wiki/Tutorial-Schedule). If **your next** tutorial is too far away, or you have a more urgent question, please message Joel on the [UAL CCI Slack](https://ual-cci.slack.com)!
-  - Tuesday: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-01, taught by [Joel](https://joelgethinlewis.com).
+  - Monday morning: 1030-1300: Slack 1-1 tutorials. For more information and detailed schedule, see [the course wiki tutorial page](https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025/wiki/Tutorial-Schedule). If **your next** tutorial is too far away, or you have a more urgent question, please message Joel on the [UAL CCI Slack](https://ual-cci.slack.com)!
+  - Monday afternoon: independent study
+  - Tuesday morning: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-01, taught by [Joel](https://joelgethinlewis.com).
     - Block 1: Coding One: Swift and Swift UI
     - Block 2: Coding Two: Further Apple Frameworks
-  - Thursday: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-03, taught by [Xiaowan](https://xiaowan-yi.com).
+  - Tusday afternoon: independent study
+  - Wednesday morning: independent study
+  - Wednesday afternoon: independent study
+  - Thursday morning: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-03, taught by [Xiaowan](https://xiaowan-yi.com).
     - Block 1: ML One: Introducing Machine Learning with Core ML
     - Block 2: ML Two: Making Models with Create ML
-  - Friday: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-03, taught by [Joel](https://joelgethinlewis.com).
+  - Thursday afternoon: independent study
+  - Friday morning: 0930-1330, in person at [Creative Computing Institute(CCI)](https://www.arts.ac.uk/creative-computing-institute), Camberwell, London. Room PR_B501-03, taught by [Joel](https://joelgethinlewis.com).
     - Block 1: Spatial One: Individual App Design and Launch
     - Block 2: Spatial Two: Further Apple Frameworks
+  - Friday afternoon: independent study
 - _**You are expected to undertake independent study of about 25 hours per week - spread across all the units of the Diploma in Apple Development.**_
 - [Course Moodle link (UAL access only)TBC](TBC)
 - [Lecture and Workshop slides](https://jgl.github.io/DiplomaInAppleDevelopment-2024-2025/)
