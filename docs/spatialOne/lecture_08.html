@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Diploma in Apple Development 🍎👩🏻‍💻: 2024/2025: Spatial One: Lecture 8: Revised project thoughts, Navigation Design, Spatial Photo and Video.</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script>
+    BIG_ASPECT_RATIO = false;
+  </script>
+
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖖🏻</text></svg>">
+
+  <style>
+    body {
+      background-color: #EDD1B0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>Diploma in Apple Development 🍎👩🏻‍💻: Spatial One: Lecture 8: Revised project thoughts, Navigation Design, Spatial Photo and Video.<br /><a href="../index.html">Back to slide index</a>.</div>
+  <div>Hi!</div>
+  <div>First, don't forget to confirm your attendance using the Seats Mobile app!</div>
+  <div>Second, I'm going to start every lecture with a meditation from the fantastic <a href="https://www.shambhala.com/sittingstilllikeafrog/">Sitting Still Like a Frog book</a>, all read by Myla Kabat-Zinn. If you don't want to participate that's completely fine.</div>
+  <div>
+    Let's start by going over your App Design Workbook work in groups. Who wants to go first? 7 minutes total each!
+    <ol>
+      <li>
+        Page 30 of the App Design Workbook: "Find Differentiators"
+      </li>
+      <li>
+        Page 36 of the App Design Workbook: "Define Features"
+      </li>
+      <li>
+        Page 42 of the App Design Workbook: "Prioritize (sic) Features"
+      </li>
+      <li>
+        Page 43 of the App Design Workbook: "Describe Key Functions"
+      </li>
+      <li>
+        Page 45 of the App Design Workbook: "Define an MVP" - do you know what an <a href="https://en.wikipedia.org/wiki/Minimum_viable_product">MVP</a> is?
+      </li>
+    </ol>
+  </div>
+  <div>Let's continue by watching some videos from WWDC.</div>
+  <div>
+    <a href="https://developer.apple.com/videos/play/wwdc2022/10001/">"Explore navigation design for iOS" (25 mins)</a>
+    <br />
+    "Familiar navigation patterns can help people easily explore the information within your app — and save them from unnecessary confusion. We'll show you how to take advantage of existing navigation structures to simplify complex interactions in your app without compromising its personality. Learn best practices and common pitfalls when working with tab bars, modality, and more."
+  </div>
+  <div>
+    <a href="https://developer.apple.com/videos/play/wwdc2024/10149/">"Work with windows in SwiftUI" (13 mins)</a>
+    <br />
+    "Learn how to create great single and multi-window apps in visionOS, macOS, and iPadOS. Discover tools that let you programmatically open and close windows, adjust position and size, and even replace one window with another. We'll also explore design principles for windows that help people use your app within their workflows."
+  </div>
+  <div>
+    Let's move on to thinking about Spatial Video and how that can be viewed in visionOS.
+  </div>
+  <div>
+    <a href="https://developer.apple.com/videos/play/wwdc2023/10070/">"Create a great spatial playback experience" (14 mins)</a>
+    <br />
+    "Get ready to support video in your visionOS app! Take a tour of the frameworks and APIs that power video playback and learn how you can update your app to play 3D content. We'll also share tips for customizing playback to create a more immersive watching experience."
+  </div>
+  <div>
+    <a href="https://developer.apple.com/videos/play/wwdc2024/10149/">"Deliver video content for spatial experiences" (17 mins)</a>
+    <br />
+    "Learn how to prepare and deliver video content for visionOS using HTTP Live Streaming (HLS). Discover the current HLS delivery process for media and explore how you can expand your delivery pipeline to support 3D content. Get up to speed with tips and techniques for spatial media streaming and adapting your existing caption production workflows for 3D. And find out how to share audio tracks across video variants and add spatial audio to make your video content more immersive."
+  </div>
+  <div>
+    <a href="https://developer.apple.com/videos/play/wwdc2024/10166/">"Build compelling spatial photo and video experiences" (23 mins)</a>
+    <br />
+    "Learn how to adopt spatial photos and videos in your apps. Explore the different types of stereoscopic media and find out how to capture spatial videos in your iOS app on iPhone 15 Pro. Discover the various ways to detect and present spatial media, including the new QuickLook Preview Application API in visionOS. And take a deep dive into the metadata and stereo concepts that make a photo or video spatial."
+  </div>
+  <div>
+    <a href="https://developer.apple.com/wwdc24/10115/">"Enhance the immersion of media viewing in custom environments" (18 mins)</a>
+    <br />
+    "Extend your media viewing experience using Reality Composer Pro components like Docking Region, Reverb, and Virtual Environment Probe. Find out how to further enhance immersion using Reflections, Tint Surroundings Effect, SharePlay, and the Immersive Environment Picker."
+  </div>
+  <div>
+    Let's explore this Sample Code from Apple: <a href="https://developer.apple.com/documentation/visionos/building-an-immersive-media-viewing-experience">"Building an immersive media viewing experience"</a> and <a href="https://developer.apple.com/documentation/visionos/enabling-video-reflections-in-an-immersive-environment">"Enabling video reflections in an immersive environment"</a>. Both of these samples refer to the larger <a href="https://developer.apple.com/documentation/visionos/destination-video">Destination Video</a> sample project, let's go through it together.
+  </div>
+  <div>
+    Finally, if there is time, let's go through the following content from <a href="http://www.flong.com/archive/index.html">Golan Levin</a>:
+    <ul>
+      <li><a href="https://github.com/golanlevin/ExperimentalCapture/blob/master/docs/environmental-capture.md">https://github.com/golanlevin/ExperimentalCapture/blob/master/docs/environmental-capture.md</a>.</li>
+      <li><a href="https://github.com/golanlevin/ExperimentalCapture/blob/master/docs/gonioreflectometry.md">https://github.com/golanlevin/ExperimentalCapture/blob/master/docs/gonioreflectometry.md</a>.</li>
+      <li><a href="https://github.com/golanlevin/ExperimentalCapture/blob/master/docs/volumetric-video.md">https://github.com/golanlevin/ExperimentalCapture/blob/master/docs/volumetric-video.md</a>.</li>
+    </ul>
+  </div>
+  <div>What questions do you have for me?</div>
+  <div>
+    See you next Friday, please review all of the content from today's lecture before then!
+  </div>
+  <div>
+    Thanks!<br /><a href="../index.html">Back to slide index</a>.
+  </div>
+</body>
+
+</html>
