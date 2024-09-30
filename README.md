@@ -26,7 +26,7 @@ Lecture slides, wiki and examples from the [Creative Computing Institute](https:
     - Block 2: Spatial Two: Further Apple Frameworks
   - Friday afternoon: independent study
 - _**You are expected to undertake independent study of about 25 hours per week - spread across all the units of the Diploma in Apple Development.**_
-- [Course Moodle link (UAL access only)TBC](TBC)
+- [Course Moodle link (UAL access only)TBC](https://moodle.arts.ac.uk/course/view.php?id=84350)
 - [Lecture and Workshop slides](https://jgl.github.io/DiplomaInAppleDevelopment-2024-2025/)
 - Please see the [course wiki for all non-lecture notes, list of people on the course and other resources](https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025/wiki).
 - Please email CCI Undergraduate Programme Admin for help with any administrative matters such as ID access, finance, timetable issues, etc. Their email is cci.ug@arts.ac.uk.
