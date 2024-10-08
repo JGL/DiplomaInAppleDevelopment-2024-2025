@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+  
+</head>
+<body>
+  <div>
+    ML One 
+    <br />
+    Lecture 02
+    <br />
+    Introduction to representation, numbers and image classification 🍵   
+  </div>
+    
+  <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+  
+  <div> By the end of this lecture, we'll have learnt about:
+  
+     <br /> The theoretical: 
+     <br /> - Introduction to representation
+     <br />  - How to use numbers to represent things
+     <br />  - Introduction to machine learning [model]
+     <br />  - Introduction to image classification
+     <br /> The practical: 
+     <br /> - How to use image classification API from Apple's Vision Framework
+  
+  </div>
+  
+  <div> First of all, don't forget to confirm your attendence on <a href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!  </a></div>
+  
+  <div> <a href="https://mimicproject.com/code/546bd3c7-31ad-c1aa-e8eb-989e91b1f2e9">A Fun AI interactive web App</a> recommended by Mick </div>
+  
+  <div> Recap </div>
+  
+  <div> 
+   - Pattern recognition is everywhere and amazing. ⭐️
+      <br />         
+   - It'd be cool to better understand intelligence by prototyping it using human-made machine (“AI”).⭐️
+      <br /> 
+   - One intermediate goal of prototyping intelligence is to make machines to do pattern recognition. ⭐️
+      <br />       
+  (because we guess that pattern recognition is an essential part of intelligence.)       
+
+  </div>
+  
+  <div> 
+  <br /> 
+     - We can also view AI as statistical, probabilistic, stochastic and
+    other mathematical processes that can be
+    used to learn procedures and perform
+    tasks automatically.
+  <br />       
+    - Symbolic and Connectionist approaches to AI  
+  <br /> 
+    (We'll see more on this in later lectures)
+  </div>
+    
+  <div> Representation </div>
+  
+  <div> What is apple </div>
+  
+  <div> Pattern recognition question 01
+  <br /> 
+  How do you distinguish apple as a fruit vs. Apple as a tech company? 
+  </div>
+  
+  <div> 
+    Here are some possible representations:
+  <br /> 
+    - is it edible or not?
+  <br /> 
+    - is it a fruit?
+   <br />
+    - is the word spelled with an upper cased "A"? 🤪    
+  </div>
+  
+  <div> 
+    Pattern recognition question 02
+    <br />    
+    How do you distinguish apple vs. pear?  🍎🍏🍐       
+  </div>
+      
+  <div> 
+    How do you distinguish apple vs. pear?  🍎🍏🍐
+    <br />   
+    Do any of our previous representations work?
+    <br /> 
+    - is it edible or not?
+    <br /> 
+    - is it a fruit?
+    <br />
+    - is the word spelled with an upper cased "A"? 🤪    
+  </div>
+  
+  <div> 
+    No but here are some possible representations:
+    <br /> 
+    - their shapes
+    <br />
+    - their tastes   
+  </div>
+  
+  
+  <div> 
+    Good representation simplifies our task!
+    <br /> 
+    To excel at pattern recognition ~= To find a good representation
+  </div>
+  
+  <div> 
+   🌪️
+   <br /> 
+   <a href="https://www.theguardian.com/lifeandstyle/wordofmouth/2012/may/21/the-papple-tasted-and-tested">Meet papple</a>
+  </div>
+  
+  <div> 
+   Representation can be contextual.
+   <br /> 
+   Depends on the problem context, different tasks may have different efficient representations for the same objects.
+  </div>
+  
+  
+  <div> My take on representation:
+     <br /> 
+    - It can be descriptive and capture some characteristics.
+     <br /> 
+    - It can be perspective and partial. 
+     <br /> 
+    - It can be contextual where "good" ones are task-dependent.
+  </div>
+
+  <div> - A side note on abstraction (in the context of computational thinking) -
+   <br /> 
+   Abstraction is related to representation in the sense that    
+   it is about taking away irrelevant details and reducing the representation to essential characteristics.
+   <br /> 
+   (Shoutout to  <a href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2022/codingOne/lecture_01.html#42">Joel's slides</a> on "what is computational thinking?")
+  </div>
+ 
+  <div> Speaking of representation... 
+     <br /> 
+    A name can be a person's representation and we have not heard about your names yet 😜 
+  </div>
+  
+  
+  <div> any questions so far? </div>
+  
+  <div> Numbers and Numeric representation </div>
+  
+  <div> 
+     What do we use (real) numbers for?
+  </div>
+  
+  <div> 
+    - To count things
+     <br />    
+    - To measure things
+      <br />   
+    - To label things
+      <br />   
+    - ...
+  </div>
+  
+  <div> 
+   <a href="https://www.youtube.com/shorts/jh0aYUlmsF0">007</a>        
+  </div>
+  
+  
+  <div> 
+  A side note:
+  <br /> 
+  - Do we really have numbers in the real world? Have you seen numbers walking on the street on their own?
+  </div>
+  
+  <div> 
+  A side note:
+  <br /> 
+  Have you seen numbers walking on the street on their own?
+  <br />
+  - Numbers are often used with contexts. To connect numbers with reality, we always need interpretation guide(e.g. a protocol, unit, etc.) when using numbers in real life. 
+  <br />
+  - How to interpret numbers produced by computer programms is a helpful skill you can get from this unit.
+  </div>
+  
+  <div>
+   My number of chaos:
+   <br />     
+  -858993460                 
+  </div>
+  
+  <div> 
+  Why are numbers important in this unit?
+     <br />    
+    - Our human-made poor machine can only deal with numbers 🫠
+      <br />   
+    - Numbers can introduce maths, which is our <a href="https://www.youtube.com/watch?v=nmvkhLz8t7I">DOMAIN EXPANSION 💥</a>
+      <br />   
+  </div>
+  
+  <div> 
+    “Information era”🍎💻
+     <br />    
+    Information we receive from the world are mainly from four modalities:
+      <br />   
+    - Image (video)
+      <br />   
+    - Text (written language)
+      <br />   
+    - Audio (music, speech)
+      <br />   
+    - Number (the weather in degree celsius, your birthday, etc.  )
+      <br />  
+      Can you think of any information that is not from the four categories?
+  </div>
+  
+  
+  <div> 
+    My mind-blowing moment:
+      <br />   
+    - Information from any of those three categories (image, text and audio) can be digitized / numberified aka be represented by just a bunch of numbers.
+  </div>
+  
+  <div> How to numberify the size of digital images?
+     <br />  
+    - Two numbers for its width and height (how many pixels).
+    <br />  
+    e.g. 3840 x 2160 for 4K resolution        
+    <br />      
+    - Sometimes another number for how many color channels there are.
+   <br />      
+    e.g. 256 x 256 x 3 for an RGB color image
+  </div>
+  
+  <div class='layout' style='grid-template-rows:55% 45%;'>
+  <img src='https://cdn.glitch.global/0e13d0b6-6ebc-4330-9873-db7826d23957/pixels.png?v=1696434561327'/>
+  <div>Here is one way to numberify digital images:
+     <br />  
+  - Three numbers for each pixel representing the RGB values in color images
+     <br />     
+  - One number for each pixel representing the greyscale value in grey images </div>
+  </div>
+  
+
+  
+  <div> How to numberify digital audio? </div>
+  
+  <div class='layout' style='grid-template-rows:55% 45%;'>
+  <img src='https://cdn.glitch.global/0e13d0b6-6ebc-4330-9873-db7826d23957/sound-in-numbers.png?v=1696434561964'/>
+  <div>Here is one way to numberify digital audio:
+   <br />  
+    - A series of numbers where each number denotes a displacement value from silence at that point of time </div>
+  </div>
+  
+  <div> Here is one way to numberify text:
+  <br />  
+  - Think about when you are looking up a word in a dictionary📕 using page number and index
+  <br /> 
+  - To decode the pair of (page number, index) back to actual words, you will need to pass that dictionary around.
+  <br /> 
+  - OR?         
+  <br />           
+  - more on this in week11
+  </div>
+  
+  
+  <div> A tricky question for you!
+   <br /> 
+  How to numberify the label of an image being a dog🐶 image or a cat😼 image?
+  <br /> 
+  You are free to define any dictionary/protocol to explain the number(s) you have used.
+  </div>
+  
+  <div> One possible way:
+   <br /> 
+  - I will use two numbers and each number is either 0 or 1.
+   <br /> 
+  - I will have the first number indicating if there is a dog in the image.
+   <br />
+  - And I will have the second number indicating if there is a cat in the image.
+   <br />
+  - If it is a dog-only image: [1, 0] (square brackets here are optional)
+   <br />
+  - If it is a cat-only image: [0, 1]
+   <br />
+  - If it is a dog and cat image: [1, 1]
+   <br />
+  - What does this numeric representation [0, 0] mean in this context?           
+  </div>
+  
+  <div> any questions so far? </div>
+  
+  <div> Image classification </div>
+  
+  <div> What we will talk about today:
+   <br />  
+  - What is image classification? 
+   <br />  
+  - What can an image classification model do?
+   <br />   
+  What we will NOT talk about today:
+   <br />   
+  - How to make an image classification model from scratch?
+   <br />   
+  - How to modify an image classification model?         
+  </div>
+  
+  <div> Image classification
+   <br />  
+  - It is a machine learning and computer vision task. 
+   <br />  
+  - It is a stepping stone task in computer vision and computational pattern recognition. 
+   <br />  
+  - The goal is to train a model to recognize and assign a predefined label or class to an input image. 
+  </div>
+  
+  
+   <div> Your first AI model to inspect!!! </div>
+  
+   <div> One hack for inspecting any model: 
+    <br /> 
+    Because a model is about "input -> process -> output",
+    <br /> 
+    to inspect what a model does, one helpful starting point is to check its input and output!
+   </div>
+  
+  
+   <div> Input? Output? </div>
+  
+  
+   <div> Image classification model:
+     <br /> 
+    - Input: a digital image
+    <br /> 
+    - output: the predicted classes of the input image 
+   </div>
+    
+   <div> Image classification model:
+     <br /> 
+   Input (in a bit more details):
+    <br /> 
+   An image with a pre-defined size.
+    <br /> 
+   (but you can get around with the size limit simply by resizing and/or cropping images.)
+    <br /> 
+   (and be careful of the aspect ratio!)
+   </div>
+  
+   <div> Image classification model:
+     <br /> 
+     Output (in a bit more details):
+     <br /> 
+     Probabilities assigned to each class from a set of pre-defined classes.
+   </div>
+  
+   <div> 
+      Image classification model:
+      <br /> 
+      It outputs probabilities assigned to each class from a set of pre-defined classes.
+      <br /> 
+      Let's dive into the "pre-defined classes" bit 
+  </div>
+  
+   <div> Back to the example of dog🐶-or-cat😼 image classification model:
+     <br />
+       What are the pre-defined classes that this model can predict into?
+     <br />
+       - a class for "dog" and a class for "cat"
+     <br />
+       - Can this model tell us which vehicle the input image is?
+     <br />
+       - 🚫
+     <br />
+       - But it would be interesting to feed a 🚗 image into the model and see how it improvises.
+   </div>
+  
+   <div> 
+      Image classification model:
+      <br /> 
+      It outputs probabilities assigned to each class from a set of pre-defined classes.
+      <br /> 
+      Let's dive into the "probabilities" bit 
+  </div>
+  
+  <div> - It is primarily outputing a list of probabilities assigned to each class from the pre-defined class sets 
+   <br /> 
+    - From there, we can easily post-process the list of probabilities and output human-friendlier result like "which one is the most probable class?"
+  </div>
+    
+  <div> any questions so far? </div>
+  
+  <div> Takeaway messages from our first encounter with image classification models
+   <br />  
+  - Each model has a pre-defined input image size.
+    <br />  
+  - Each model has a pre-defined output classes range.
+  </div>
+  
+  
+   <div> A toy example on image classification in playground </div>
+  
+   <div> Has everyone installed Xcode? </div>
+  
+   <div> Download the playground <a href="https://moodle.arts.ac.uk/mod/resource/view.php?id=1251946">here</a> and double click the file to open it (Xcode should be fired up automatically)</div> 
+  
+   <div> 
+     Don't panic about the chunks of swift code 💙
+     <br />
+     - The code has been prepared and is ready to run.
+     <br />
+     - It can predict the given input image's class, one image at a time.
+  </div>
+  
+  <div> 
+      All we have to do for this lecture is to:
+      <br /> 1. Run the playground as it is.
+      <br /> 2. Check the classfication results.
+      <br /> 3. Inspect the loaded classification model's input image size and output classes.
+      <br /> 4. Swap to another input image and run the playground.
+  </div>
+  
+  <div class='layout' style='grid-template-rows:65% 35%;'>
+  <img src='https://cdn.glitch.global/0e13d0b6-6ebc-4330-9873-db7826d23957/RunThePlayground.png?v=1696457336223'/>
+  <div>This is how you can run the playground and check the classification results 👻 </div>
+  </div>
+  
+  
+  <div class='layout' style='grid-template-rows:65% 35%;'>
+  <img src='https://cdn.glitch.global/0e13d0b6-6ebc-4330-9873-db7826d23957/InspectInputSize.png?v=1696455426041'/>
+    <div>This is where you can inspect the model's input image size👋
+    <br />  
+    - Bonus question: go back to the main file and check the code in line 25, have you seen some familiar numbers? What does these numbers mean?</div>
+  </div>
+  
+  <div class='layout' style='grid-template-rows:65% 35%;'>
+  <img src='https://cdn.glitch.global/0e13d0b6-6ebc-4330-9873-db7826d23957/InspectOutputClasses.png?v=1696455442367'/>
+  <div>This is where you can inspect the model's output classes 🌛
+   <br />  
+  - Bonus question: how many classes can this model predict from?</div>
+  </div>
+  
+  <div class='layout' style='grid-template-rows:65% 35%;'>
+  <img src='https://cdn.glitch.global/0e13d0b6-6ebc-4330-9873-db7826d23957/ChangeInputImage.png?v=1696457930265'/>
+  <div>This is how you can swap the input image 💅
+   <br />  
+  - Bonus question: try using other images from your laptop (you can download new interesting ones from the internet) as the input image </div>
+  </div>
+   
+  <div>  <a href="https://www.youtube.com/watch?v=bqeQByqf_f8">A nice App</a> that makes good use of image classification model </div>
+
+  <div> Today we have talked about:
+     <br />
+     Representation 🧠
+       <br /> - descriptive, perspective, and contextual
+       <br />
+     Numeric representation 🌶️
+       <br /> - How image, audio and text can be represented by numbers
+       <br />
+      Image classification 🕹️
+       <br /> - Given an input image, which is of a pre-defined size, a IC model predicts the probabilities of that image assigned to each class from a pre-defined set of classes.
+  </div>
+  
+  
+  <div> Homework :)
+       <br />
+       Envision an App that leverages image classification model(s) 👐
+       <br /> Some possible starting points:
+       <br /> - What is the scenario where an image classification model could be helpful / fun?
+       <br /> - What are the classes you envision the model to predict from input images?
+       <br /> - Classes could be any, both objective and subjective(e.g. different emotions) categories!
+  </div>
+  
+
+  
+  <div> 
+    We'll see you next Thursday same time and same place!
+  </div>
+  
+</body>
+</html>
