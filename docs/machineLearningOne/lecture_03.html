@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+  
+</head>
+<body>
+<div>
+  ML One
+  <br />
+  Lecture 03
+  <br />
+  Introduction to data types and face detection 😎
+</div>
+
+<div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+<div> By the end of this lecture, we'll have learnt about:
+  <br /> The theoretical:
+  <br /> - Introduction to data types in data science
+  <br /> - Introduction to face detection
+  <br /> The practical:
+  <br /> - Two example Apps that use Apple's face detection model
+</div>
+
+<div> First of all, don't forget to confirm your attendence on <a
+    href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App! </a>
+</div>
+
+<div> A <a href="https://youtu.be/l1J4MvyL2to?si=w1qEIaU61CiLLUXX">nice tune with music video</a> from my favourite UK
+  Jazz musician to wake us up </div>
+
+<div> Recap </div>
+
+<div>
+  Representation 🧠
+  <br /> - descriptive, perspective, and contextual
+  <br />
+  Numeric representation 🌶️
+  <br /> - How we use numbers to represent image, audio and text
+
+  <br /> - How we use numbers (with an interpretation guide) to represent image classes (🐶 or 😼)
+</div>
+
+
+<div>
+  Image classification 🕹️
+  <br /> - Given an input image, which is of a pre-defined size, an IC model predicts the probabilities of that image
+  assigned to each class from a pre-defined set of classes.
+  <br /> - Image classes == image categories in this unit.
+  <br />- We have seen an example of deploying a ready-to-use IC model to predict the image class for your favourite
+  image from the internet in Swift playground.
+  <br />- We have NOT talked about how IC models work in computational low-level details and how to make one from
+  scratch (these are saved for later).
+</div>
+
+<div> Morning noodling time!
+  <br /> Imagine I have an awesome image classification model for detecting which season it is (here in UK)...
+  <br /> 🌶️ Q1: How many classes are there?
+</div>
+
+<div>
+  4 classes 🍀
+</div>
+
+<div> Morning noodling time!
+  <br /> Imagine I have an awesome image classification model for detecting which season it is (here in UK)
+  <br /> 🌶️🌶️ Q2: How can we use numbers to represent each class?
+</div>
+
+<div>
+  There are many ways!
+  <br /> For instance,
+  <br /> we can use 1 for spring, 2 for summer, 3 for autumn and 4 for winter
+</div>
+
+<div>
+  A machine-learning-convention way:
+  <br /> [1,0,0,0] for spring
+  <br /> [0,1,0,0] for summer
+  <br /> [0,0,1,0] for autumn
+  <br /> [0,0,0,1] for winter
+</div>
+
+<div> BTW this number representation for classes is called "one-hot encoding" </div>
+
+<div> Morning noodling time!
+  <br /> Imagine I have an awesome image classification model for detecting which season it is (here in UK)
+  <br /> 🌶️🌶️🌶️ Q2: How can we use numbers to represent
+  <br />
+  "i think there are 10% chance for this image to be a spring image, 20% for summer, 70% for autumn, 0 for winter"?
+</div>
+
+<div>
+  🌶️🌶️🌶️
+  <br /> [0.1, 0.2, 0.7, 0] for the win!
+
+</div>
+
+<div> The end of recap </div>
+
+<div> data types in programming language (e.g. Swift): float, integer, etc. </div>
+
+<div> data types in data science: the roles of numbers for describing the world </div>
+
+
+<div>numerical (for quantitative data)</div>
+
+
+<div>categorical (for qualitative data)</div>
+
+<div>
+  numerical data
+  <br />
+  - discrete type
+  <br />
+  - continuous type
+</div>
+
+
+
+
+<div>
+  Numerical data
+  <br />
+  - Usually discrete values occur as the result of counting something
+  <br />
+  - and continuous values occur as the result of measuring something
+  <br />
+  <small class="nowrap"> but exceptions may apply </small>
+  <br />
+  - 🌶️ can you think of an exception case where the data comes from measuring but is of discrete type?
+</div>
+
+<div>
+  shoe sizes 👟
+</div>
+
+<div>
+  Categorical data
+  <br />
+  - ordinal type (categories with an implied order)
+  <br />
+  - nominal type (named category, no order implied)
+</div>
+
+<div>
+  <img src="https://cdn.glitch.global/841687b3-fa5e-4ba3-938a-a0034682e8ed/earpiercingpainchart.jpg?v=1668023510199" />
+</div>
+
+<div>
+  23
+  <br />
+  hint: 🏀
+</div>
+
+<div>
+  Quiz time! Which data type is it?
+</div>
+
+<div>
+  🦿 The number of legs this desk has
+</div>
+
+<div>
+  📏Numerical data
+  <br />
+  - discrete type
+  <br />
+  - continuous type
+  <br />
+  📦Categorical data
+  <br />
+  - ordinal type (categories with an implied order)
+  <br />
+  - nominal type (named category, no order implied)
+</div>
+
+<div>
+  🦿 The numebr of legs this desk has
+  <br />
+  - Numerical and discrete
+</div>
+
+<div>
+  🧞 The weight of our camberwell building
+</div>
+
+<div>
+  🧞 The weight of our camberwell building
+  <br />
+
+  - Numerical and continuous
+</div>
+
+<div>
+  🧞 The floor number of CCI
+</div>
+
+<div>
+  🧞 The floor number of CCI
+  <br />
+
+  - Categorical and ordinal
+</div>
+
+
+
+<div> Face detection 😎 </div>
+
+<div> What we will talk about today:
+  <br />
+  - What is face detection?
+  <br />
+  - What can a face detection model do?
+  <br />
+  What we will NOT talk about today:
+  <br />
+  - How does a face detection model work internally?
+  <br />
+  - How to make a face detection model from scratch?
+
+</div>
+
+
+<div> Face detection
+  <br />
+  - It is a computer vision task.
+  <br />
+  - It involves automatically identifying and locating human faces within digital images or videos.
+  <br />
+  - It takes digital images or videos as input.
+  <br />
+  - Depends on the model/system, its output usually include bounding boxes and landmark coordinates.
+</div>
+
+<div class='layout' style='grid-template-rows:55% 45%;'>
+  <img src='https://cdn.glitch.global/3f831966-9d5f-4e00-88f2-bb26f1569597/FD_Input.png?v=1697061218002' />
+  <div>This is an example input image for face detection model</div>
+</div>
+
+<div class='layout' style='grid-template-rows:55% 45%;'>
+  <img src='https://cdn.glitch.global/3f831966-9d5f-4e00-88f2-bb26f1569597/FD_Output.png?v=1697061216889' />
+  <div>one type of face detection model output: a bounding box around the detected face</div>
+</div>
+
+
+<div class='layout' style='grid-template-rows:55% 45%;'>
+  <img src='https://cdn.glitch.global/3f831966-9d5f-4e00-88f2-bb26f1569597/manga_landmarks.png?v=1697061213705' />
+  <div>another type of face detection model output: detected facial landmarks </div>
+</div>
+
+<div class='layout' style='grid-template-rows:55% 45%;'>
+  <img src='https://cdn.glitch.global/3f831966-9d5f-4e00-88f2-bb26f1569597/manga_landmarks2.png?v=1697061214903' />
+  <div>another slide to flex <a
+      href="https://www.semanticscholar.org/paper/Facial-Landmark-Detection-for-Manga-Images-Stricker-Augereau/64cac22210861d4e9afb00b781da90cf99f9d19c">
+      this manga landmark detection model</a> </div>
+</div>
+
+<div>
+  Quiz time!
+  <br />
+  Which question is more difficult?
+  <br /> - 1. Is there a face in this image?
+  <br /> - 2. Which grid/square in this image contains a face?
+</div>
+
+<div>
+  Quiz time!
+  <br />
+  Which question is more difficult?
+  <br /> - 1. Is there a face in this image? (classification) 🌶️
+  <br /> - 2. Which grid/square in this image contains a face? (bounding box detection) 🌶️🌶️
+</div>
+
+<div>
+  Quiz time!
+  <br />
+  Which question is more difficult?
+  <br /> - 1.Which grid/square in this image contains a face?
+  <br /> - 2. Where exactly in the detected face in the image does it have a right eye, a left eye, a nose, etc. ?
+</div>
+
+<div>
+  Quiz time!
+  <br />
+  Which question is more difficult?
+  <br /> - 1. Which grid/square in this image contains a face? (bounding box detection) 🌶️🌶️
+  <br /> - 2. Where exactly in the detected face in the image does it has a right eye, a left eye, a nose, etc.?
+  (landmark detection) 🌶️🌶️🌶️
+</div>
+
+<div>
+  Quiz time! 🌶️
+  <br />
+  How to use numbers to represent the answer to this question?
+  <br /> - 1. Is there a face in this image?
+  <br /> - hint: this is a classic classification label
+</div>
+
+<div> [0, 1]
+  <br />
+  where the first number corresponds to the class "HasFace" and the second number corresponds to the class "NoFace"
+</div>
+
+
+<div>
+  Quiz time! 🌶️
+  <br />
+  How to use numbers to represent the answer to this?
+  <br /> - The coordinate of a point within an image.
+  <br /> - hint: there are different ways...
+</div>
+
+<div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='https://cdn.glitch.global/3f831966-9d5f-4e00-88f2-bb26f1569597/Pixel_Coordinate.png?v=1697061212776' />
+  <div>One way of representing the point coordinate (using upper-left corner as the origin [0,0]) </div>
+</div>
+
+<div>
+  <a href="https://developer.apple.com/documentation/corefoundation/cgpoint"> The Apple way of representing a point
+    coordinate within an image </a>
+  <br /> - With the lower-left corner as the origin point [0, 0]
+  <br /> - One number specifying the x-coordinate of the point.
+  <br /> - One number specifying the y-coordinate of the point.
+</div>
+
+
+<div>
+  Quiz time! 🌶️🌶️
+  <br />
+  How to use numbers to represent this?
+  <br /> - The location of a rectangle (bounding box) within an image.
+  <br /> - hint: there are different ways...
+</div>
+
+<div>
+  <a href="https://developer.apple.com/documentation/vision/vndetectedobjectobservation/2867227-boundingbox"> The Apple
+    way of representing a rectangle (bounding box) within an image </a>
+  <br /> - Two numbers specifying the coordinate of the lower-left corner of the rectangle.
+  <br /> - One number specifying the width of the rectangle.
+  <br /> - One number specifying the height of the rectangle.
+</div>
+
+
+
+
+
+<div>
+  Quiz time! 🌶️🌶️
+  <br />
+  How to use numbers to represent the answer to this?
+  <br /> - 3. Which point in the image does it correspond to the right eye centre, or the left eye centre, or the nose
+  tip, etc.?
+</div>
+
+<div>
+  <a href="https://developer.apple.com/documentation/vision/vnfacelandmarks2d"> The Apple way of representing facial
+    landmarks within an image </a>
+  <br /> - A set of coordinates with one coordinate for each landmark.
+  <br /> - Which landmarks are used by Apple?
+  <br /> - Let's take a look at the document!
+</div>
+
+
+<div> Till now we have looked at:
+  <br />
+  - Bounding boxes and facials landmarks as face detection model's output
+  <br />
+  - Bounding boxes
+  <br />
+  - How bounding boxes are represented in Apple's Vision framework
+  <br />
+  - Landmarks
+  <br />
+  - How landmarks are represented in Apple's Vision framework
+
+</div>
+
+<div> That's quite a lot, congrats! 🎉 </div>
+
+<div>
+
+  <a href="https://www.youtube.com/watch?v=XSFP6JHnn9c">Female figure by Jordan Wolfson</a>
+  an installation that uses good old face detection models </a>
+</div>
+
+
+<div> Now let's take a look at two example Apps that use Apple's face detection model </div>
+
+<div> What can we do with detected bounding boxes? </div>
+
+<div> We can count how many faces there are in the image and draw the bounding boxes on the image! </div>
+
+
+
+<div> Please download the Apps <a href="https://moodle.arts.ac.uk/mod/resource/view.php?id=1122066">here</a> 🎉
+
+  <br /> - All code are prepared.
+  <br /> - We only need to do some minor modification to bring the Apps running on your phone.
+</div>
+
+<div>
+  <a href=" https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device">If you have not enable
+    the developer mode on your device</a>
+</div>
+
+
+<div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='https://cdn.glitch.global/3f831966-9d5f-4e00-88f2-bb26f1569597/open.png?v=1697067563209' />
+  <div> Connect your phone to the macbook and open the xcode project </div>
+</div>
+
+<div class='layout' style='grid-template-rows:85% 15%;'>
+  <img src='https://cdn.glitch.global/3f831966-9d5f-4e00-88f2-bb26f1569597/prepare.png?v=1697067567895' />
+  <div> Here are the steps for getting the App running on your phone
+    <br /> - There might be some issues coming up, let me know!!!
+  </div>
+</div>
+
+<div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='https://cdn.glitch.global/3f831966-9d5f-4e00-88f2-bb26f1569597/app_bounding_box.png?v=1697061182499' />
+  <div>This App looks like this if it runs on your phone</div>
+</div>
+
+<div> Don't be scared about the big chunk of code
+  <br /> - We are not expected to write these from scratch at the moment.
+  <br /> - A lot of them will become more familiar after Coding and Product One!
+  <br /> - Most code are for building the basic functionality (build the UI, wake up the camera on demand, etc.) of the
+  App.
+  <br /> - That means most of them are directly re-usable for your own project!
+
+</div>
+
+
+<div> Little task:
+  <br /> - Can you find "VNDetectFaceRectanglesRequest()" in Faces.swift ?
+  <br /> - That's where we tell the system to run the face detection for producing bounding box output.
+
+</div>
+
+<div> Little task:
+  <br /> - Can you find "VNDetectFaceRectanglesRequest()" in Faces.swift ?
+  <br /> - That's where we tell the system to run the face detection for producing bounding box output.
+  <br /> - It's in Line 16 in Faces.swift
+</div>
+
+
+<div> Just for your curiosity,
+  <br /> - Line 61 in Faces.swift is where we retreive the detected bounding boxes
+  <br /> - (and then draw that rectangle on the image)
+</div>
+
+
+<div> What can we do with detected landmarks? </div>
+
+<div> We can use the landmarks to overlay emojis nicely over the detected faces! </div>
+
+<div> Please download the Apps <a href="https://moodle.arts.ac.uk/mod/resource/view.php?id=1122071">here</a> 🎉
+
+  <br /> - All code are prepared.
+  <br /> - We only need to do some minor modification to bring the Apps running on your phone.
+</div>
+
+<div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='https://cdn.glitch.global/3f831966-9d5f-4e00-88f2-bb26f1569597/open.png?v=1697067563209' />
+  <div> Connect your phone to the macbook and open the xcode project </div>
+</div>
+
+<div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='https://cdn.glitch.global/3f831966-9d5f-4e00-88f2-bb26f1569597/prepare.png?v=1697067567895' />
+  <div> Here are the steps for getting the App running on your phone
+    <br /> - There might be some issues coming up, let me know!!!
+  </div>
+</div>
+
+<div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='https://cdn.glitch.global/3f831966-9d5f-4e00-88f2-bb26f1569597/app_emoji.png?v=1697061190059' />
+  <div>This App looks like this if it runs on your phone</div>
+</div>
+
+
+<div> Don't be scared about the big chunk of code
+  <br /> - We are not expected to write these from scratch at the moment.
+  <br /> - A lot of them will become more familiar after Coding and Product One!
+  <br /> - Most code are for building the basic functionality (build the UI, wake up the camera on demand, etc.) of the
+  App.
+  <br /> - That means most of them are directly re-usable for your own project!
+
+</div>
+
+
+<div> Little task:
+  <br /> - Can you find "VNDetectFaceLandmarksRequest()" in Faces.swift ?
+  <br /> - That's where we tell the system to run the face detection for producing landmarks output.
+
+</div>
+
+<div> Little task:
+  <br /> - Can you find "VNDetectFaceLandmarksRequest()" in Faces.swift ?
+  <br /> - That's where we tell the system to run the face detection for producing landmarks output.
+  <br /> - It's in Line 14 in Faces.swift
+</div>
+
+<div> Recall from the previous App,
+  <br /> - We use VNDetectFaceRectanglesRequest() for detecting bounding boxes.
+  <br /> In this app,
+  <br /> - We use VNDetectFaceLandmarksRequest() for detecting landmarks.
+</div>
+
+
+<div> Just for your curiosity,
+  <br /> - Line 106 in Faces.swift is where we retreive the detected landmarks for anchoring the emoji.
+</div>
+
+<div> The scope of these examples is for you to see face detection in action in Apps, well done everyone! 🎉 </div>
+
+
+<div> Take a moment and think about what you would do with Apple's face detection model🎉 </div>
+
+<div> Today we have looked at:
+  <br />
+  - One-hot encoding for class labels 🔥
+  <br /> - Face detection 😎
+  <br /> -- Bounding boxes and landmarks as output
+  <br /> - Two examples Apps using face detection
+</div>
+
+
+<div>a COOL AI project borrowed from <a href="https://researchers.arts.ac.uk/2030-murad-khan">Murad</a>'s slides</div>
+
+<div>
+  In the artwork
+  <a href="https://notnot.home.xs4all.nl/pareidolia/pareidolia.html">Pareidolia*</a>
+  facial detection is applied to grains of sand. A fully automated robot
+  search engine examines the grains of sand in situ. When the machine finds
+  a face in one of the grains, the portrait is recorded.
+</div>
+
+
+<div>
+  We'll see you next Thursday same time and same place!
+</div>
+</body>
+</html>
