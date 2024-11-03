@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>">
+  </link>
+
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div>
+    ML One
+    <br />
+    Lecture 06
+    <br />
+    Introduction to functions
+    <br />
+    +
+    <br />
+    Python basics 02
+  </div>
+
+  <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+  <div> By the end of this lecture, we'll have learnt about:
+
+    <br /> The theoretical:
+    <br /> - What is function
+    <br /> - Function graphs
+    <br /> - Several big namer functions
+    <br /> - Function chaining
+    <br /> The practical:
+    <br /> - Python basics 02 (implementing functions)
+
+  </div>
+
+  <div> First of all, don't forget to confirm your attendence on <a
+      href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!
+    </a></div>
+
+  <div> AI Artist for today: <a href="https://www.youtube.com/watch?v=pP3okAdY7Ts">Jon Rafman</a> </div>
+
+
+  <div> Recap </div>
+
+  <div>
+
+    Scalar, vector and matrix 🧑‍🎨
+    <br />
+    - how to describe their shapes
+    <br />
+    -- number of rows x number of columns
+  </div>
+
+  <div>
+
+    Scalar, vector and matrix 🧑‍🎨
+    <br />
+    - how to add two matrices: they should be of the exactly same shape
+  </div>
+
+  <div>
+
+    Scalar, vector and matrix 🧑‍🎨
+    <br />
+    - how to multiply a matrix with a scalar?
+    <br />
+    -- multiply every element in the matrix with the scalar
+  </div>
+
+  <div>
+
+    Scalar, vector and matrix 🧑‍🎨
+    <br />
+    - how to multiply a row vector and a column vector?
+    <br />
+    -- dot product which results in a scalar
+    <br />
+    -- the shape rule: these two vectors have to be of the same length.
+  </div>
+
+
+  <div>
+
+    Scalar, vector and matrix 🧑‍🎨
+    <br />
+    - how to multiply two matrices?
+    <br />
+    -- the shape rule:
+    <br />
+    -- the shapes of the two matrices should be: M x K and K x N
+    <br />
+    -- the shape of the product matrix would be: M x N
+
+  </div>
+
+  <div> That's quite a lot, congrats! 🎉 </div>
+
+
+
+
+  <div> Another building block before we diving into AI neural networks next week: </div>
+
+  <div> Functions </div>
+
+  <div> What is a function in maths:
+
+    <br />
+    A function relates an input (usually a number) to an output (usually a number).
+  </div>
+
+  <div>What are the keywords there? Do these sound familiar?</div>
+
+  <div>
+    Where else can you find this construct of "input, process, output"?
+  </div>
+
+  <div>
+    Where else can you find this construct of "input, process, output"?
+    <br />
+    - Models!
+  </div>
+
+  <div>
+    ☕️ sit back and watch
+    <a href="https://youtu.be/X5fD0Evny4w">this geeky vid from 5 years ago
+    </a>
+  </div>
+
+  <div> Most of the time models (like the AI model we are about to see next week) can be seen as a set of functions
+    wired up together. </div>
+
+  <div>Some conventions on function expression</div>
+
+  <div>
+    function input: x
+    <br />
+    function output: f(x)
+    <br />
+    f(x) = x + 1
+  </div>
+
+  <div> Most of the time we can use tables to describe a function.
+    <br />
+    (on whiteboard)
+  </div>
+
+  <div> Most of the time we can also use graphs to represent a function.
+    <br />
+    (on whiteboard)
+  </div>
+
+  <div> <a href="https://www.youtube.com/watch?v=kvGsIo1TmsM">This</a> video explains functions short and simple. </div>
+
+  <div> Big namer functions (especially in AI) </div>
+
+  <div>Jargons alert but don't be afraid they are cute</div>
+
+  <div>
+    exponential
+    <br />
+    sigmoid
+    <br />
+    quadratic
+    <br />
+    relu
+    <br />
+    sine
+    <br />
+    tanh
+  </div>
+
+  <div>
+    Let's google their function graphs one by one and draw on the whiteboard!
+    <br />
+    - exponential
+    <br />
+    - sigmoid
+    <br />
+    - quadratic
+    <br />
+    - relu
+    <br />
+    - sine
+    <br />
+    - tanh
+  </div>
+
+  <div>Note that we are not expected to memorise the math equations for each function.
+    <br />
+    Just knowing the shape of their graphs is sufficient.
+  </div>
+
+  <div>Fun stuff: different "personalities" of functions</div>
+
+  <div>
+    - asymptotic (quite philosophical, it touches the notion of infinity)
+    <br />
+    - squashing anything to be between 0 and 1 (remember probability?😉)
+    <br />
+    - symmetric (things can go equally wrong in different directions ...)
+    <br />
+    - ignoring negative(booo) numbers
+    <br />
+    - periodic (wooo, aperiodic signal can be represented by periodic stuff only)
+
+    <br />
+    -- Make sure you check <a href="https://www.youtube.com/shorts/qmNtSq2e5eM">this</a> out
+  </div>
+
+  <div>
+    🤯 (optional)
+    <br />
+    underneath these functions of different personalities,
+    <br />
+    they all have the same "DNA" (polynomials)
+    <br />
+    they can all be represented just using polynomials and
+    <a href="https://youtu.be/3d6DsjIBzJ4">here is an example</a>
+  </div>
+
+
+
+  <div> ⛓️ Chaining functions ⛓️ </div>
+
+  <div> ⛓️ Chaining functions ⛓️
+    <br />
+    In short, we can feed the output of one function as the input to another function.
+  </div>
+
+  <div>
+    me "小" as a function:
+    <br />
+    🍎 -> 小 -> lecture
+    <br />
+    小(🍎) = lecture
+  </div>
+
+  <div>
+    🥃 -> 小 -> 🤪
+    <br />
+    小(🥃) = lEcTUrE
+  </div>
+
+  <div>
+    you "CoolStudents" as a function:
+    <br />
+    lecture -> CoolStudents -> some times good sleep 💤
+    <br />
+    <small class="nowrap"> CoolStudents(lecture)= good sleep 💤 </small>
+  </div>
+
+  <div>
+    we can chain functions together!
+    <br />
+    We have:
+    <br />
+    <small class="nowrap">小(🍎) = lecture</small>
+    <br />
+    and
+    <br />
+    <small class="nowrap"> CoolStudents(lecture)= good sleep 💤 </small>
+    <br />
+    We chain these up:
+    <small class="nowrap"> CoolStudents(小(🍎))= good sleep 💤 </small>
+  </div>
+
+  <div>
+    Note that the chained function CoolStudents(小(🍎))
+    <br />
+    is a different function than either 小(🍎) and CoolStudents(lecture)
+    <br />
+    in the sense that its input and output are not the same as those of the smaller functions.
+    <br />
+    - Basically by chaining functions together we get a new and "bigger" function.
+
+  </div>
+
+  <div> 😍 Recall a model can be a set of functions wired up together. Chaining functions together is how we can wire
+    functions up to form an AI model! To be continued next week... </div>
+
+
+  <div> That's quite a lot, congrats! 🎉 </div>
+
+  <div>
+    Next, we are going to:
+    <br />
+    - take a look at how these functions can be implemented in python with help from NumPy!
+
+  </div>
+
+  <div>
+    <a href="https://colab.research.google.com/drive/1euU7Dn-Z7JYkTBd76vHBUW9tt-UEWPZd?usp=sharing"> A prepared google
+      colab notebook </a>
+    <br /> 1. click on the link and open this google colab notebook
+  </div>
+
+
+
+
+  <div>
+    Let's take a look at the notebook!
+    <br />
+
+    <br /> - 1. Make sure you have saved a copy to your GDrive or opened in playground. 🎉
+    <br /> - 2. Read all text cells and code cells.
+    <br /> - 3. Try out the only excercise (Excercise 1.).
+
+  </div>
+
+  <div> Today we have looked at:
+
+    <br />
+    Functions 🧑‍🎨
+    <br />
+    - A function relates an input to an output.
+    <br />
+    -- Function graphs
+    <br />
+    -- Several big namer functions including exp, sigmoid, quadratic, relu, sine, tanh (and they have characteristics)
+
+    <br />
+    -- Chain functions together to make a new function
+    <br />
+    -- Big namer functions implemented using NumPy
+
+  </div>
+
+
+  <div>
+    We'll see you next Thursday same time and same place!
+
+  </div>
+
+</body>
+
+</html>
