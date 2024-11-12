@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>">
+  </link>
+
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div>
+    ML One
+    <br />
+    Lecture 07
+    <br />
+    Introduction to (artificial) neural network
+    <br />
+    +
+    <br />
+    Multi-Layer Perceptron
+  </div>
+
+  <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+  <div> By the end of this lecture, we'll have learnt about:
+
+    <br /> The theoretical:
+    <br /> - Neurons in biological neural network
+    <br /> - Neurons in artificial neural network (ANN)
+    <br /> - Neurons grouped in layers in artificial neural network
+    <br /> - Use function and matrix multiplication to describe what happens between layers in ANN
+    <br /> - A simple neural network - Multilayer Perceptron (MLP)
+    <br /> The practical:
+    <br /> - MLP implemented in python
+
+  </div>
+
+  <div> First of all, don't forget to confirm your attendence on <a
+      href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!
+    </a></div>
+
+  <div> introduing "repeated exposure": <a href="https://www.nature.com/articles/s41598-018-32018-9#Sec14">the
+      amazingness in our built-in perceptual adaptation effect</a></div>
+
+
+  <div> Recap </div>
+
+  <div> Today we are going to see how dots (adding/multiplying matrices, functions) are connected!!! </div>
+
+  <div>
+
+    Scalar, vector and matrix 🧑‍🎨
+    <br />
+    - how to describe their shapes
+    <br />
+    -- number of rows x number of columns
+  </div>
+
+  <div>
+
+    Scalar, vector and matrix 🧑‍🎨
+    <br />
+    - how to multiply a row vector and a column vector?
+    <br />
+    -- dot product which results in a scalar
+    <br />
+    -- the shape rule: these two vectors have to be of the same length.
+  </div>
+
+  <div>
+
+    Scalar, vector and matrix 🧑‍🎨
+    <br />
+    - how to multiply two matrices?
+    <br />
+    -- the shape rule:
+    <br />
+    -- the shapes of the two matrices should be: M x K and K x N
+    <br />
+    -- the shape of the product matrix would be: M x N
+
+  </div>
+
+  <div>
+    Functions 🧑‍🎨
+    <br />
+    - A function relates an input to an output.
+    <br />
+    -- Chain functions together to make a new function
+    <br />
+    -- Function graphs
+    <br />
+    -- Exp, sigmoid, quadratic, relu, sine, tanh (and they have characteristics)
+  </div>
+
+  <div>
+    Functions 🧑‍🎨
+    <br />
+    -- Function graphs
+    <br />
+    -- Exp, sigmoid, quadratic, relu, sine, tanh
+  </div>
+
+  <div> end of recap </div>
+
+  <div> Artificial neural network is fun, computationally capable and made up of smaller components including neurons.
+  </div>
+
+  <div> We'll meet quite a few new terms today - they are easy concepts, just have faith in perceptual adaptation
+    through repetition! </div>
+
+
+  <div> Let's forget about math for now </div>
+
+  <div> the story starts from real biological neuron (a simulation) 🤘 </div>
+
+  <div> As human we have roughly 86 (some said 100) billion neurons. A neuron is an electrically excitable cell that
+    fires electric signals across a neural network. [wikipedia] </div>
+
+  <div> It is the fundamental unit of the brain and nervous system.
+    <br />
+    The cells are responsible for receiving sensory input, for sending motor commands to our muscles, and for
+    transforming and relaying the electrical signals at every step in between.
+  </div>
+
+  <div> Neurons are connected in some structure.
+    <br />
+    Connected neurons communicate with each other via electrical impulses. ⚡️
+  </div>
+
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img
+      src='https://cdn.glitch.global/a1109332-f65e-48a1-8be8-d90271530061/MIT-Dendrite-Computation_0.jpeg?v=1670452859013' />
+    <div> one neuron with dendrites, axon and transmitters</div>
+
+  </div>
+
+  <div><a href="https://www.youtube.com/watch?v=6qS83wD29PY"> when did you last have a biology lesson? </a> </div>
+
+  <div>Think of your happiest moment in memory, and <a href="https://www.youtube.com/watch?v=S1dT0QkwC-s"> this </a> is
+    probably what was going on in your brain during that moment. </div>
+
+  <div> Recap of the simulated neural process:
+    <br />
+    -- A neuron is charged by signals from other connected neurons.
+    <br />
+    -- We can refer to the level of accumulated charges in one neuron as its activation.
+    <br />
+    -- A neuron receives different levels of signals from different neurons.
+    <br />
+    -- Once a neuron is sufficiently charged, it fires off a charge to the next neurons.
+  </div>
+
+  <div> The myth of grandma neuron ⭐️:
+    <br /> A hypothetical neuron that has high activation
+    <br />
+    when a person "sees, hears, or otherwise sensibly discriminates" a specific entity, such as their grandmother.
+  </div>
+
+  <div> But does the grandma neuron actually look like a grandma? 😜
+    <br />
+    Nope, the information it carries is encoded as its conditional activation,
+    <br />
+    which can be loosely depicted as a number which increases when you see your grandma and decreases when you doesn't
+    see your grandma.
+  </div>
+
+
+  <div> What are the mathsy parts in the neural process? 🧮 </div>
+
+  <div> Recap of the simulated neural process:
+    <br />
+    -- A neuron is charged by signals from other connected neurons.
+    <br />
+    -- We can refer to the level of accumulated charges in one neuron as its activation value.
+    <br />
+    -- There are usually different levels of signals emitted from different neurons.
+    <br />
+    -- Once a neuron is sufficiently charged, it fires off a signal to the next neurons.
+  </div>
+
+
+  <div> let's do something quite interdisciplinary
+    <br />
+    <small class="nowrap"> --- extracting maths ideas from dat biology class ---> </small>
+
+    💡👾🧪🧮💡
+
+  </div>
+
+  <div> Maths extraction 00
+    <br />
+    -- Numberify each neuron's activation:
+    <br />
+    a number that representing how much electrical charge a neuron receives and fires ☝️
+  </div>
+
+
+  <div> Maths extraction 01
+    <br />
+    -- View the charging process from arithemetic:
+    <br />
+    accumulation, addition ➕
+  </div>
+
+  <div> Maths extraction 02
+    <br />
+    -- A neuron is NOT firing immediately whatever charges it receives,
+    <br />
+    instead it waits till being sufficiently charged and firing:
+    <br />
+    a sense of thresholding 🪜
+    <br />
+    hint hint function: relu, sigmoid
+  </div>
+
+
+  <div> Maths extraction 03
+    <br />
+    -- A bird eye view of neuron connectivity:
+    <br />
+    there is a hierarchical process where neurons are both the receiver of preceding neurons and transmitter of next
+    ones,
+    <br />
+    recall how function chaining works? It it routing one function's output to be the next function's input. ⛓️
+  </div>
+
+  <div> Maths extraction 04
+    <br />
+    -- Numberify the connection strength:
+    <br />
+    Not every two neurons are connected with equal strength.
+    <br />
+    Perhaps we can use a number per each connection, referred to as weight, to depict the different stength? 🔋
+  </div>
+
+  <div> ☁️🌫️☁️ </div>
+
+
+  <div> Introducing now: (artificial) neural networks, the anatomy
+    <br />
+    finally!!! 🔥
+  </div>
+
+  <div> ⚠️ Note:
+    <br />
+    For this lecture, we are not looking at what do the numbers actually mean and how to interpret them.
+    <br />
+    We are only looking at how this neural process portrayed computationally.
+  </div>
+
+
+  <div> Today's road map:
+    <br />
+    1. Introduction to neurons: what does it do
+    <br />
+    2. Introduction to layers: what does it do and what's the computation underneath
+    <br />
+    3. Introduction to MLP: a combination of what we have introduced so far
+  </div>
+
+
+
+  <div> Starting from (artificial) neuron { </div>
+
+  <div> One neuron holds a single number indicating its activation 🪫🔋 </div>
+
+  <div> on whiteboard </div>
+
+  <div> Neurons are grouped in layers, reflecting the hierarchical structure (the order is from left to right) 🏘️
+  </div>
+
+  <div> let's draw another two layers of neurons because I want to </div>
+
+  <div> Connectivity between !consecutive! layers </div>
+
+  <div> ps: it is actually connectivity between neurons in !consecutive! layers </div>
+
+  <div> A neuron receives signals(numbers, or activations) from all neurons in the previous layer, let's draw out the
+    links🔗 </div>
+
+  <div> and so does every single neurons! </div>
+
+  <div> ⚠️ note: neurons inside the same layer are NOT connected </div>
+
+  <div> Different connection strengths: every link indicates a different connection strength 🔌</div>
+
+  <div> that is to say every link also indicates a number, let's call it a weight </div>
+
+  <div> Note that a weight is different from an activation that is stored in each neuron </div>
+
+  <div> One activation is contextualised in one single neuron,
+    <br />
+    whereas one weight is contextualised in the link between two connected neurons
+  </div>
+
+  <div>
+    <small class="nowrap"> /*end of (artificial) neuron */ </small>
+    <br />
+    }
+  </div>
+
+
+
+  <div> Now that we know what neurons are and that they are grouped in layers 🥰 </div>
+
+  <div> let's look from the perspective of layers and build our first multilayer perceptron by hands 🤑</div>
+
+  <div> layers and Multilayer perceptron MLP { </div>
+
+  <div>
+    aka vanilla neural networks,
+    <br />
+    aka fully connected feedforward neural network, (don't memorise this, MLP sounds way cooler, but this lengthy name
+    has some meanings we'll see shortly )
+  </div>
+
+  <div> Let's contexturise MLP in an example image classification task. </div>
+
+  <div> summoning the "hello world" in ML: MNIST, handwritten digits recognition </div>
+
+  <div>
+    <img
+      src="https://cdn.glitch.global/63600261-b30b-436e-adf7-162a6a7c51d6/multilayer-perceptron.png?v=1669866109577" />
+  </div>
+
+  <div> It is a dataset comprising 28*28 images of handwritten digits. Each image is labelled with its digit class (from
+    0 to 9). </div>
+
+  <div> The task is to, take an input image and output its digit class. </div>
+
+  <div> Since an MLP is characterised by its layer types, let's introduce layers. </div>
+
+  <div> Through the lens of layers{</div>
+
+  <div> Neurons are holding numbers (activations), so in one layer there is a vertical layout of one column of numbers.
+    Does this one vertical column of numbers sound familiar? </div>
+
+  <div> Neuron activations in one layer forms a vector, let's call this "layer vector" or "layer activation vector"
+  </div>
+
+
+  <div> There are different types of layers: </div>
+
+  <div> First we have input and output layers </div>
+
+  <div> Input layer is where the input data is loaded (e.g. one neuron holds one pixel's grayscale value) </div>
+
+  <div> The number of neurons in input layer is pre-defined by the specific task and data. </div>
+
+  <div> 🌶️🌶️🌶️ How many neurons there should be in the input layer for MNIST (which is a dataset of 28*28 images)?
+    hint: one neuron for one pixel</div>
+
+  <div> 28*28 = 784 </div>
+
+  <div> Because it has to be a vertical col vector for MLP, the flattening giant has stepped over... </div>
+
+  <div> For instance, a 2*2 image/matrix after flattening becomes a 4*1 col vector</div>
+
+
+  <div>🌶️🌶️ What is the shape of the input layer vector in MNIST (which is a dataset of 28*28 images)? </div>
+
+  <div> 784*1 </div>
+
+
+  <div> 🌶️🌶️🌶️ What if we have a dataset of small images of size 20*20? How many neurons should we put in the input
+    layer and what should the new shape of the input layer vector be? </div>
+
+  <div> 400*1 </div>
+
+  <div> Output layer is where the output is held </div>
+
+  <div> For classification tasks, the output is categorical and how do we encode categorical data? </div>
+  <div> One-hot encoding: it depends on how many classes are there </div>
+  <div> Another way to interpret one-hot encoding output: each neuron holds the "probability" of the output belonging to
+    that class</div>
+
+  <div> It is just another number container anyway 🤪</div>
+
+  <div> 🌶️🌶️ What is the shape of the output layer vector for MNIST?</div>
+
+  <div> 10*1 (10 classes of digits) </div>
+
+  <div> 🌶️🌶️🌶️ What if my task changes to recognise if the digit is zero or non-zero? How many neurons should we put
+    in the output layer and what should the new shape of the output layer vector be? </div>
+  <div> 2*1 (only 2 classes of digits!) </div>
+
+
+  <div> The number of neurons in the input and output layer are determined by the task and the dataset. </div>
+
+  <div> Next:
+    <br />
+    Hidden layers: any layer inbetween input and output layers 😅
+  </div>
+
+  <div> How many neurons should we put in each hidden layer? Is it pre-defined by the task and the dataset like
+    input/output layers? </div>
+
+  <div> No, it is all up to you woo hoo ! It is part of the fun neural net designing process 🥰 </div>
+
+  <div> Here i choose... </div>
+
+  <div> Let's connect these layers following our previous connection rule: only consecutives layers are *directly*
+    linked </div>
+
+
+  <div> ATTENTION 💿 </div>
+
+  <div> The last piece of puzzle 🧩 </div>
+
+  <div> Recall the biological process of charging, accumulation and firing </div>
+
+  <div> Let's simulate the ANN process from biological analogies, from input layer to output layer </div>
+
+  <div> ⚠️ Note:
+    <br />
+    For this lecture, we are not looking at what do the numbers actually mean and how to interpret them.
+    <br />
+    We are only looking at how this neural process is portrayed computationally.
+  </div>
+
+
+  <div> Recall that each link has a number ("weight") for connection strength </div>
+
+
+  <div> Activations in each layer's activation vector are computed using previous layer's activation vector and the
+    corresponding connection weights </div>
+
+
+  <div> For example, to caculate the first neuron's activation in the first hidden layer: input layers' neurons
+    activations multiplied with corresponding connection weights, and sums up </div>
+
+  <div> Wait did that look just like a dot product process? 💿 </div>
+
+  <div> Indeed, we can simulate the "charging" and "accumulating" process using matrix multiplication ✌️😎</div>
+
+  <div> A layer's weights matrix: made of weight of every connection link this layer has with *previous* layer 🧮 </div>
+
+  <div> Demonstration of first hidden layer's weights matrix multipled with input layer's activation vector on
+    whiteboard 🤘 </div>
+
+  <div>🌶️🌶️🌶️🌶️ What is the shape of the weights matrix? </div>
+
+  <div>🌶️🌶️🌶️🌶️ What is the shape of the weights matrix?
+    <br />
+    # of neurons in THIS layer
+    <br />
+    x
+    <br />
+    # of neurons in PREVIOUS layer
+
+  </div>
+
+
+  <div> For the "wait till sufficiently charging or thresholding" part, let's introduce bias vector and activation
+    function ✌️ </div>
+
+  <div> 🌶️🌶️ Recall the graph of ReLU function, what is its activate zone? aka the range of input that relates to
+    non-zero output </div>
+
+  <div> 🌶️🌶️ Recall the graph of ReLU function, what is its activate zone? aka the range of input that relates to
+    non-zero output
+    <br />
+    from 0 to ∞ !
+  </div>
+
+  <div> 🌶️🌶️🌶️🌶️ The effect of the bias vector:
+    <br />
+    What if I want to have an activate zone from 1 to ∞?
+    <br />
+    Add a bias of -1 to the input.
+    <br />
+    (you can take some time ponder and wonder here later)
+
+  </div>
+
+  <div>
+    Clarify the input and output of the activation:
+    <br />
+    The raw activation vector after matrix multiplication and bias vector addition is the input to the activation
+    function (e.g. ReLU).
+    <br />
+    The activation function output is the actual activation (fires to the next layer)
+  </div>
+
+  <div> Demonstration of layer vector added with bias vector on whiteboard (adding or removing extra difficulty for
+    neuron activation to reach "active zone" in activation function) </div>
+
+  <div>🌶️🌶️🌶️🌶️ What is the shape of the bias vector?
+    <br />
+    # of neurons in THIS layer
+    <br />
+    x
+    <br />
+    1
+
+  </div>
+
+  <div> Demonstration of layer vector wrapped with activation function on whiteboard </div>
+
+
+  <div> Puzzle almost finished! </div>
+
+  <div>
+    <small class="nowrap"> /*end of through the lens of layers */ </small>
+    <br />
+    }
+  </div>
+
+
+  <div> Let's write down what just happened using function expression 🤘😎 </div>
+
+  <div> 1. wrap each layer's charging(aka weight matrix multiplication) and thresholding(bias vector and act. function)
+    process as a function </div>
+
+  <div>
+    -- function input: a vector, previous layer's activation vector
+    <br />
+    -- function output: a vector, this layer's activation vector
+
+  </div>
+
+  <div>
+    -- the function body: input multiplied by this layer's weights matrix, added with bias vector, wrapped with
+    activation function
+
+  </div>
+
+  <div> V_output =
+
+    <br /> ReLU(WeightsMat * V_input + Bias)
+
+  </div>
+
+
+
+
+
+  <div> Next, how to connect different layers using function expression? </div>
+
+  <div> Function chaining!!! demonstration on whiteboard ⛓⛓⛓</div>
+
+  <div> Puzzle finished, recall that a model is roughly a big function?</div>
+
+  <div> MLP is a model, and a function. Let's writedown the final BIG function for this neural network </div>
+
+  <div> 🎉🥂🎊 </div>
+
+
+  <div> Done! ✌️😤 </div>
+
+  <div> Note that I made up all the numbers in the weights matrices and bias vectors during demo 🙂</div>
+
+  <div> In practice, these numbers are learned through training process.
+    <br />
+    We'll leave the training process to next week's lecture.
+    <br />
+    The process we talk about today with assumed weights matrices and bias vector is the forward pass of neural network.
+    <br />
+    aka how information(activations) is propagated from input to output⏩.
+    <br />
+    The training process will be about how information is propagated backwards⏪,
+    <br />
+    from ouput to input to find the proper numbers in weights matrices and bias vectors to make the neural network work.
+
+  </div>
+
+
+  <div> That's quite a lot, congrats! 🎉 </div>
+
+  <div> Here is a <a
+      href="https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&index=4">video</a> from
+    3B1B that explains MLP from another perspective, very nice. </div>
+
+  <div>
+    Next, we are going to:
+    <br />
+    - take a look at how MLP can be implemented in python with help from NumPy and Pytorch(a very popular deep learning
+    library in Python)!
+
+  </div>
+
+  <div>
+    Alert: you are going to see quite advanced python and neural network programming stuff, we are not expected to
+    understand them all at the moment.
+
+    <br />
+    Let's take a look at how some ideas we talk about today are reflected in the code,
+    <br />
+    especially how we set up a layer by specifying how many neurons it should have.
+  </div>
+
+  <div>
+    <a href="https://colab.research.google.com/drive/1oJvW58aC7_ginb7FmYsntzQMOj84uE-Y?usp=sharing"> A prepared google
+      colab notebook </a>
+    <br /> 1. click on the link and open this google colab notebook
+  </div>
+
+
+
+
+  <div>
+    Let's take a look at the notebook!
+    <br />
+
+    <br /> - 1. Make sure you have saved a copy to your GDrive or opened in playground. 🎉
+    <br /> - 2. Most parts are out of the range of the content we have covered so far.
+    <br /> - 3. We only need to take a look at the several lines in the "Defining the Model" section.
+    <br /> - 4. IMPORTANT: In practice, we just need to specify the number of neurons in each layer and all the
+    computation is left to computers.
+  </div>
+
+  <div> Today we have looked at:
+    <br /> - Neurons as a number container (activation)
+    <br /> - Neurons are grouped in layers
+    <br /> - Layers are connected Hierarchically (from left to righ)
+
+    <br /> - Input layer
+    <br /> - Output layer
+    <br /> - Hidden layer
+    <br /> - Weights matrix
+    <br /> - Bias vector
+    <br /> - Activation function
+    <br /> - Write the MLP into one big function
+  </div>
+
+  <div>
+    We'll see you next Thursday same time and same place!
+
+  </div>
+</body>
+
+</html>
