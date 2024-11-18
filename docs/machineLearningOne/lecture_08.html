@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>">
+  </link>
+
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div>
+    ML One
+    <br />
+    Lecture 08
+    <br />
+    Introduction to supervised learning
+    <br />
+    +
+    <br />
+    How does AI learn? - Intuitions on gradient descent
+  </div>
+
+  <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+  <div> By the end of this lecture, we'll have learnt about:
+
+    <br /> The theoretical:
+    <br /> - what is supervised learning: the framework of training
+    <br /> - how to train a neural network on a labeled dataset
+    <br /> - aka how to find the right numbers to put in weight matrices and bias vector
+    <br /> - Intuitions on gradient descent
+    <br /> The practical:
+    <br /> - MLP implemented in python
+
+  </div>
+
+  <div> First of all, don't forget to confirm your attendence on <a
+      href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!
+    </a></div>
+
+  <div>as usual, an AI-related <a href="https://www.youtube.com/watch?v=VGa1imApfdg"> fun project </a> to wake us up
+  </div>
+
+
+  <div> Recap </div>
+
+  <div> Last lecture we saw how dots (adding/multiplying matrices, functions) are connected!!! </div>
+
+
+  <div> 🧫 Biological neurons: receive charges, accumulate charges, fire off charges</div>
+
+  <div> 🧫 Biological neurons
+    <br />
+    -- A neuron is connected with some other neurons.
+    <br />
+
+    -- A neuron is charged by other connected neurons.
+    <br />
+    -- There are usually different levels of charges emitted from different neurons.
+
+  </div>
+
+  <div> 🧫 Biological neurons (continued)
+    <br />
+    -- The received charges within one neurons are accumulated.
+    <br />
+    -- We can refer to the level of accumulated charges in one neuron as its activation value.
+    <br />
+    -- Once a neuron is sufficiently charged, it fires off a charge to the next neurons.
+
+  </div>
+
+  <div> 🧫 Biological neurons (continued)
+    <br />
+    -- This "charging, thresholding and firing" neural process is the backbone of taking sensory input, processing and
+    conducting motory output.
+  </div>
+
+
+  <div> 🤖 Artificial neurons
+    <br /> - Think of a neuron as a number container that holds a single number, activation. 🪫🔋
+    <br /> - Neurons are grouped in layers. 🏘️
+    <br /> - Neurons in different layers are connected hierarchically (usually from left to righ) 👉
+    <br /> - There are different weights assigned to each link between two connected neurons. 🔗
+  </div>
+
+  <div> 🏘️ Layers in MLP
+
+    <br /> - Put each layer's activations into a vector: a layer activation vector 📛
+
+  </div>
+
+  <div> 🏘️ Layers in MLP
+
+    <br /> - Input layer: each neuron loads one value from the input (e.g. one pixel's greyscale value in the MNIST
+    dataset)👁️
+
+  </div>
+
+  <div> 🏘️ Layers in MLP
+
+
+    <br /> - Output layer: for image classification task, one neuron represents the probability this neural net assigns
+    to one class🗣️
+
+  </div>
+
+  <div> 🏘️ Layers in MLP
+
+    <br /> - Hidden layer: any layer between input and output layers and the size (number of neuron) is user-specified
+    🏴‍☠️
+
+  </div>
+
+  <div> 🏘️ Layers in MLP
+
+    <br /> - Put each layer's activations into a vector: a layer activation vector 📛
+    <br /> - Input layer: each neuron loads one value from the input (e.g. one pixel's greyscale value in the MNIST
+    dataset)👁️
+    <br /> - Output layer: for image classification task, one neuron represents the probability this neural net assigns
+    to one class🗣️
+    <br /> - Hidden layer: any layer between input and output layers and the size (number of neuron) is user-specified
+    🏴‍☠️
+
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> - The computation runs from left to right (a forward pass)👉
+
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> - The computation runs from left to right (a forward pass)👉
+    <br /> - The computation calculates each layer activation vector one by one from left to right.👉
+
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> - The computation runs from left to right (a forward pass)👉
+    <br /> - The computation calculates each layer activation vector one by one from left to right.👉
+    <br /> - Overall, the computation takes the input layer activation vector as input and returns the output layer
+    activation vector that ideally represents the correct answer.👉
+
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> -- Zoom in to the function between every consecutive layers🔬:
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> -- Zoom in to the function between every consecutive layers🔬:
+    <br /> --- Multiply previous layer's activation vector with a weights matrix: "charging" ⚡️
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> -- Zoom in to the function between every consecutive layers🔬:
+    <br /> --- Multiply previous layer's activation vector with a weights matrix: "charging" ⚡️
+    <br /> --- Add with a bias vector and feed into an activation function (e.g. relu): "thresholding" 🪜
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> -- Zoom in to the function between every consecutive layers🔬:
+    <br /> --- Multiply previous layer's activation vector with a weights matrix: "charging" ⚡️
+    <br /> --- Add with a bias vector and feed into an activation function (e.g. relu): "thresholding" 🪜
+    <br /> --- The result would be this layer's activation vector. ✌️
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> -- Zoom in to the function between every consecutive layers🔬:
+    <br /> --- Multiply previous layer's activation vector with a weights matrix: "charging" ⚡️
+    <br /> --- Add with a bias vector and feed into an activation function (e.g. relu): "thresholding" 🪜
+    <br /> --- The result would be this layer's activation vector. ✌️
+    <br /> --- We then feed this layer's activation vector as the input to next layer until it reaches the last layer
+    (output layer): "firing" ⛓️
+  </div>
+
+
+  <div>
+    🔗 one layer function:
+    <br />
+    V_output =
+
+    <br /> ReLU(WeightsMat · V_input + Bias)
+
+  </div>
+
+  <div>
+    ⛓️ the big function for a MLP with one hidden layer (chaining each layer function together):
+    <br />
+    V_output =
+
+    <br /> ReLU(WeightsMat_o · ReLU(WeightsMat_h · V_input + Bias_h) + Bias_o)
+
+    <br /> <small class=nowrap>V_input: input layer's activation vector </small>
+
+    <br /> <small class=nowrap>V_output: output layer's activation vector </small>
+
+    <br /> <small class=nowrap>WeightsMat_h, Bias_h: weights matrix and bias vector from the hidden layer </small>
+
+    <br /> <small class=nowrap>WeightsMat_o, Bias_o: weights matrix and bias vector from the output layer </small>
+
+
+  </div>
+
+  <div>Recall the amazing perceptual adaptation effect: repeated exposure makes things easier and familier! 🥸 </div>
+
+  <div> Wait but what numbers shall we put in the weights matrices and bias vectors? 🥹 </div>
+
+  <div> end of recap 👋 </div>
+
+  <div> Let's forget about neural network for now and zoom out a little bit </div>
+
+
+
+  <div>
+    - Supervised (machine) learning (SL) is a subcategory of machine learning.
+
+    <br />
+    - Supervised learning involves training a model on a labeled dataset, where the algorithm learns the mapping from
+    input data to corresponding output labels.
+
+    <br />
+    💡keywords: model, labeled dataset
+  </div>
+
+  <div>
+    <img
+      src="https://cdn.glitch.global/63600261-b30b-436e-adf7-162a6a7c51d6/multilayer-perceptron.png?v=1669866109577" />
+  </div>
+
+  <div>
+    🖇️Connected to what we have talked about:
+    <br /> - The handwritten digit recognition task on the MNIST dataset we introduced last week is a supervised
+    learning task.
+    <br /> - Neural networks (e.g. the MLP we introduced last week) are models (big functions with weight matrices and
+    bias vectors).
+  </div>
+
+  <div>
+    🖇️Connected to what we have talked about:
+    <br /> - The handwritten digit recognition task on the MNIST dataset we introduced last week is supervised learning.
+    <br /> - Neural networks (e.g. the MLP we introduced last week) are models.
+    <br /> - The missing pieces: what does it mean by training a model? how to train a model using labeled dataset?
+    <br /> To be demystified today!
+  </div>
+
+
+
+
+  <div>
+
+    Let's consider a much easier labeled dataset and a much simpler model.
+
+  </div>
+
+
+
+  <div>
+    hi I'm a happy caveman,
+    <br />
+    I eat potatoes 🥔,
+    <br />
+    and I collect apples 🍎
+    <br />
+    can I have a model that predict the number of 🍎 I can collect given the number of 🥔 I eat today?
+
+  </div>
+
+  <div>
+    This is my labeled dataset at hand:
+    <br />
+    I ate 0.5🥔 and collected 2🍎 on Monday
+    <br />
+    I ate 2 🥔 and collected 5🍎 on Tuesday
+    <br />
+    I ate 1 🥔 and collected 3🍎 on Wedneady
+
+  </div>
+
+  <div>
+    the input: number of 🥔 I ate
+    <br />
+    the labelled output: number of 🍎 i collected
+    <br />
+    the task: to learn a model from the dataset, which is a function that can predict the numebr of 🍎 I collect (the
+    output)
+    <br />
+    given the number of 🥔 I eat (the input)?
+  </div>
+
+  <div>
+    Now I'm puzzled... 🤨
+    <br />
+    Which function shall I choose?
+  </div>
+
+  <div>
+
+    Numbers are too headache to look at so I want to plot these numbers out and look at the relation between 🥔 and 🍎
+    visually!
+
+  </div>
+
+  <div>
+
+    an easy task: if today I ate 1🥔, make an educated guess on how many 🍎 I can collect today?
+
+  </div>
+
+
+  <div>
+
+    a harder task: if today I ate 1.5🥔, make an educated guess on how many 🍎 I can collect today?
+
+  </div>
+
+  <div>
+
+    Look at the dataset, unfortunatelly we don't have a data point that corresponds to 1.5🥔
+
+  </div>
+
+
+
+  <div>
+
+    What if... there is a continuous line going through all points so that I can lookup the point corresponding to 1.5🥔
+    from this line?
+
+  </div>
+
+  <div>
+    Back to the question: 🤨
+    <br />
+    - Which function shall I choose?
+    <br />
+    - By looking at the dataset, a linear function (whose graph representation is a straight line) looks like a good
+    fit.
+  </div>
+
+  <div>
+    Back to the question: 🤨
+    <br />
+    Which function shall I choose?
+    <br />
+    - By looking at the dataset, a linear function (whose graph representation is a straight line) looks like a good
+    fit.
+    <br />
+    - a linear function: f(x) = wx + b where w is the weight and b is the bias
+    <br />
+    - But there are infinite many straight lines I can draw on the canvas! Which one is THE best?
+  </div>
+
+  <div>
+
+    But there are infinite many straight lines I can draw on the canvas! Which one is THE best model?
+    <br />
+    - BTW, the infinite many straight lines can be parametrised by weight and bias according to this expression: f(x) =
+    wx + b where w is the weight and b is the bias
+    <br />
+    - Being parametrised means that we can tweak the value of the weight and bias to create all the infinite many
+    straight lines where each line is determined by a unique combination of weight and bias.
+  </div>
+
+
+  <div>
+    Which one is THE best straight line?
+    <br />
+    - The line that "weaves" through all the labelled data points! It means that this line perfectly captures relation
+    between # of 🥔 to # of 🍎 from my existing experience (the labeled dataset)
+    <br />
+    - And we can hand calculate THE weight and bias for this best-fit line easily.
+  </div>
+
+  <div>
+    SOLVED!!! 🤘 Happy caveman life!
+    <br />
+    - Note that we have made two choices for this SL task: we chose to use a straight line or a linear function for
+    weaving the labeled dataset
+    <br />
+    - and we chose the best-fit weight and bias for the linear function.
+  </div>
+
+  <div>
+    Caution: this is a overly simplified example where it seems trivial to find a model that has the perfect fit shape
+    (a straight line) and perfect parameters for weaving through all data points.
+  </div>
+
+  <div>
+    an example of real life data on the whiteboard...
+  </div>
+
+  <div>
+
+    In real life, data is a lot more messy and do not fall into a straight line 🙂
+  </div>
+
+
+  <div>
+    For real life data,
+    <br />
+    to find a good-fit model/function,
+    <br />
+    we can't just look at data and draw a nice weaving curve,
+    <br />
+    we can only start with initially guessed function and tweak its parameters till it is in a good weaving position.
+
+  </div>
+
+  <div> That's quite a lot, congrats! 🎉 </div>
+  <div>
+    The supervised learning training process (a summary of what we just talked about)
+  </div>
+
+  <div>
+    1. have an initially guessed model (often imperfect)
+    <br />
+    ->
+    <br />
+    2. feed the input data into the (imperfect) model
+    <br />
+    ->
+    <br />
+    3. get the (imperfect) model output
+    <br />
+    ->
+    <br />
+    4. measure how wrong this output is compared to the correct answer (labeled output)
+    <br />
+    ->
+    <br />
+    5. use the measurement to update the model
+    <br />
+    ->
+    <br />
+    back to step 2 and repeat
+  </div>
+
+  <div>
+    Let me demonstrate the training process for the naive caveman 🍎regression task on the whiteboard.
+  </div>
+
+  <div>
+    🤘 that is what "learning" in SL is about
+
+  </div>
+
+
+  <div>
+    what about "supervised" in SL then?
+  </div>
+
+  <div>
+    easy, it means learning/training using data that have "correct answers", aka labeled output
+  </div>
+
+  <div>
+    wait, can learning be done without "correct answers"?
+  </div>
+
+  <div>
+    introducing unsupervised learning (the one that uses unlabelled data, stay tuned!) or self-supervised learning(cool
+    kids use this term)
+  </div>
+
+  <div>
+    think about how human and animal baby learn, it is amazing...
+  </div>
+
+  <div>
+    <img src="https://cdn.glitch.global/f708119b-284c-41b0-a2a7-6046c12da1c8/timescale.png?v=1668649857241" />
+  </div>
+
+  <div>
+    <img src="https://cdn.glitch.global/f708119b-284c-41b0-a2a7-6046c12da1c8/intuitive-physics.png?v=1668649827197" />
+  </div>
+
+
+  <div> Connecting what we have talked about last week: </div>
+
+  <div>
+    1. have an initially guessed model (often imperfect)
+    <br />
+    ->
+    <br />
+    2. feed the input data into the (imperfect) model
+    <br />
+    ->
+    <br />
+    3. get the (imperfect) model output
+    <br />
+    ->
+    <br />
+    4. measure how wrong this output is compared to the correct answer (labeled output)
+    <br />
+    ->
+    <br />
+    5. use the measurement to update the model
+    <br />
+    ->
+    <br />
+    back to step 2 and repeat
+  </div>
+
+
+  <div>
+    🤩The MLP we talked about last week corresponds to the step 1, 2 and 3
+    <br /> (recall the forward pass with randomly guessed numbers in the weight matrices and bias vector?).
+
+  </div>
+
+  <div>
+    🤩The MLP we talked about last week corresponds to the step 1, 2 and 3 (recall the forward pass with randomly
+    guessed numbers in the weight matrices and bias vector?).
+    <br /> 😎It also corresponds to our first decision on choosing linear functions to model in the caveman example.
+  </div>
+
+  <div>
+    🤩The MLP we talked about last week corresponds to the step 1, 2 and 3 (recall the forward pass with randomly
+    guessed numbers in the weight matrices and bias vector?).
+    <br /> 😎It also corresponds to our first decision on choosing linear functions to model in the caveman example.
+    <br /> 🥸It is another function after all, just a more complicated/expressive one.
+  </div>
+
+  <div> That's quite a lot, congrats! 🎉 </div>
+
+  <div>
+    Now let's zoom into step 4 and 5 😎:
+
+    <br /> - how to tweak the numbers in weight matrices and bias vectors according to the labeled data
+    <br /> so that the model is in a good weaving state.
+  </div>
+
+
+
+  <div> Let's forget about neural network and supervised learning for now. </div>
+
+  <div>
+    on whiteboard:
+    <br />
+    let's start with a game! 🕹️
+  </div>
+
+  <div>
+    GAME SETTINGS 🎰
+    <br />
+    --1. environment: littel 2D creature living on a curve terrain 🗻
+    <br />
+    --2. objective: find the valley 🔻
+    <br />
+    --3. player control: moving along the X axis, left or right (direction)? how far (stepsize)?🕹️
+    <br />
+    --4. world mist: mostly unknown but some very local information
+    <br />
+    all we know is that we can feel the slope under our feet 🌫️
+  </div>
+
+
+  <div> on the whiteboard:
+    <br />
+    start here,
+    <br />
+    question 1: shall i go left or right? 😈
+  </div>
+
+  <div> on the whiteboard:
+    <br />
+    answer 1: go with the downward slope direction 😉
+
+  </div>
+
+  <div> on the whiteboard:
+    <br />
+    question 2: what happens if we feel the slope is flat under our feet? 🧐
+  </div>
+
+  <div> on the whiteboard:
+    <br />
+    answer 2: jackpot! 🥰
+    <br />
+    no slope means that we have reached the valley!!!
+    <br />
+    a gentle reminder: avoiding being omniscient in this game, we know it is the valley not because we can see it being
+    the lowest point from outside the game world
+
+  </div>
+
+
+  <div> on the whiteboard:
+    <br />
+    question 3: back to the start, now we know how to decide the direction but how about our step size?
+    <br />
+    the dangerous situation with big step size 🥾
+  </div>
+
+  <div> on the whiteboard:
+    <br />
+    answer 3: a good strategy is that we should decrease our step size when the slope gets flatter
+  </div>
+
+  <div> on whiteboard:
+    <br />
+    question 4: game level up! new terrain unlocked... 🔐
+    <br />
+    What are the flat-slope points in the new terrain? how can we know if we are at THE valley (if flat slope is all we
+    are looking for) ??? 🥲
+  </div>
+
+  <div> on the whiteboard:
+    <br />
+    answer 4 part one:
+    <br />
+    these are global minima, local minima, local maxima and saddle point.
+  </div>
+
+  <div> on the whiteboard:
+    <br />
+    answer 4 part two: NO WE CAN'T 🥹
+    <br />
+    We can easily get trapped at local minima
+  </div>
+
+
+
+  <div> on the whiteboard:
+    <br />
+    BONUS 💰 question 1: start here and is there any chance we end up at the local maxima ?
+    <br />
+    hint: run simulations in your 🧠, follow the
+    <br />
+    "feel the slope -> decide the direction
+    <br />
+    -> pick a step size -> jump to the point
+    <br />
+    -> repeat"
+    <br />
+    process
+  </div>
+
+  <div> on the whiteboard:
+    <br />
+    BONUS 💰 answer 1: barely possible
+    <br />
+    don't worry too much about the local maxima
+  </div>
+
+  <div> on the whiteboard:
+    <br />
+    BONUS 💰 question 2: start here and is there any chance we end up at the saddle point?
+    <br />
+    hint: run simulations in your 🧠, follow the
+    <br />
+    "feel the slope -> decide the direction
+    <br />
+    -> pick a step size -> jump to the point
+    <br />
+    -> repeat"
+    <br />
+    process
+  </div>
+
+  <div> on the whiteboard:
+    <br />
+    BONUS 💰 answer 2: likely!!!
+    <br />
+    we could get trapped at the saddle point 🪤
+    <br />
+    what can we do?
+    <br />
+    larger step size helps us get carried over
+  </div>
+
+  <div> on the whiteboard:
+    <br />
+
+    but what can we do?
+    <br />
+    larger step size helps us get carried over
+  </div>
+
+  <div>
+    MISSION ACCOMPLISHED ❤️‍🔥
+  </div>
+
+  <div>
+    wait how about training a neural network (tweaking its parameters)?
+
+  </div>
+
+  <div>
+    that's exactly how we train a neural network
+  </div>
+
+  <div>
+    Recall the SL training process:
+    <br />
+    1. have an initially guessed model (often imperfect)
+    <br />
+    ->
+    <br />
+    2. feed the input data into the (imperfect) model
+    <br />
+    ->
+    <br />
+    3. get the (imperfect) model output
+    <br />
+    ->
+    <br />
+    4. measure how wrong this output is compared to the correct answer (labeled output)
+    <br />
+    ->
+    <br />
+    5. use the measurement to update the model
+    <br />
+    ->
+    <br />
+    back to step 2 and repeat
+  </div>
+
+  <div>
+    SAME SETTINGS 🎰
+    <br />
+    --1. curve terrain 🗻: a loss function measuring distance between predicted output and labeled output
+    <br />
+    and we are moving in the space of model parameters
+  </div>
+
+  <div>
+    SAME SETTINGS 🎰
+    <br />
+    --2. objective 🔻: find the parameters that give the lowest loss, which corresponds to the valley on the loss
+    function terrain
+  </div>
+  <div>
+    SAME SETTINGS 🎰
+    <br />
+    --3. player control with step size🕹️: adjust numbers in weight matrices and bias vectrs by deciding how much to
+    increase/decrease each parameter
+  </div>
+
+  <div>
+    SAME SETTINGS 🎰
+    <br />
+    --4. world mist 🌫️: we are agnostic of what parameters give the perfect solution
+    <br />
+    but we can compute the gradient (the slope) given current parameter values (under our feet)
+  </div>
+
+
+  <div>
+    SAME SETTINGS 🎰
+    <br />
+    --1. curve terrain 🗻: a loss function measuring distance between prediction and groudtruth
+    <br />
+    --2. objective 🔻: navigate in the space of parameters and find the lowest loss point
+    <br />
+    --3. player control 🕹️: adjust numbers in weight matrices and bias vectors by deciding how much to
+    increase/decrease each parameter
+    <br />
+    --4. world mist 🌫️: we are agnostic of what parameter values would give the perfect solution
+    <br />
+    but we can compute the gradient (the slope) given current parameter values (under our feet)
+  </div>
+
+
+  <div>
+    SAME TECHNIQUES 🍜
+    <br />
+    --1. use the slope (gradient) direction to infer what directions to adjust for each parameter
+    <br />
+    gradient: derivative, aka the slope
+    <br />
+    direction really just refer to the plain binary choice of "increase or decrease / + or - "
+  </div>
+
+  <div>
+    SAME TECHNIQUES 🍜
+    --2. also use the slope (gradient) value as an indicator of how close we are to a potential valley
+  </div>
+
+  <div>
+    SAME TECHNIQUES 🍜
+    <br />
+    --3. also use the slope (gradient) value to determine the step size of adjustment
+    <br />
+    step size: learning rate
+  </div>
+
+  <div>
+    SAME TECHNIQUES 🍜
+    <br />
+    --1. use the slope (gradient) direction to infer what directions to adjust for each parameter
+    <br />
+    direction really just refer to the plain binary choice of "increase or decrease / + or - "
+    <br />
+    --2. also use the slope (gradient) value as indicator of how close we are to a potential valley
+    <br />
+    --3. also use the slope (gradient) value to determine the step size of adjustment
+    <br />
+    step size: learning rate
+  </div>
+
+  <div>
+    SAME FINDINGS IMPLIED 🍜
+    <br />
+    -- mostly local minima
+    <br />
+    -- impossible global minima
+    <br />
+    -- no need to worry about local maxima
+    <br />
+    -- extra caution for saddle point (use larger step size)
+  </div>
+
+
+  <div>
+    RECAP 1️⃣
+    <br />
+    numberify and rephrase the neural network parameter tweaking process:
+    <br />
+    1. the goal is to minimize the loss (cost) function by adjusting parameter numbers
+  </div>
+
+  <div>
+    RECAP 2️⃣
+    <br />
+    2. after numberifying the training process, we can then apply some math trick called gradient descent
+    <br />
+    -- find the steepest decreasing direction
+    <br />
+    -- one gradient for one parameter
+  </div>
+
+  <div>
+    RECAP 3️⃣
+    <br />
+    3. we multiply the (minus) gradients with some learning rate to decide the parameter adjustment values
+    <br />
+  </div>
+
+  <div>
+
+    DONE🎉
+
+  </div>
+
+
+  <div>
+    let's watch some of <a href="https://youtu.be/sDv4f4s2SB8"> this </a> video together
+    <br />
+    to verify our intuitions
+    <br />
+    and to connect them with the practical process
+
+  </div>
+
+  <div>
+    maybe <a href="https://youtu.be/IHZwWFHWa-w"> this </a> as well
+  </div>
+
+  <div>
+    well done everyone 🎉
+    <br />
+    we have gone through MSc-level content
+
+  </div>
+
+  <div>
+    another two jargons unlocked:
+    <br />
+    backpropagation: a gradients calculation scheme
+    <br />
+    optimizer: conventionally in python DL libraries, all these backprop/GD stuff are handled by an object called
+    "optimizer"
+  </div>
+
+
+  <div> That's quite a lot, congrats! 🎉 </div>
+
+
+  <div>
+    Next, we are going to:
+    <br />
+    - take a look at how training a MLP on fashion MNIST dataset is implemented in python with help from NumPy and
+    TensorFlow(a very popular deep learning library in Python)!
+
+  </div>
+
+  <div>
+    Alert: you are going to see quite advanced python and neural network programming stuff, we are not expected to
+    understand them all at the moment.
+
+    <br />
+    Let's take a look at how some ideas we talk about today are reflected in the code,
+    <br />
+    especially how we choose a model and how we fit the model to the dataset by setting up the loss function and
+    optimizer.
+    <br />
+    - It is just a one-liner really...
+  </div>
+
+
+
+  <div>
+    everything is prepared <a
+      href="https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">here</a>
+  </div>
+
+
+
+  <div>
+    Let's take a look at the notebook!
+    <br />
+
+    <br /> - 1. Make sure you have saved a copy to your GDrive or opened in playground. 🎉
+    <br /> - 2. Most parts are out of the range of the content we have covered so far.
+    <br /> - 3. We only need to take a look at the several lines in the "Build the Model" and "Feed the Model" sections.
+  </div>
+
+  <div> Today we have looked at:
+    <br /> - The supervised learning process that select a parametrised model and train the model to fit a labeled
+    dataset
+    <br /> - The training or parameter tweaking process is done through backpropogation by a technique called gradient
+    descent
+    <br /> - Intuitions on the gradien descent: feel the slope and find the valley
+
+  </div>
+
+  <div>
+    We'll bring swift and fun applications back next week, see you next Thursday same time and same place!
+
+  </div>
+</body>
+
+</html>
