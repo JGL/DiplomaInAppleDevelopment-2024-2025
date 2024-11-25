@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>">
+  </link>
+
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div>
+    ML One
+    <br />
+    Lecture 09
+    <br />
+    Introduction to convolutional neural network (CNN)
+    <br />
+    +
+    <br />
+    example application: pose detection with PoseNet
+  </div>
+
+  <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+  <div> By the end of this lecture, we'll have learnt about:
+
+    <br /> The theoretical:
+    <br /> - new AI model unlocked 🔓: convolutional neural network
+    <br /> - cool AI application unlocked 🔓💃: pose detection
+
+    <br /> The practical:
+    <br /> - CNN implemented in python using PyTorch
+
+  </div>
+
+  <div> First of all, don't forget to confirm your attendence on <a
+      href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!
+    </a></div>
+
+  <div> as usual, a fun AI project <a href="https://research.rhizomatiks.com/s/works/discrete_figures/en/">Discrete
+      Figures</a> to wake us up
+    <br />- we'll inspect the AI model related to this project later!!!
+  </div>
+
+  <div> Recap of past two weeks</div>
+
+  <div> 🧫 Biological neurons: receive charges, accumulate charges, fire off charges</div>
+
+  <div> 🧫 Biological neurons (continued)
+    <br />
+    -- This "charging, thresholding and firing" neural process is the backbone of taking sensory input, processing and
+    conducting motory output.
+  </div>
+
+  <div> 🤖 Artificial neurons
+    <br /> - Think of a neuron as a number container that holds a single number, activation. 🪫🔋
+    <br /> - Neurons are grouped in layers. 🏘️
+    <br /> - Neurons in different layers are connected hierarchically (usually from left to righ) 👉
+    <br /> - There are different weights assigned to each link between two connected neurons. 🔗
+  </div>
+
+  <div> 🏘️ Layers in MLP
+
+    <br /> - Put each layer's activations into a vector: a layer activation vector 📛
+
+  </div>
+
+  <div> 🏘️ Layers in MLP
+
+    <br /> - Input layer: each neuron loads one value from the input (e.g. one pixel's greyscale value in the MNIST
+    dataset)👁️
+
+  </div>
+
+  <div> 🏘️ Layers in MLP
+
+
+    <br /> - Output layer: for image classification task, one neuron represents the probability this neural net assigns
+    to one class🗣️
+
+  </div>
+
+  <div> 🏘️ Layers in MLP
+
+    <br /> - Hidden layer: any layer between input and output layers and the size (number of neuron) is user-specified
+    🏴‍☠️
+
+  </div>
+
+  <div> 🏘️ Layers in MLP
+
+    <br /> - Put each layer's activations into a vector: a layer activation vector 📛
+    <br /> - Input layer: each neuron loads one value from the input (e.g. one pixel's greyscale value in the MNIST
+    dataset)👁️
+    <br /> - Output layer: for image classification task, one neuron represents the probability this neural net assigns
+    to one class🗣️
+    <br /> - Hidden layer: any layer between input and output layers and the size (number of neuron) is user-specified
+    🏴‍☠️
+
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> - The computation runs from left to right (a forward pass)👉
+
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> - The computation runs from left to right (a forward pass)👉
+    <br /> - The computation calculates each layer activation vector one by one from left to right.👉
+
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> - The computation runs from left to right (a forward pass)👉
+    <br /> - The computation calculates each layer activation vector one by one from left to right.👉
+    <br /> - Overall, the computation takes the input layer activation vector as input and returns the output layer
+    activation vector that ideally represents the correct answer.👉
+
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> -- Zoom in to the function between every consecutive layers🔬:
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> -- Zoom in to the function between every consecutive layers🔬:
+    <br /> --- Multiply previous layer's activation vector with a weights matrix: "charging" ⚡️
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> -- Zoom in to the function between every consecutive layers🔬:
+    <br /> --- Multiply previous layer's activation vector with a weights matrix: "charging" ⚡️
+    <br /> --- Add with a bias vector and feed into an activation function (e.g. relu): "thresholding" 🪜
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> -- Zoom in to the function between every consecutive layers🔬:
+    <br /> --- Multiply previous layer's activation vector with a weights matrix: "charging" ⚡️
+    <br /> --- Add with a bias vector and feed into an activation function (e.g. relu): "thresholding" 🪜
+    <br /> --- The result would be this layer's activation vector. ✌️
+  </div>
+
+  <div> 🤖🧮 The computational simulation of the "charging, thresholding and firing" neural process
+    <br /> -- Zoom in to the function between every consecutive layers🔬:
+    <br /> --- Multiply previous layer's activation vector with a weights matrix: "charging" ⚡️
+    <br /> --- Add with a bias vector and feed into an activation function (e.g. relu): "thresholding" 🪜
+    <br /> --- The result would be this layer's activation vector. ✌️
+    <br /> --- We then feed this layer's activation vector as the input to next layer until it reaches the last layer
+    (output layer): "firing" ⛓️
+  </div>
+
+
+
+  <div> Wait but what numbers shall we put in the weights matrices and bias vectors? 🥹 </div>
+
+  <div>
+    - Numbers in the weights matrices and bias vectors are called parameters 🎛️
+    <br />
+    - The training (aka parameter tweaking) process is done through backpropogation by a technique called gradient
+    descent ⏪
+
+  </div>
+
+  <div>
+    - Numbers in the weights matrices and bias vectors are called parameters 🎛️
+    <br />
+    - The training (aka parameter tweaking) process is done through backpropogation by a technique called gradient
+    descent ⏪
+    <br />
+    - Intuitions on the gradien descent: feel the slope and find the valley 🏂⛷️
+    <br />
+    - Feel the slope and find the valley 🏂⛷️: try to find the set of parameters that land at the lowest point on loss
+    function
+
+  </div>
+
+  <div>
+    well done everyone 🎉
+    <br />
+    we have gone through MSc-level content
+
+  </div>
+
+  <div>Recall the amazing perceptual adaptation effect: repeated exposure makes things easier and familier! 🥸 </div>
+
+
+  <div> end of recap 👋 </div>
+
+
+  <div>
+    Today we are going to look at the stepstone of (almost) every advanced image-dealing AI models
+    <br />
+    - convolutional neural network
+  </div>
+
+  <div>
+    Fully connected layer 🥹
+  </div>
+
+  <div>
+    Confession: there is more than one way of connection between consecutive layers
+  </div>
+
+  <div>
+    What we have seen in the MLP hidden layer is "fully connected layer"
+  </div>
+
+  <div>
+    Simply because every neuron is connected to every neuron in previous layer
+  </div>
+
+  <div>
+    This full connectivity brings a convenience for NN architects (you)
+  </div>
+
+  <div>
+    When defining a fully connected layer, the only quantity (aka hyper-parameter) to be specified, that is left to our
+    choice, is the numebr of neurons to set up in this layer.
+  </div>
+
+  <div>
+    Once that choice is made,
+    <br />
+    the shapes of weights matrix and bias vector would be automatically calculated using #of neurons in this layer times
+    #of neurons in previous layer.
+    <br />
+
+  </div>
+
+
+  <div>
+    let's confirm we have learned something today by revisiting <a
+      href="https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">this</a>
+    model training process, especially "Set up the layers" part
+
+  </div>
+
+  <div>
+    Our first time hands-on tweaking with a neural network:
+    <br />
+    add another fully connected layer comprising [your choice here] neurons
+  </div>
+
+  <!--The impact (on computation cost) of numbers of neurons in fully connected layer-->
+  <div>
+    Help me with basic maths: how many parameters are there for this MLP that handle this more practical input data?
+    hint: use the shape of weights matrix and bias vector
+  </div>
+
+  <div>
+    Apparently we don't encounter image of 28x28 much often, say if we have more realistic images of 1024 x 1024
+
+  </div>
+
+  <div>
+    With the task being a dog-or-not classification problem
+  </div>
+
+
+  <div>
+    The size of input layer?
+  </div>
+
+
+
+  <div>
+    1,048, 576 ~= 1m
+  </div>
+
+  <div>
+    With first hidden layer having 1000 neurons, what is the size of this weights matrix?
+  </div>
+
+  <div>
+    ~= 1B
+
+  </div>
+
+  <div>
+    This number of parameters is probably more than the number of dogs in the world (check this up) 🎃
+
+  </div>
+
+  <div>
+    Recall that we oNLy have 100 billion neurons 😈
+  </div>
+
+  <div>
+    Imagine that with 100 different 1024x1024 image classifications models and our brain juice is drained 😵
+  </div>
+
+
+  <div>
+    When the task and data get slightly more difficult... the constraint of FC layer becomes prominent:
+    <br>
+    the curse of dimensionality (CoD)
+
+  </div>
+
+  <div>
+    sorry, fully connected layer 🥹
+
+  </div>
+
+  <div>
+    Reflection on why FC layer suffers from CoD:
+    <br />
+    1. everything connects to everthing
+    <br />
+    2. every connection has its own weight
+    <br />
+    hence the big weight matrix size
+
+  </div>
+
+  <div>
+    🫥 bye MLP for now
+  </div>
+
+  <!--CNN to rescue-->
+
+  <div>
+    Introducing... convolutional neural network!
+  </div>
+
+
+  <div>
+    CNN is the stepstone for working with vision or any 2D data.
+  </div>
+
+  <div>
+    It is a variant on top of MLP, most things remain the same (it has input output layer, and fully connected layer🤨)
+  </div>
+
+  <div>
+    New ideas in CNN are essentially two new layer types introduced: convolutional layer and pooling layer
+  </div>
+
+
+  <div>
+    Convolution and conv layer 🫣
+    <br />
+    -- convolution is a math operation that is a special case of "multiplication" applied between two matrices
+    <br />
+    -- just another meaningful computation rules 🤠
+    <br />
+
+    -- check <a href="https://www.youtube.com/watch?v=KuXjwB4LzSA">this</a> video out for a very smooth introduction
+  </div>
+
+  <div>
+    Good thing about CNN 01:
+    <br />
+    Because convolution operation can be defined in 2D, image data can retain its 2D structure.
+    <br />
+    It means that in the input layer, there is no need to flatten the 2D input.
+    <br />
+    (recall the cost of losing neighboring information in flattening)
+    <br />
+
+  </div>
+
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/conv.webp?v=1670549167473' />
+    <div>Convolution is actually quite easy:
+      <br /> - "filter" in the image is the weights matrix
+      <br /> - element-wise multiplication between input and filter matrices
+      <br /> - sum up the element-wise products to one number, similar to dot product
+    </div>
+  </div>
+
+  <div>
+    and slide the filter to the next part of input like a sliding window and compute again, all the way till the end
+  </div>
+
+  <div>
+    recall multiplication has a flavour of "computing similarity"
+  </div>
+
+  <div>
+    Some intuitions on conv
+    <br />
+    - view the weights matrix here as a filter that has a graphical pattern on it,
+    <br />
+    - by convolute a filter with input image,
+    <br />
+    - it can detect if that graphical pattern is present in the image or not
+    <br />
+    - ( how similar it is between the filter pattern and input image)
+    <br />
+    <a href="https://www.youtube.com/watch?v=KuXjwB4LzSA">3B1B smashes it again</a>
+  </div>
+
+  <div>
+    Now we know what convolution is, a convolution layer is just a layer comprising a set of filters with following
+    specifications:
+    <br />
+    - Kernel size: size of filter (e.g. 3x3, 5x5)
+    <br />
+    - Number of channels: number of total filter (e.g. 32, 64)
+    <br />
+    - stride: how do you slide the filter over the input (e.g. 1, 3 )
+    <br />
+    - padding: usually used when the filters do not fit the input image
+    <br />
+    (<a href="https://www.ibm.com/topics/convolutional-neural-networks">more details here fyi</a> )
+  </div>
+
+
+  <div>
+    Recall layer activation vectors in MLP?
+    <br />
+    in CNN, the input and output of a conv layer is called "feature maps" (2D feel huh)
+  </div>
+
+  <div>
+    Conv layer is profound
+    <br />
+    -- this single math operation is a game changer in AI, it made up the "first" working AI model in 1998 by Lecun Yann
+    <br />
+    -- reduced connectivity (see next slides)
+    <br />
+    -- shared(copied/tied) weights (see next slides)
+    <br />
+    -- its design coincides with image's intrinsic properties, right tool for the right problem (e.g. self-similarity as
+    shown later)
+  </div>
+
+  <div>
+    Conv layer why cool:
+    <br />
+    -- reduced connectivity: a neuron only connects to some of the neurons in prev layer
+    <br />
+    -- not one link one weight anymore: the connection weights are shared (copied) across different links
+    <br />
+    -- image has self-similarity structure (patches at diff locations looks similar)
+    <br />
+
+  </div>
+
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img
+      src='https://cdn.glitch.global/a1109332-f65e-48a1-8be8-d90271530061/Screenshot%202022-12-08%20at%2011.59.20.png?v=1670500784582' />
+    <div><a href="https://youtu.be/XTZwB_jicMI?si=JlZ5B19iV8L1SBns&t=284">another ytb vid on convolution</a></div>
+  </div>
+
+  <div> That's quite a lot, congrats! 🎉 </div>
+
+  <div>
+    It also helps me get a job lol, <a
+      href="https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/VGG16.png?v=1670552342798">this</a> is the
+    exact CNN that helped my previous job a looot
+  </div>
+
+  <div>
+    Pooling layer (max pooling or average pooling):
+    <br /> - no parameters/weights
+    <br /> - just an operation of taking the max/avg pixel values in a given neighborhood from the input
+    <br /> - "downsample" (like blurring the image)
+  </div>
+
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/maxpooling.png?v=1670553224802' />
+    <div> max pooling is just another easy math operation, it reduces each dimension by half in this example </div>
+  </div>
+
+  <div>
+    Why pooling layer? some intuitions... 🤖
+    <br /> - to compensate the fact that conv layer cannot largely reduce the dimension.
+    <br />
+    why do we need dimension reduction?
+    <br />
+    - to squeeze information into more general ones,
+    <br />
+    - and max pooling does dimension reduction brutally, with no parameters to be learned
+
+  </div>
+
+  <div>
+    😈 End of noodling!!! Here is a takeaway message:
+    <br />
+    - In CNN, there is a typical mini-architecture of having a conv layer followed by a pooling layer.
+    <br />
+    - The ordered layering of "conv+pooling" is very conventional, like shown in <a
+      href="https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/VGG16.png?v=1670552342798">VGG</a>.
+    <br />
+    - Sometimes it is called a "conv block" or "conv module".
+    <br />
+    - The process of designing a CNN architecture is mostly just stacking conv blocks, and add some FC layers in the end
+  </div>
+
+
+  <div> Here are what we have talked so far:
+    <br /> - 🍰Convolution operation and conv layer
+    <br /> -- 🤘conv layer why cool? efficient (less parameters) and effective (very handy in image processing)
+    <br /> - 🍰Pooling operation and pooling layer
+    <br /> -- 🤘pooling layer why cool? it does dimension reduction, VERY simply (no parameters)
+    <br /> - 🍔A conv block: conv + pool layer
+    <br /> - 🍔🍔 CNN: stacked conv blocks, sometimes with FC layers in the end
+
+  </div>
+
+  <div> That's quite a lot, congrats! 🎉 </div>
+
+  <div>
+    Intuitions time: the hierachical feature extractions in CNN
+  </div>
+
+  <div>
+    Here is a visualisation of "hierachical 2D features extraction done properly by CNN"
+  </div>
+
+
+
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/neuronvisualcnn.png?v=1670554235380' />
+    <div>https://cs.colby.edu/courses/F19/cs343/lectures/lecture11/Lecture11Slides.pdf </div>
+  </div>
+
+
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/visualpathway.png?v=1670553832162' />
+    <div>Filters in different conv layers are doing pattern detection with an overall hierarchical structure, which is
+      guess what, biologically inspired! </div>
+  </div>
+
+
+
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/posenet.png?v=1670557639470' />
+    <div> A modern state-of-the-art AI architecture: PoseNet.
+      <br /> - Intimidating maybe at the first look
+      <br /> - looking closely you will find it is just many good old friends stacking together.
+    </div>
+  </div>
+
+  <div>
+    <br /> Introducing Pose detection 💃🕺:
+    <br /> - Input: a digital image
+    <br /> - Output: a set of coordinates corresponding to different key points on human body (similar with landmarks on
+    face)
+  </div>
+
+  <div>
+
+    <a href="https://github.com/tensorflow/tfjs-models/tree/master/pose-detection#example-code-and-demos">play around
+      with PoseNet which does pose detection in real time</a>
+    <br /> - you can use this model easily in your Apple App, check <a
+      href="https://developer.apple.com/documentation/coreml/model_integration_samples/detecting_human_body_poses_in_an_image">
+      this </a> out
+  </div>
+
+
+  <div> That's quite a lot, congrats! 🎉 </div>
+
+
+  <div>
+    Let's take a look at <a
+      href="https://colab.research.google.com/drive/1dW9RPgOtVNbxttO8ZdShUV8t1e4EFQQP?usp=sharing">this </a> notebook!
+    <br />
+    - on how to train a CNN using PyTorch
+    <br /> - 1. Make sure you have saved a copy to your GDrive or opened in playground. 🎉
+    <br /> - 2. Most parts are out of the range of the content we have covered so far.
+    <br /> - 3. Your task: find the line of codes where the <a href="https://swift-morning-print.glitch.me/#62">conv
+      layer specifications aka hyperparameters </a> are defined.
+    <br /> - 4. hint: it is something related to nn.Conv2D()
+
+  </div>
+
+  <div> Today we have looked at:
+    <br /> - CNN is better at image tasks than MLP: efficient and effective
+    <br /> - CNN with two new layer types: conv layer and pooling layer
+    <br /> - Conv layer: a set of filters 🔎
+    <br /> - Pooling layer: take avg/max in each patch 🌫️
+    <br /> - A conv block: conv layer + pooling layer 🍔
+    <br /> - CNN: input layer, conv blocks, fc layer, output layer 🍔🍔
+
+    <br /> - Pose detection application: a model that detects key points on human body🩻
+    <br /> - PoseNet as an example of real-life sized CNN 💃
+  </div>
+
+  <div> We have gone through some MSc-level content today, congrats!!!
+
+    <br /> - It's okay if you have not grasped all the details yet, this lecture serves as a demystifying purpose.
+
+  </div>
+
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/neuronvisualcnn.png?v=1670554235380' />
+    <div> This is the simple takeaway message on what's going on inside an AI model (CNN) in action: extracing features
+      hierachically 🪜</div>
+  </div>
+
+
+  <div>
+    We'll see you next Thursday same time and same place!
+
+  </div>
+
+</body>
+
+</html>
