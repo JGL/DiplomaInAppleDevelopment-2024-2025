@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>">
+  </link>
+
+  <style>
+    body {
+      background-color: #EDDD6E;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div>
+    ML One
+    <br />
+    Lecture 10
+    <br />
+    A walking tour of AI developments in computer vision
+    <br />
+    +
+    <br />
+    example applications: hand pose detection, barcode detection, image foreground instance segmentation
+  </div>
+
+  <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+  <div> By the end of this lecture, we'll have learnt about:
+
+    <br /> The STORY:
+    <br /> - The evolution of AI in computer vision
+    <br /> - Computer vision tasks, datasets and models
+
+    <br /> The practical:
+    <br /> - Core ML models walkthrough
+    <br /> - Example applications in hand pose detection, barcode detection, image foreground instance segmentation
+
+  </div>
+
+  <div> First of all, don't forget to confirm your attendence on <a
+      href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!
+    </a></div>
+
+  <div> as usual, a fun AI model <a href="https://affinelayer.com/pixsrv/">Pix2Pix</a> to wake us up
+  </div>
+
+  <div> <a href="https://github.com/JGL/DiplomaInAppleDevelopment-AutumnWinter2023#block-1-assessment">Assessment
+      Info</a> </div>
+
+  <div> <a href="https://github.com/JGL/DiplomaInAppleDevelopment-AutumnWinter2023#block-1-assessment">Assessment
+      Info</a>
+    <br /> - Multiple Choice test: There will be a summary sheet and mock exam handed out on 11th Jan
+  </div>
+
+  <div> <a href="https://github.com/JGL/DiplomaInAppleDevelopment-AutumnWinter2023#block-1-assessment">Assessment
+      Info</a>
+    <br /> - Presentation: pick an AI model and present (what are its input/output? what can it do? and a proposal plan
+    of application, no training/implementation is required)
+    <br /> - There will be a summary sheet(with tips and model zoo) handed out next week (7th December)
+  </div>
+
+  <div> Recap</div>
+
+  <div> 🍰Convolutional neural network (CNN) is better at image tasks than MLP: efficient and effective. </div>
+  <div> 🤘CNN is characterised by two new types of layers: conv layer and pooling layer </div>
+  <div> A conv layer has a set of filters and is convoluted with previous layer's activations. 🔎 </div>
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/conv.webp?v=1670549167473' />
+    <div>Convolution is actually quite easy:
+      <br /> - "filter" in the image is the weights matrix
+      <br /> - element-wise multiplication between input and filter matrices
+      <br /> - sum up the element-wise products to one number, similar to dot product
+    </div>
+  </div>
+
+  <div> A pooling layer takes the avg/max value within each sliding window on previous layer's activations. ◰ </div>
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/maxpooling.png?v=1670553224802' />
+    <div> max pooling is just another easy math operation, it reduces each dimension by half in this example </div>
+  </div>
+
+  <div> A conv block is a stack of one or more conv layers followed by a pooling layer. 🍔 </div>
+  <div> A typical CNN: input layer -> conv blocks -> fc layer -> output layer 🍔🍔 </div>
+
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/posenet.png?v=1670557639470' />
+    <div> A state-of-the-art AI model: PoseNet.
+      <br /> - Intimidating maybe at the first look
+      <br /> - By looking closely you will find it is just many good old layers stacking together.
+    </div>
+  </div>
+
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/a5d78b38-91c6-4583-82da-75eb6dad2022/neuronvisualcnn.png?v=1670554235380' />
+    <div> Intuition on how CNN works: it hierachically extracts features from an image: from simple edges to complex
+      patterns </div>
+  </div>
+
+  <div> That's quite a lot, congrats! 🎉 </div>
+
+  <div> end of recap 👋 </div>
+
+
+
+  <div>
+    Now that we have the basics (CNN) equiped, let's have a bird eye view on computer vision!
+  </div>
+
+  <div>
+    What is computer vision?
+  </div>
+
+  <div>
+    Computer vision (CV) is a field of artificial intelligence (AI) that enables computers and systems to <strong>derive
+      meaningful information</strong> from digital images, videos and other visual inputs.
+  </div>
+
+  <div>
+    Meaningful information from digital images:
+    <br> - What is it about?
+    <br> - What are the objects in it?
+    <br> - Where are the objects in it?
+    <br> etc.
+  </div>
+
+  <div>
+    🤠Here are several main CV tasks:
+    <br> - Image classification
+    <br> - Object detection
+    <br> - Image segmentation
+    <br> - Scene reconstruction
+    <br> etc.
+  </div>
+
+  <div>
+    🏋️While they all take digital images as input, we can differentiate these CV tasks by their distinct output types:
+    <br> - Image classification: outputs a categorical vector
+    <br> - Object detection: outputs bounding boxes
+    <br> - Image segmentation: outputs pixel masks (providing finer object location precision than bb )
+    <br> - Scene reconstruction: outputs 3D representations
+  </div>
+
+  <div>
+    let's look at some of the <a href="https://developer.apple.com/machine-learning/models/">apple models</a> and
+    corresponding tasks, now this page should be much more familiar
+  </div>
+
+  <div> The evolution of AI models in computer vision (story time): </div>
+
+  <div> Once upon a time... </div>
+
+  <div> The story started with two scientists and a cat🐈 in the 1950s-1960s.</div>
+
+  <div>
+    <a href="https://www.youtube.com/watch?v=IOHayh06LJ4">Hubel and Wiesel Cat Experiment</a>:
+    <br /> They discovered that the early layers of cat's visual cortex responded to simple shapes, like hard edges or
+    lines.
+    <br /> - This meant that image processing starts with simple shapes like straight edges
+    <br /> (here is a <a href="https://www.youtube.com/watch?v=Cw5PKV9Rj3o">demo</a> of the experiment.)
+  </div>
+
+  <div> In the 1960s, AI emerged as an academic field of study, and it also marked the beginning of the AI quest to
+    solve the human vision problem. </div>
+
+  <div> 1974 saw the introduction of optical character recognition (OCR) technology, which could recognize text printed
+    in any font or typeface.
+
+    <br /> - (check out <a href="  https://www.youtube.com/watch?v=kU8A80Y5NQU">Optacon</a>)
+  </div>
+
+  <div> In 1982, neuroscientist David Marr established that vision works hierarchically and introduced algorithms for
+    machines to detect edges, corners, curves and similar basic shapes. </div>
+
+  <div> Concurrently, computer scientist Kunihiko Fukushima developed a network of cells that could recognize patterns.
+    The network, called the <a href=" https://www.rctn.org/bruno/public/papers/Fukushima1980.pdf">Neocognitron</a>,
+    included convolutional layers in a neural network.
+    <br /> - Neocognitron was applied to Japanese handwritten character recognition and other pattern recognition tasks.
+  </div>
+
+  <div>
+    <a href="https://www.youtube.com/watch?v=50u3LfmgDKU">Back to the year of 1998 </a>
+  </div>
+
+  <div> "hello world" dataset of machine learning - MNIST, <a
+      href="https://en.wikipedia.org/wiki/MNIST_database#/media/File:MnistExamples.png">handwritten digits images with
+      labels </a> </div>
+
+
+
+  <div> Lenet: one of the earlies Convolutional Neural Network, with conv and pooling layers, the prototype of
+    everything follows </div>
+
+
+  <div>
+    But what next? Where should computer vision go? In the early 2000s, computer vision tasks included face recognition,
+    matching satellite images, image stitching, 3D scene reconstruction ...
+  </div>
+
+  <div>
+    Finding the focal point, the right level of difficulty and task abstraction: obejct recognition
+  </div>
+
+  <div>
+    <a href="http://host.robots.ox.ac.uk/pascal/VOC/voc2005/index.html"> 2005 PASCAL Visual Object Classes Challenge
+    </a>
+  </div>
+
+  <div>
+    It has an annotated <a href="http://host.robots.ox.ac.uk/pascal/VOC/databases.html#VOC2005_1"> dataset </a>
+    <br />
+    number of training images: 1500±
+    <br />
+    image dimension: RGB 450*280 ish
+    <br />
+
+    four classes: motorbikes, bicycles, people, and cars
+    <br />
+    type of tasks: let's have a look!
+  </div>
+
+  <div>
+    🍜 noodle time!
+    <br />
+    How would you programme the computer to differentiate a car from a bike? (a car-or-bike binary classifier)
+  </div>
+
+  <div>
+    🍜 noodle time!
+    <br />
+    How would you programme the computer to differentiate a car from a bike? (a car-or-bike binary classifier)
+    <br />
+    Rule-based explicit programm is hard...
+  </div>
+  <div>
+    Type of tasks:
+    <br />
+    classification: outputs categorical vector
+    <br />
+    obejct bouding box detection: outputs bounding box
+    <br />
+    object segmentation: outputs pixel mask
+    <br />
+    These are the milestone tasks for computer vision till today.
+  </div>
+
+  <div>
+    While "gathering data" nowadays is just an everyday word, back at 2005 there was not so much mindset about the
+    "data" and the impact of just the scale of data!
+
+  </div>
+
+  <div>
+    Let's move on to the ImageNet era 👽
+  </div>
+
+  <div>
+    The visionary ImageNet was introduced in 2010.
+  </div>
+
+  <div>
+    Let's take a look at its visionary scale:
+    <br />
+    number of training images: 1,281,167
+    <br />
+    image dimension: RGB 469x387 on average
+    <br />
+    <a href="https://deeplearning.cms.waikato.ac.nz/user-guide/class-maps/IMAGENET/">1000 classes</a>: based on WordNet
+
+    <br />
+    tasks: image classification and object detection
+    <br />
+
+  </div>
+
+  <div>
+    and introducing another scientist behind recent computer vision developments <a
+      href="https://youtu.be/Z7naK1uq1F8?t=2">Feifei Li</a>
+  </div>
+
+  <div>
+    another visionary design of ImageNet: 1000 classes from WordNet
+    <br />
+    WordNet consists of many English-language terms organized into an ontological structure
+  </div>
+
+  <div class='layout' style='grid-template-columns: 1fr;grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/0421b738-9cc6-4bf3-8bfe-62c09f63f5f5/wordnet.webp?v=1673469441436
+' />
+    <div>Wordnet example: a lexical database that is ontologically structured</div>
+  </div>
+
+
+  <div>
+    It is bridging computer vision with cognitive science and 1000-class classification task is far beyond the
+    capability of contemporary models
+  </div>
+
+
+  <div class='layout' style='grid-template-columns: 1fr;grid-template-rows:75% 25%;'>
+    <img src='https://cdn.glitch.global/0421b738-9cc6-4bf3-8bfe-62c09f63f5f5/imagenet.png?v=1673470204858' />
+    <div>ImageNet challenge winners from 2010 to 2017</div>
+  </div>
+
+  <div>
+    Explanation of "top-5" error on whiteboard
+  </div>
+
+
+
+  <div>
+    - 1. It was really bad in 2010 and 2011
+    <br /> - 2. Everything changed from 2012, from AlexNet onwards
+  </div>
+
+
+  <div>
+    <br /> - From AlexNet in 2012, we saw an explosion of AI models in CV.
+    <br /> - Let's take a look at some of the big namers (they are all image classifiers initially trained on ImageNet
+    dataset).
+  </div>
+
+
+  <div>
+    Side note:
+    <br />
+    every big name model is usually chracterised by one or few brilliant architectural designs (e.g. a new set of
+    hyper-paremters, a new layer type etc.).
+
+  </div>
+
+  <div>
+    <a
+      href="https://medium.com/analytics-vidhya/types-of-convolutional-neural-networks-lenet-alexnet-vgg-16-net-resnet-and-inception-net-759e5f197580">
+      just for reference</a>
+  </div>
+
+  <div>
+    AlexNet: the first CNN that goes "deep", and uses GPU for training
+  </div>
+
+  <div>
+    VGG: deeper(aka it has more layers), with smaller filter size(3x3) in conv layers
+  </div>
+
+  <div>
+    Resnet: residual modules ("new layer type"), connections jumping layers
+  </div>
+
+  <div>
+    Inception, or GoogleNet: inception modules ("new layer type"), it goes "wide"
+  </div>
+
+  <div>
+    All these models pre-trained on ImageNet can be used as a good starting point for "any" vision task.
+    <br />
+    - think of these models as "vision task bootcamp" graduates,
+    <br />
+    they are good visual feature extractors.
+    <br />
+    We'll see applications of these next semester!
+  </div>
+
+  <div>
+    "New" topics of computer vision:
+    <br />
+    - Image captioning (image to text) e.g. models <a href="https://github.com/salesforce/LAVIS">here</a>
+    <br />
+    - 2D images generation: GAN( <a href="https://thispersondoesnotexist.com/">thispersondoesnotexist</a>), Stable
+    diffusion (next year😈)
+    <br />
+    3D models generation:
+    <br />
+    -- 2D-to-3D, e.g. avatar generation with <a href="https://youtu.be/1Lkk7PHbE8E?si=5cff8kusdNla4T3I">RODIN by
+      Microsoft</a>, <a href="https://youtu.be/rSb0Io92_R8?si=0bdBYhAZtmKTLT_r">Avaturn</a>(it has a free plan)
+    <br />
+    -- text-to-3D, e.g. game asset genetation <a href="https://youtu.be/O1TlGOmSQ4M?si=X05VaM49SVJCG1xj">Masterpiece
+      X</a>
+  </div>
+
+
+  <div>
+    Introducing hand pose detection:
+    <br /> - Input: a digital image
+    <br /> - Output: a set of coordinates corresponding to different key points on human hand
+    (<a href="https://developer.apple.com/documentation/vision/vnhumanhandposeobservation/jointname">Here</a> are the
+    keypoints used by Apple's hand pose detector)
+  </div>
+
+  <div>
+    For the next ~30 mins:
+    <br /> - 😛download the virtual drawing (enabled by hand pose detection) App <a
+      href="https://developer.apple.com/documentation/vision/detecting_hand_poses_with_vision">here</a>
+    <br /> - 🍺unzip and open the xcode project
+    <br /> - ✏️modify the "Team" and "Bundle Identifier" fields under signing&capabilities
+    <br /> - 📱run it on your phone!
+    <br /> - 🤏pinch to draw, double tap to clear the screen
+    <br /> - 🤨question: where is the hand pose detection API called?
+    <br /> - 🫥hint: VNDetectHumanHandPoseRequest()
+  </div>
+
+
+  <div>
+    For the next ~20 mins:
+    <br /> - 😛download the barcode detection playground <a
+      href="https://moodle.arts.ac.uk/pluginfile.php/1737987/mod_resource/content/2/barcode-detection.playground.zip?forcedownload=1">here</a>
+    <br /> - 🍺unzip and open the playground
+    <br /> - 📱run it and see what the output print is
+    <br /> - ⛹️‍♀️find a QR-code generator online, generate a QR code and use this playground to decipher!
+  </div>
+
+  <div>
+    For the next ~30 mins:
+    <br /> - 😛download the subject lifting (enabled by an image segmentation model) App <a
+      href="https://developer.apple.com/documentation/vision/applying_visual_effects_to_foreground_subjects">here</a>
+    <br /> - 🍺unzip and open xcode project
+    <br /> - ✏️modify the "Team" and "Bundle Identifier" fields under signing&capabilities
+    <br /> - 📱run it on your phone!
+    <br /> - 🤨question: where is the foreground instance segmentation API called?
+    <br /> - 🫥hint: VNGenerateForegroundInstanceMaskRequest()
+  </div>
+
+  <div> That's quite a lot, congrats! 🎉 </div>
+
+
+
+  <div> Today we have looked at:
+    <br /> - What is computer vision about 👁️
+    <br /> - Image classification, object detection, image segmentation 🤓
+    <br /> - Some open datasets in CV research: MNIST, PASCAL, ImageNet 💿
+    <br /> - Some popular AI models in CV:
+    <br /> -- VGG, ResNet, GoogleNet 🏎️
+    <br /> - Three example Apps integrating models from Apple's Vision framework:
+    <br /> -- hand pose detection, barcode detection, foreground instance segmentation 🧃
+  </div>
+
+
+
+  <div>
+    <br /> - Next week is our last lecture of this year!😎
+    <br /> - Hope to see you all next Thursday same time and same place!😎
+  </div>
+
+</body>
+
+</html>
