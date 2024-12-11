@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>">
+  </link>
+
+  <style>
+    body {
+      background-color: #EDDD6E;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div>
+    ML One
+    <br />
+    Lecture 11
+    <br />
+    Introduction to RNN, LSTM and Transformer for modelling sequential data
+    <br />
+    +
+    <br />
+    Tips for presentation
+  </div>
+
+  <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+  <div> By the end of this lecture, we'll have learnt about:
+
+    <br /> - Introduction to sequential data modelling
+    <br /> - Example applications of sequential data modelling: natural language processing🗣️💬👁️‍
+    <br /> - A new AI architecture unlocked 🔓: recurrent neural network
+    <br /> - A very cool and almost universally useful AI architecture unlocked🔓: Transformer 🤖
+
+    <br /> *Tips for presentation (ML One assessment)*
+
+
+  </div>
+
+  <div> First of all, don't forget to confirm your attendence on <a
+      href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!
+    </a></div>
+
+  <div> as usual, a fun AI application Music Source Separation (with <a href="https://www.lalal.ai/">LALAL.AI</a> as an
+    example) to wake us up
+  </div>
+
+
+  <div> - Neural networks for modelling sequential data -
+    <br /> (following content is adapted from <a
+      href="https://moodle.arts.ac.uk/mod/resource/view.php?id=1251960">Mick's slides</a>)
+  </div>
+
+  <div> 〰️ Introduction to sequential data - what's a sequence? 〰️
+
+    <br /> - A tracking record of coin tosses 🪙
+    <br />- A transcript/score of a drum beat 🎼🥁
+    <br />- An audio recording of a drum beat 🎤🥁
+    <br />- Letters in a word
+    <br />- Words in a sentence
+    <br />- Methods in a cooking recipe🔖
+
+    <br />- Numbers in a list of any kind that represent anything that happens over time 💯
+
+  </div>
+
+  <div> 〰️ Introduction to sequential data - sequence of tokens 〰️
+
+    <br /> Let's use "token" to denote the "what" in any sequence.
+    <br />- A transcript/score of a drum beat 🎼🥁: each music note as token
+    <br />- An audio recording of a drum beat 🎤🥁: each audio sample as token
+    <br />- Letters in a word: each letter as token
+    <br /> Words in a sentence: each word as token
+    <br />- Methods in a cooking recipe🔖:each method as token
+
+  </div>
+
+  <div> 〰️ Introduction to sequential data - token embeddings 〰️
+    <br /> 🫲What token really is if we want to feed sequence data into our computer for doing some computation later?🫱
+    <br /> - They are just representations (of note, audio sample, letter, word, etc.) in numbers, which are just
+    vectors/matrices.
+  </div>
+
+
+  <div> 〰️ Introduction to sequential data - sequential data modelling tasks 〰️
+
+    <br /> 🫲Say we are given this sequence dataset, which comprises a list of token embeddings where the order implies
+    the time dimension🫱
+    <br />What tasks can we do? What information can we model and predict?
+    <br />- 1. At any point of time, based on what has happened, which token is likely to the next?
+    <br />-- example application: langauge modelling -> given a context of previous text, predict the next word (this is
+    what ChatGPT does)
+  </div>
+
+  <div> 〰️ Introduction to sequential data - sequential data modelling tasks 〰️
+
+    <br />- 2. At the end of the sequence, based on what has happened in the entire sequence, what kind of sequence is
+    this?
+    <br />-- example application: sentiment analysis
+  </div>
+
+  <div> 〰️ Introduction to sequential data - sequential data modelling tasks 〰️
+
+    <br />- 3. At the end of the sequence, based on what has happened in the entire sequence, can we predict another
+    related sequence?
+    <br /> -- example application: machine translation -> given a sentence in French, generate the English version of it
+  </div>
+
+  <div> Models that are made for sequential data modelling: RNN and LSTM
+
+    <br /> <a href="https://karpathy.github.io/2015/05/21/rnn-effectiveness/">A very good introduction here.</a>
+  </div>
+
+  <div> RNN - summary
+
+    <br /> 1. Recurrent Neural Networks are different from MLPs, CNNs etc.
+    <br /> 2. They still have input layer, hidden layers with weights and biases.
+    <br /> 3. The hidden layers are applied recurrently along tokens of an input sequence - RNNs have loops in them! (
+    <a href="https://www.researchgate.net/figure/Recurrent-Neural-Network-with-loop_fig3_321453109">Here</a> is an
+    illustration.)
+    <br /> 4. The network doesn't hard memorise an exact copy of the sequence. Instead it encodes the compound
+    information of tokens in a sequence.
+    <br /> 5. This architecture has a kind of'memory'.
+  </div>
+
+  <div> <a href="https://colab.research.google.com/drive/1-i7paU37t8nouB2ANOkuZw0RaMYoLjVo?usp=sharing">A google colab
+      notebook for training an RNN to generate text</a> (using <a
+      href="https://github.com/karpathy/char-rnn/tree/master/data/tinyshakespeare">text from Shakespear</a> as training
+    data) </div>
+
+
+  <div> RNN - the problem🥲
+
+    <br /> - It is designed to "try to memorise everything from a sequence".
+    <br /> - Because of that recurrent loop, which can be unrolled into a looong computation graph, RNN suffers from
+    exploding/vanishing gradient.
+    <br /> (meaning that it is hard to train a RNN, and to have a good modelling performance)
+
+  </div>
+
+
+
+  <div> RNN - the mitigation🤗 -> LSTM
+
+    <br /> Other RNN variants are proposed for better optimization performance.
+    <br /> - LSTM (Long Short Term Memory Networks, I usually refer to <a
+      href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">this article</a> for an in-depth explanation.)
+    <br />- LSTM networks add gates (yet another sets of weight and bias and activation function) to edit and filter the
+    information that the RNN retains.
+    <br />- These gates allow for "selectively forgetting information" in a way.
+
+  </div>
+
+
+
+  <div> <a href="https://colab.research.google.com/drive/1mkPVmUcf8MrJ0qblALE6H4cOinTZo3cZ?usp=sharing">A google colab
+      notebook for training a LSTM to generate audio</a> </div>
+
+
+  <div> Introduction to natural language processing🗣️
+
+    <br /> - It's about language!
+    <br />- Our language, either written(text) or spoken(audio) is in the form of sequential data!
+
+  </div>
+
+
+  <div> Introduction to natural language processing🗣️
+
+    <br /> Natural language processing, or NLP, combines computational linguistics—rule-based modeling of human language
+    with statistical and machine learning models
+    <br />- to enable computers and digital devices
+    <br />- to recognize, understand and generate text and speech.
+
+  </div>
+
+  <div> Introduction to natural language processing🗣️
+
+    <br /> Natural language processing, or NLP, combines computational linguistics—rule-based modeling of human language
+    with statistical and machine learning models
+    <br />- Check <a href="https://www.ibm.com/topics/natural-language-processing#NLP+use+cases">here</a> for example
+    applications of NLP (we have seen some of them already🤗)
+
+  </div>
+
+
+  <div> What does GPT in ChatGPT stand for?
+
+    <br /> - Generative Pre-trained Transformer.
+    <br /> Transformer is the neural network that does the heavy lifting behind ChatGPT.
+
+  </div>
+
+  <div> Transformer
+
+    <br /> You can find the original epic-titled paper <a href="https://arxiv.org/abs/1706.03762">here</a>, and many
+    good explanations online.
+    <br /> ‼️"Attention mechanism" is the key design.
+    <br /> - Key components:
+    <br /> -- Transformer block with self-attention layer, feedforward layer, residual connection and layer
+    normalization
+
+  </div>
+
+  <div> Transformer
+
+    <br /> - We use language tokens as input to transformer for NLP tasks.
+    <br /> - Transformer is quite universitile and can be applied to other domains and data modalities.
+    <br /> - It can be very powerful for multi-modal application. 💪
+    <br /> *You just need to swap that language token to be other tokens, for instance, patches from an image, latent
+    code from an audio etc. *
+    <br /> - An example: <a href="https://arxiv.org/abs/2010.11929">Vision Transformer (ViT)</a>
+    <br /> - Hugging face has a <a href="https://huggingface.co/docs/transformers/index">model hub</a> for Transformers.
+
+  </div>
+
+  <div> 🔥!!!Congrats!!!🔥 </div>
+
+
+  <div> <a href="https://moodle.arts.ac.uk/mod/resource/view.php?id=1251959">Tips for ML One assessment presentation</a>
+    <br /> - Start preparing early!
+  </div>
+
+
+  <div>
+    *BIG ANNOUNCEMENT*
+  </div>
+
+  <div>
+    🎄Merry Xmas and Happy New Year🎉
+    <br /> - See you in 2025✋ (more fun ML applications to come...)
+  </div>
+
+</body>
+
+</html>
