@@ -128,7 +128,7 @@ Please read [UAL's guidance for students on how they will be assessed](https://w
 - **Coding One: Swift and SwiftUI**:
 
   1. Multiple Choice Test: students will be presented with a series of questions relating explicitly to course content. They must choose between up to 4 potential correct answers per question. Test will be sat on Tuesday 21st January 2025, 1000-1200, duration two hours. This test will be worth 50% of your overall unit mark.
-  2. Practical Exam: students will be individually asked to write a basic program to demonstrate the application of creative coding to a set problem. Exam will be sat on Tuesday Tuesday 28th January 2025, 1000-1200, duration two hours. This exam will be worth 50% of your overall unit mark.
+  2. Practical Exam: students will be individually asked to write a basic program to demonstrate the application of creative coding to a set problem. Exam will be sat on Tuesday 28th January 2025, 1000-1200, duration two hours. This exam will be worth 50% of your overall unit mark.
 
 - **ML One: Introducing Machine Learning with CoreML**:
 
@@ -143,8 +143,8 @@ Please read [UAL's guidance for students on how they will be assessed](https://w
 
 - **Coding Two: Further Apple Frameworks**:
 
-  1. Multiple Choice test: students will be presented with a series of questions relating explicitly to course content. They must choose between up to 4 potential correct answers per question. This test will be sat on TBC, duration two hours, 1000-1200. This test will be worth 50% of your overall unit mark.
-  2. Practical Exam: students will be individually asked to write a basic program to demonstrate the application of creative coding to a set problem. This exam will be sat on TBC, duration two hours, 1000-1200. This exam will be worth 50% of your overall unit mark.
+  1. Multiple Choice test: students will be presented with a series of questions relating explicitly to course content. They must choose between up to 4 potential correct answers per question. This test will be sat on Tuesday 3rd June 2025, duration two hours, 1000-1200. This test will be worth 50% of your overall unit mark.
+  2. Practical Exam: students will be individually asked to write a basic program to demonstrate the application of creative coding to a set problem. This exam will be sat on Tuesday 10th June 2025, duration two hours, 1000-1200. This exam will be worth 50% of your overall unit mark.
 
 - **ML Two: Making Models with CreateML**:
 
@@ -153,7 +153,7 @@ Please read [UAL's guidance for students on how they will be assessed](https://w
 
 - **Spatial Two: Individual App Design and Launch**:
 
-  1. Presentation: You will present your creative work to your peers and upload the 'slide deck' from the presentation. This presentation will be given on TBC, duration 30 minutes, 1000-1300. This presentation will be worth 100% of your overall unit mark.
+  1. Presentation: You will present your creative work to your peers and upload the 'slide deck' from the presentation. This presentation will be given on Friday 13th June, duration 30 minutes, 1000-1300. This presentation will be worth 100% of your overall unit mark.
 
 Finally, some tips about how to get the best grades possible:
 
