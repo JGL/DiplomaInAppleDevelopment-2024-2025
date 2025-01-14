@@ -148,8 +148,8 @@ Please read [UAL's guidance for students on how they will be assessed](https://w
 
 - **ML Two: Making Models with CreateML**:
 
-  1. Multiple Choice test: students will be presented with a series of questions relating explicitly to course content. They must choose between up to 4 potential correct answers per question. This test will be sat on TBC. This test will be worth 50% of your overall unit mark.
-  2. Presentation: You will give a presentation around a bespoke ML model to your peers and upload the ‘slide deck’ from the presentation. This presentation will be given on TBC, duration 30 minutes, 1000-1300. This presentation will be worth 50% of your overall unit mark.
+  1. Multiple Choice test: students will be presented with a series of questions relating explicitly to course content. They must choose between up to 4 potential correct answers per question. This test will be sat on Thursday 5th June 2025, duration two hours, 1000-1200. This test will be worth 50% of your overall unit mark.
+  2. Presentation: You will give a presentation around a bespoke ML model to your peers and upload the ‘slide deck’ from the presentation. This presentation will be given on Thursday 12th June 2025, duration 30 minutes, 1000-1300. This presentation will be worth 50% of your overall unit mark.
 
 - **Spatial Two: Individual App Design and Launch**:
 
