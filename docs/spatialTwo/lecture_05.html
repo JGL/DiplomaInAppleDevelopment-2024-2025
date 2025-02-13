@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-  <title>Diploma in Apple Development 🍎👩🏻‍💻: 2024/2025: Spatial Two: Lecture 5: Object tracking and Photogrammetry</title>
+  <title>Diploma in Apple Development 🍎👩🏻‍💻: 2024/2025: Spatial Two: Lecture 5: Photogrammetry, Image Tracking and Object Tracking.</title>
   <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
 
   <link href="../big/big.css" rel="stylesheet" type="text/css" />
@@ -26,70 +26,40 @@
 </head>
 
 <body>
-  <div>Diploma in Apple Development 🍎👩🏻‍💻: Spatial Two: Lecture 5: Photo tracking, Object tracking and Photogrammetry.<br /><a href="../index.html">Back to slide index</a>.</div>
+  <div>Diploma in Apple Development 🍎👩🏻‍💻: Spatial Two: Lecture 5: Photogrammetry, Image Tracking and Object Tracking.<br /><a href="../index.html">Back to slide index</a>.</div>
   <div>Hi! 👻</div>
   <div>First, don't forget to confirm your attendance using the Seats Mobile app!</div>
   <div>Second, I'm going to start every lecture with a meditation from the fantastic <a href="https://www.shambhala.com/sittingstilllikeafrog/">Sitting Still Like a Frog book</a>, all read by Myla Kabat-Zinn. If you don't want to participate that's completely fine.</div>
   <div>
-    What is the famous tower demo with someone in shot and then a kite shot - wasn't it featured on corridor crew?
-    VFX Artists React to Bad & Great CGi 107 (ft. Paul Debevec)
-    UC Berkeley Tower
-    The Campanile Movie
-    https://www.pauldebevec.com/Campanile/
-    https://www.youtube.com/watch?v=gdsd3S_9Y_A
-
-    What other videos and content here?
-    https://en.wikipedia.org/wiki/Photogrammetry
-    https://wayback.archive-it.org/all/20090227061949/http://www.ferris.edu/faculty/burtchr/sure340/notes/History.pdf
-    https://github.com/mikeroyal/Photogrammetry-Guide ?
-    Golan's student Claire Henshenker.
-    https://www.clairesophie.com/shining360excerpt
-    Golan lecture on Photogrammetry
-    https://github.com/golanlevin/ExperimentalCapture/blob/master/docs/photogrammetry.md
-    https://github.com/golanlevin/ExperimentalCapture/blob/master/docs/tools.md#scanning--photogrammetry-tools
-    Show the whole lecture series?
-    Show https://vimeo.com/134973504 James George, now at Adobe, previously startup
-    https://svl.stanford.edu
-    https://en.wikipedia.org/wiki/Bullet_time
-
-    https://poly.cam
-    Watch "Understand USD fundamentals" - WWDC22 - Videos - Apple Developer
-    https://developer.apple.com/videos/play/wwdc2022/10129/
-    Create 3D workflows with USD - WWDC21 - Videos - Apple Developer
-    https://developer.apple.com/videos/play/wwdc2021/10077/
-    Watch "Meet object capture for iOS" https://developer.apple.com/videos/play/wwdc2023/10191/ (21 mins)
-    Watch "Explore the USD ecosystem" https://developer.apple.com/videos/play/wwdc2023/10086/ (15 mins)
-
-    Gaussian Splats in VisionOS: https://github.com/scier/MetalSplatter
-    https://www.youtube.com/watch?v=YX5AoaWrowY nerfs
-
-    https://developer.apple.com/videos/play/wwdc2024/10101/
-    "Explore object tracking for visionOS"
-
-    this goes with the above
-
-    https://developer.apple.com/documentation/visionos/exploring_object_tracking_with_arkit
-
-    also:
-
-    https://developer.apple.com/documentation/visionos/object-tracking-with-reality-composer-pro-experiences
-
-    https://developer.apple.com/documentation/visionOS/implementing-object-tracking-in-your-visionOS-app
-
-    https://developer.apple.com/documentation/visionos/using-a-reference-object-with-reality-composer-pro
-
-    https://developer.apple.com/documentation/visionos/using-a-reference-object-with-realitykit
-
-    https://developer.apple.com/documentation/visionos/using-a-reference-object-with-arkit
-
-    Demo poly.cam full path...
-
-    https://developer.apple.com/videos/play/wwdc2024/10107/
-    "Discover area mode for Object Capture"
+    What is <a href="https://en.wikipedia.org/wiki/Photogrammetry">Photogrammetry</a>? Let's take a look at some projects that have used it:
+    <ul>
+      <li><a href="https://wayback.archive-it.org/all/20090227061949/http://www.ferris.edu/faculty/burtchr/sure340/notes/History.pdf">A history of Photogrammetry</a>.</li>
+      <li>From 1997: <a href="https://www.pauldebevec.com/Campanile/">The Campanile Movie</a>. Paul has done <a href="https://www.pauldebevec.com">lots of other great work</a>.</li>
+      <li><a href="https://www.clairesophie.com/shining360excerpt">Shining 360</a> by <a href="https://www.clairesophie.com">Claire Hentschker</a> who also has done many other great projects.</li>
+      <li><a href="https://flong.com">Golan Levin's</a> <a href="https://github.com/golanlevin/ExperimentalCapture/blob/master/docs/photogrammetry.md">lecture on Photogrammetry, including some great projects at the bottom</a>.</li>
+      <li><a href="https://www.jamesgeorge.me">James George's</a> <a href="https://vimeo.com/134973504">lecture at Eyeo 2015</a> - the whole Eyeo playlist is great.</li>
+    </ul>
   </div>
+  <div>
+    Let's start with Image tracking, starting on <a href="https://developer.apple.com/documentation/arkit/arkit-in-visionos#Image-tracking">the image tracking section of the ARKit in visionOS page</a> on developer.apple.com. <a href="https://developer.apple.com/documentation/visionOS/tracking-images-in-3d-space">"Tracking preregistered images in 3D space"</a> looks useful. Shall we try to build a demo with <a href="https://claude.ai">Claude</a>? What keyword should we search for on GitHub? We don't have time to build today, but this would be perfect to work on over the holidays.
+  </div>
+  <div>
+    Let's move onto Object tracking. Let's watch this video from WWDC24:<a href="https://developer.apple.com/videos/play/wwdc2024/10101">Explore object tracking for visionOS</a>. Let's follow up with <a href="https://developer.apple.com/documentation/visionOS/exploring_object_tracking_with_arkit">the sample code for that session</a>. Don't forget you can use <a href="https://poly.cam">poly.cam</a> to easily generate .USDZ files to use as reference objects for trackings! We don't have time to build today, but this would be perfect to work on over the holidays.
+  </div>
+  <div>
+    Let's take a look at this great article: <a href="https://developer.apple.com/documentation/visionOS/implementing-object-tracking-in-your-visionOS-app">"Implementing object tracking in your visionOS app"</a>. Once you've done the steps in the article, you then have three options for how you integrate object tracking:
+    <ol>
+      <li><a href="https://developer.apple.com/documentation/visionos/using-a-reference-object-with-reality-composer-pro">Use Reality Composer Pro</a></li>
+      <li><a href="https://developer.apple.com/documentation/visionos/using-a-reference-object-with-realitykit">Use RealityKit</a></li>
+      <li><a href="https://developer.apple.com/documentation/visionos/using-a-reference-object-with-arkit">Use ARKit</a></li>
+    </ol>
+    Which do you think you should try first?
+  </div>
+  <div>Watch this video from WWDC24: <a href="https://developer.apple.com/videos/play/wwdc2024/10186">"Optimize(sic) your 3D assets for spatial computing"</a> for good tips and <a href="https://developer.apple.com/documentation/RealityKit/presenting-an-artists-scene">useful sample code</a>.</div>
+  <div>Let's divide into Anchor groups and spend some time in discussion - in the next lecture after the holidays, I'm expecting you to present your revised project thoughts, including your first working app, centred around your key moment.</div>
   <div>Great! Let's spend up to the next break watching videos from the <a href="https://www.youtube.com/playlist?list=PLgKCjZ2WsVLTVcEHQFioJF263Ip_yoxen">"UI"</a> category of <a href="https://www.youtube.com/@sora_sakurai_en">Masahiro Sakurai's YouTube channel</a>.</div>
   <div>
-    Thanks! Please watch all of the content from today's lecture as homework and prepare to present your revised project thoughts after the Easter holidays, including your first working app, centred around your key moment. Take this opportunity to make big progress on your app.<br /><a href="../index.html">Back to slide index</a>.
+    Thanks! Please watch all of the content from today's lecture as homework and prepare to present your revised project thoughts after the Easter holidays, including your first working app, centred around your key moment. Take this opportunity to make big progress on your app!<br /><a href="../index.html">Back to slide index</a>.
   </div>
 </body>
 
