@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+  
+</head>
+<body class="light">
+  <div>
+      ML Two 
+    <br />
+    Lecture 01
+      <br />
+    🤗Introduction to ML Two
+     <br />
+    +
+     <br />
+    👍First time training an AI model with CreateML: image classification
+    </div>
+  
+    <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+   
+   <div> First of all, don't forget to confirm your attendence on <a href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!  </a></div>
+  
+      <div> 🎤As usual,
+         <br />
+        - a made-with-AI <a href="https://www.youtube.com/watch?v=018o0enjGOs"> music video</a> to wake us up,
+         <br />
+        - an <a href="https://carolineec.github.io/everybody_dance_now/"> AI research work</a> that is relevant to that music video,
+        <br />
+        - more from this researcher <a href="https://people.eecs.berkeley.edu/~shiry/"> Shiry Ginosar</a>
+  </div>
+  
+  
+      <div> 🎊🧧WELCOME TO ML TWO🎊🧧
+  </div>
+  
+  <div> <a href="https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025?tab=readme-ov-file#block-2-structure">ML Two keywords</a>: 
+  <br /> 🔨Making models 
+  <br /> 🌬️with CreateML
+  <br /> (and some other tools...)
+  </div>
+  
+    <div> In ML Two, we will: 
+  <br /> - train our own AI models🌶️
+  <br /> - see example Apps that integrate a variety of AI models🌶️
+  <br /> - a variety of AI models: computer vision models (classification, object detection, etc.), image generation model, audio synthesis model, large language model, etc.👌
+  </div>
+  
+    <div> <a href="https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025?tab=readme-ov-file#block-2-assessment">ML Two assessment</a>: 
+  <br /> - Part 1: Multiple choice test.
+  </div>
+
+      <div> <a href="https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025?tab=readme-ov-file#block-2-assessment">ML Two assessment</a>: 
+  <br /> - Part 2: A presentation around a bespoke ML model.
+  <br /> - start thinking about this "bespoke ML model" early!!! 
+  <br /> - you can use your ML One presentation proposal as a starting point,
+   <br /> - of course you can also build something new!
+    <br /> - Make good use of CCI resources around, google, your peers, Mick and I 😎
+    <br /> - We also have a fantastic AI and Data Science technician Mayra Berrones 😎
+  </div>
+  
+<div>
+ 👍First time training an AI model with CreateML: image classification
+  </div>
+  
+      <div> question time! imagine you are the principal AI engineer at a fast-growing tech startup that is specialised in classifying fruit images being apple🍎 or banana🍌 </div>
+  
+    <div> what skills do you need? what are the steps to take to make a fruit image classification model ? (anything you can think of) </div>
+  
+    
+   <div> 
+     <a href="https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf"> the hidden technical debt in machine learning system </a>
+ <br /> Only a small fraction of real-world ML systems is composed of the ML code
+</div>
+  
+  <div>
+
+      1. DATA PREP
+    <br /> - - data collection
+     <br /> - - data pre-processing
+     <br /> 2. TRAINING
+      <br /> - - fine tuning
+     <br /> - - from scratch  
+    <br /> 3. DEPLOYMENT
+    <br /> - - Apple dev, etc.
+
+    </div>
+  
+      <div>
+
+      1. DATA PREP
+    <br /> - - data collection (p)
+     <br /> - - data pre-processing (p)
+     <br /> 2. TRAINING
+      <br /> - - fine tuning (p,c)
+     <br /> - - from scratch  (p,t)
+    <br /> 3. DEPLOYMENT (c)
+      
+      <br />
+      <small class=nowrap>p: python 🐍</small>
+      <br />
+      <small class=nowrap>C: CoreML and CreateML 🍎🤖</small>
+    </div>
+  
+            <div>     
+Let's start building the fruit classification model🍎🍏! 
+  <br />We will be following this typical ML dev pipeline:
+       <br />     1. DATA PREP     
+  <br /> - - data collection
+     <br /> - - data pre-processing
+         <br />     2. MODEL TRAINING     
+     <br /> - - train a model in CreateML (super simple)
+     <br /> - - evaluate and improve
+           <br />     3. DEPLOYMENT
+          
+</div>
+  
+  <div
+  class='layout'
+  style='grid-template-columns: 1fr;grid-template-rows:75% 25%;'>
+  <img src='https://cdn.glitch.global/63fc6e16-389b-40c4-8a07-3de5967ceec2/download.png?v=1707941228206'/>
+  <div> step 1 data collection:  <a href="https://github.com/Horea94/Fruit-Images-Dataset"> fruit images dataset </a></div>
+</div>
+  
+  
+  
+      <div>
+     <br /> - <a href="https://github.com/red-x-silver/MLTwo-Lec01"> download this starter project</a> 
+      <br /> - put it in a folder for ML Two stuff and unzip
+       <br /> - open *ICDemo-working xcodeproj* 
+           <br /> - NOT the ICDemo-starter
+         <br /> - NOT the ICDemo-working mlproj
+
+</div>
+  
+                <div>     
+       Step 2 data pre-processing:
+                  <br /> 
+- that's just raw data(images scattered in folders), often times we need to preprocess the raw data to our needs!
+  <br /> 
+                - this part is usually done by coding in python, 
+                  
+                <br /> - but CreateML just makes our life easier 🤓
+  </div>
+  
+              <div>     
+Step 2.1 Summon CreateML 😈
+    <br /> - open Xcode and select Xcode 
+       <br /> → Open Developer Tool 
+       <br /> - → Create ML from the drop-down menu  
+</div>
+  
+  <div> 
+   Step 2 data pre-processing:
+     <br /> What data pre-processing do we need in this task? 
+     <br /> - For supervised learning, we need data and their labels.
+  <br /> 
+=>
+    <br /> 
+- for image classification, we need images and their classes
+    <br /> 
+  =>
+    <br /> 
+- How does CreateML know the corresponding label for each image? 
+  <br /> 
+
+</div>
+  
+  
+  
+<div>     
+🤗 Label info is inferred from file structure!
+<br /> 
+- this is also how we should prepare our img classification data (which is already done in this fruit classification example), when using CreateML
+<br /> 
+- Though when training in python, there are many other ways to feed in labels information...
+</div>
+
+  <div>
+   Step 3 importing dataset into Create ML and training
+
+</div>
+  
+  
+          <div>     
+Let's test the model trained with 25 iterations
+</div>
+  
+            <div>     
+How to check if a trained model performs well or not?
+</div>
+  
+              <div>     
+In CreateML, we can firstly look at the training/evaluation tab, 
+   <br />             
+where the higher accuracy the better
+</div>
+  
+              <div>     
+Secondly, thanks to CreateML, we can live preview the results using camera!
+</div>
+  
+  
+              <div>     
+not working great 🫤
+<br />
+this is a good example of "you should not only looking at the accuracies,                
+ <br />               
+but also inputting images to the model and seeing the classification result yourself!"
+                
+</div>
+ 
+    
+<div>   
+How to improve?
+</div>
+  
+  
+<div>   
+Check out my model with 150 iterations and added noise & flips as data augmentation!
+</div>
+  
+ 
+ <div>     
+Let's bring this to our App!
+ <br /> - 1. export the model
+ <br /> - 2. drop the model file to the IOS App code.  
+</div>
+  
+   <div>     
+😎Done! Here is a summary of what we have done so far:
+<br /> - 1. Collect a dataset of images of different classes.
+<br /> - 2. Organise the images into folders with folder name being the class name. 
+<br /> - 3. Open CreateML. 
+<br /> - 4. Drag and drop the images into the data pool.
+<br /> - 5. Select the hyper-parameters to your liking and hit training!    
+<br /> - 6. Evaluate the results, adjust hyper-parameters, and train again!
+<br /> - 7. Export the model and drop into the IOS App code.
+</div>
+  
+
+     <div>     
+💙Homework: find an image classification dataset with a NICE file structure (or build your own)
+<br />
+<a href="https://www.kaggle.com/datasets/gpiosenka/cards-image-datasetclassification?resource=download
+">this one for example</a> 
+<br />
+train a classifier and import to App
+<br />
+send a demo
+</div>
+  
+  
+  <div>     
+  We'll see you next week same time same place! 🫡
+</div>
+  
+
+  
+  
+</body>
+</html>
+  
