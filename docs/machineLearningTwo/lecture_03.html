@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+  
+</head>
+<body class="light">
+
+ <div>
+      ML Two 
+    <br />
+    Lecture 03 (Week 4)
+      <br />
+    🤗Train a GAN model with Pytorch 🔥
+    </div>
+  
+    <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+   
+   <div> First of all, don't forget to confirm your attendence on <a href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!  </a></div>
+  
+
+   <div>as usual, an AI-related <a href="https://www.youtube.com/watch?v=3XAV08wnFSs&list=PLSTftrct03TbVUk2ce6BD4fs93i22Er-M"> fun project </a> to wake us up</div>
+  
+  
+      <div> Last two lectures: 
+        <br /> 
+        - Trained an image classifier with CreateML, using a well-prepared fruit image dataset🍎🍏
+         <br />
+        - Train a sound classifier with CreateML, using a not-so-well-prepared environment sound dataset🔊 and some python code for data pre-processing
+ </div>
+  
+        <div> 
+        Today: 
+       <br />
+        Let's navigate outside CreateML and see how to train a GAN model using Python and PyTorch 🔥
+  </div>
+  
+                <div>     
+After today's lecture:
+       <br /> -- train a cool GAN from scratch
+       <br /> -- gain some confidence on knowing what's going on behind the jumbo codes
+       <br /> -- prepare to train your own GAN!
+</div>
+  
+   <div> What can GAN models do? </div>
+        
+                       <div> 
+ Staff-pick AI stuff to wake us up - 😎Cool GAN Applications - part 1
+
+<br /> -- <a href="https://thispersondoesnotexist.com/">thispersondoesnotexist</a>
+       <br />-- <a href="https://thisjellyfishdoesnotexist.com/">thisjellyfishdoesnotexist</a> (A project exploring the limits of available data as a means of engaging
+with critically endangered species) 
+       <br /> (both use StyleGAN,<a href="https://github.com/NVlabs/stylegan2">TensorFlow implementation</a> and <a href="https://github.com/rosinality/stylegan2-pytorch">Pytorch implementation</a>)
+   </div>
+  
+                     <div> 
+ Staff-pick AI stuff to wake us up - 😎Cool GAN Applications - part 2
+
+<br />-- <a href="https://affinelayer.com/pixsrv/">Pix2Pix</a> with an interactive demo 
+       <br />-- <a href="https://gandissect.csail.mit.edu/">GAN dissection</a> for unconventional image editting
+       <br />-- a recent <a href="https://github.com/XingangPan/DragGAN">DragGAN</a> for unconventional image editting 
+   </div>
+  
+
+  
+    <div> What can GAN models do? <a href="https://www.youtube.com/watch?v=_qB4B6ttXk8">just to name a few</a> </div>
+  
+  
+  <div> Our GAN for today is <a href="https://colab.research.google.com/drive/1hg-95u82ElVWlfIB22OMV63BEBdD_keq#scrollTo=2ouffaVuCj_t"> here</a>, everything is prepared :) </div>
+
+  <div> Pytorch🔥
+    <br />
+    It is a Python library/framework for training and using AI models with a lot of customization possibilities.
+     <br />
+  <a href="https://www.youtube.com/watch?v=IC0_FRiX-sw&list=PL_lsbAsL_o2CTlGHgMxNrKhzP97BaG9ZN&pp=iAQB">Here</a> is a PyTorch tutorial FYI.
+  </div>
+  
+  
+  
+  <div> Let's go to the notebook:
+    <br />
+    🥇First run: 
+    <br />
+     1. Run the cell one by one just to see the nice results! 
+    <br />
+    (no need to understand the codes)  
+    <br />
+    2. A note: run the tensorboard cell before running the training cell
+     <br />
+    3. A fun stuff: once training has started, go to images tab under tensorboard and smash that refresh button
+    
+  </div>
+  
+  <div> 
+  🫲Your turn! 🫱
+  <br /> -- 1. Save the notebook to your drive or open in playground mode 
+    <br /> -- 2. Under "Runtime" -> "Change runtime type", make sure "GPU" is selected
+    <br /> -- 3.  Run the cell one by one EXCEPT:    
+    <br /> -- 4.  Run the tensorboard cell before running the training cell 
+  </div>
+  
+  <div> Code in this notebook would take me days to write, 
+  
+  <br /> - today we are not aiming for understanding every line of it, 
+  
+    <br /> - instead we'll be working on conquering the fear of jumbo python code for training AI models 😎  </div>
+
+  
+  
+  <div> A gentle introduction to Generative Adversarial Networks (GAN) </div>
+
+  <div>
+- A problem: say if we have a bunch of cat images😼 and we want to train a neural network on these images so that it can generate new cat images. 
+<br />
+-  How? 
+</div> 
+  
+    <div>
+A smaller problem - 
+      <br /> Question 1: of course we'd like to have this neural network generating a different cat image every time. Where could this randomness come from?
+</div> 
+  
+      <div>
+
+- Solution 1: The network's weights and biases are usually deterministic once trained but we can play with the neural network input. we can use a random vector as the input to the network. Every time we infer the model, it starts from sampling a new random vector and outputs a different 2D matrix (image).
+</div> 
+  
+  
+<div>
+Question 2: Then how can we make this generative network able to generate cat images😼 instead of noisy 2D matrix of random numbers?🤯
+</div> 
+  
+  <div>
+  Question 3: Then how can we make this generative network able to generate NEW cat images😼 beyond the training data?🤯🤯 
+  </div> 
+  
+   <div> 
+  GAN tackles all these questions in a smart way: it sets one neural network to teach another neural network to generate.
+   </div> 
+  
+  
+     <div> 
+ - Introduction to GAN🤘
+ <br />
+  -- It is an ensemble of two neural networks - a Generator (G) and a Discriminator (D).
+  <br />
+  --- Generator: it takes a random vector as input and expands that into a 2D matrix (aka image).  
+     <br />
+  --- Discriminator: a good old classification model that predicts if an image is real (from the training dataset) or fake (generated by G).   
+  <br /> (no magic yet... we just set up two individual neural nets.)     
+   </div> 
+        
+
+        
+       <div> 
+ - Introduction to GAN🤘
+ <br />
+  -- The magic happens when we train G and D alternatively in a particlar way: 
+  <br />
+  -- It is a tom and jerry game between these two networks Generator 🐭 and Discriminator 😼 
+ <br />
+  --- where D tries to catch G as a fake image generator 🕵️
+     <br />
+  --- and G tries to fool D into thinking that G produces real images. 🤡 
+         
+   </div> 
+
+  
+         <div> 
+ - Introduction to GAN🤘
+ <br />
+  -- G and D has its own loss term.
+  <br />
+  --- 🕵️Discriminator loss: just like any image classification model, it tries to classify if the input image is real or generated(fake) and the loss is just a typical classification task loss.
+ <br />
+  --- 🤡Generator loss: the ingenious design comes from the generator loss being "how well it is able to trick the discriminator into making mistakes", aka the inverse version of the Discriminator loss. 
+     <br />
+  ---It you think about it, both G and D losses come from D...      
+   </div> 
+
+
+  
+           <div> 
+ - Introduction to GAN🤘
+ <br />
+  --  Putting together they are sometimes called a "min-max loss" (check the colab notebook for implementation details, it is actually quite simple. )
+   </div> 
+        
+   <div>
+  <img src='https://i.imgur.com/LweaD1s.png'/>
+</div>
+
+  
+             <div> 
+ - Introduction to GAN🤘
+ <br />
+  --  Despite the names, G and D are (usually) nothing more special than layers and models we have already seen in MLPs, CNNs. 
+  <br />
+  --- Generator gets its name because its layers are set to output a 2D matrix given a 1D vector.
+    <br />
+  --- Discriminator gets its name because its layers are set to output 1 single number, which is trained to predict the probability of being fake or real image.             
+   </div> 
+
+ 
+  <div>
+A gentle YTB tutorial on GAN <a href="https://www.youtube.com/watch?v=_qB4B6ttXk8">here</a>
+</div> 
+  
+<div>  
+Back to this... 
+<br /> we'll be working on conquering the fear of jumbo AI training code   
+<br /> part 1 : what are the pytorch-specific code and where are the models being defined?
+</div>
+  
+<div>  
+
+Look at the import cell:
+<br />
+all the imported pytorch stuff are NOT for hard memorising, 
+<br /> 
+we get to know more only when necessary and only after we starting using them.
+  
+</div>
+
+<div>     
+🥈Second run at the notebook: 
+<br />
+ there are four <a href="https://colab.research.google.com/drive/1U8K0GdqB6_WqsBGfyFgyRBV8uVotrZNl#scrollTo=3wqo23ErfjqX">classes</a> defined:    
+<br /> - Which class corresponds to Generator?
+<br /> - Which class corresponds to Discriminator? 
+<br /> - Which class corresponds to assemble Generator and Discriminator together?   
+<br /> - Which class corresponds to data handling?
+</div> 
+  
+  
+<div>     
+Recap from MLOne: the training process big picture
+   
+</div>
+  
+       <div> 
+         1. Build the model: have an initially guessed model (random and imperfect)
+         <br />
+         -> 
+         <br />
+      2. Prepare the data: pre-process data to be able to loaded into training.
+         <br />
+         -> 
+         <br />
+         3. Forward pass: input the data to the model, let the model do the computations and get the output.
+         <br />
+         -> 
+         <br />
+         4. Loss calculation: measure how wrong this output is compared to the correct answer paired with the input.
+         <br />
+         -> 
+         <br />
+         5. Backward pass: calculate gradients from the loss and use those to update the model's weights and biases (update rules specified by an optimizer).
+          <br />
+         -> 
+         <br />
+         back to step 2 and repeat
+  </div>
+      
+ <div>  
+😎Conquering the fear of jumbo AI training code   
+<br /> - part 2 : what does each class do corresponding to the training process big picture?
+</div>
+  
+            <div>     
+🥉Third run at the notebook: 
+<br />
+ There are four classes defined:              
+<br /> - MNISTDataModule 
+<br /> - Generator    
+<br /> - Discriminator
+<br /> - GAN                         
+</div>
+  
+  
+  <div> 
+  Without looking into each class's detail codes, try to assign the role of each class in terms of steps in the big picture
+  <br />
+    (add a comment above the class definition, me demo)
+
+  </div>
+  
+ <div>  
+😎Conquering the fear of jumbo AI training code
+<br /> - part 3 : diving deeper: where is the model architecture (aka layers) being defined?
+</div>
+  
+  
+  
+<div>     
+
+There are lots of pytorch-specific classes and functions, don't worry on having to know all of them!             
+<br /> 
+😎Here are three important ones -                     
+</div> 
+  
+<div>   
+ 😎 
+<br /> - nn.Linear : fully connnected layer (MLP)
+<br /> - nn.LeakyRelu : an activation func similar to relu
+<br /> - nn.Sequential() : a container for connecting individual layers together sequentially                 
+
+</div> 
+  
+ 
+     <div>   
+∜Fourth run at the notebook: 
+<br />
+Just by looking at Discriminator class
+<br /> - self.model = nn.Sequential(...) is where the model architecture is defined
+<br /> - nn.Linear : fully connnected layer (MLP)
+<br /> - nn.LeakyRelu : activation func similar to relu
+<br /> - nn.Sequential() : to connect layers together 
+          
+</div>
+  
+  <div> 
+
+  <br /> 💸 bonus questions: 
+    <br /> -- 1.  what is the number of epochs in this notebook?
+     <br /> --- (Epoch: During training, we divide the entire training dataset into batches and train the model batch by batch. One epoch means that the model has seen all batches from the training dataset once. )
+    <br /> -- 2.  what is the input size of generator in this notebook?
+    <br /> -- 3.  what is the input size of discriminator?
+  </div>  
+
+  
+<div> Fun AI time: <a href="https://www.youtube.com/watch?v=8oVdPaJoE6c"> dadabots </a>🤘, for your inner metalhead  </div>
+
+  
+   <div>     
+Summary today
+<br /> - Class in python 🖲
+     
+<br /> - Introduction to GAN and the training process 👾
+
+<br /> - GAN training notebook 📀
+     
+<br /> - How to define a neural netowrk model and the traning process using pytorch (woohoo, connection from MLOne) 🥰
+     
+<br /> - Next: we are going to WRITE a neural network from scratch
+
+</div>
+  
+   <div>     
+Play time!
+     
+<br /> play around with the notebook, improve or deteriorate the generated image quality 😈
+<br />
+     <br /> here are some possiblities you could try  (mainly in G and D)
+ 
+<br /> - change layers params in discriminator
+     
+<br /> - Add one or more layers to discriminator
+
+<br /> - Change the block parameters in generator
+     
+<br /> - Try more epochs
+     
+<br /> - Change (mayber lower) the latent dimension (input of generator)
+
+</div>
+ 
+ <div>  
+Shoutout when things are broken! that will be fantastic because i like fixing
+</div>
+
+
+ <div>  
+💸💸 Bonus time 2: do you want to train a <a href="https://auspicious-amenable-caribou.glitch.me/#47">Pokemon GAN</a> ? 
+</div>
+  
+  
+  
+  
+        
+
+  
+  <div>     
+  We'll see you next week same time same place! 🫡
+</div>
+  
+
+  
+  
+</body>
+</html>
