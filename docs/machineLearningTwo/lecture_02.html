@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+  
+</head>
+<body class="light">
+
+  <div>
+      ML Two 
+    <br />
+    Lecture 02
+      <br />
+    🤗 AI for audio applications
+     <br />
+    +
+     <br />
+    🎤 Sound classification with CreateML
+    </div>
+  
+    <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+   
+   <div> First of all, don't forget to confirm your attendence on <a href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!  </a></div>
+  
+
+  
+  
+      <div> Last lecture: train an image classifier with CreateML, using a well-prepared fruit image dataset🍎🍏
+ </div>
+  
+        <div> 
+        Today: train a sound classifier with CreateML, using a not-so-well-prepared environment sound dataset🔊
+  </div>
+  
+              <div>     
+😎Recall from last lecture, what were the important bits from training an image classifier in CreateML?  
+              <br /> - in order to inform the CreateML what the training data and their corresponding labels are,
+              <br /> - we need to put images of the same class
+              <br /> - into one folder named as the class label!
+</div>
+  
+    <div>
+  <img src='https://cdn.glitch.global/df9f86de-3a90-4fea-836b-c62476744d45/data_structure.png?v=1677097905914'/>
+</div>
+  
+ <div> 
+   Today's dataset:
+   <a href="https://github.com/karolpiczak/ESC-50"> environment sounds </a> 
+   <br />
+   1. download 
+   <br />
+   2. unzip
+   <br />
+   3. check what is the file structure for this dataset?
+  
+  </div>
+  
+
+  <div>
+    All files are scrambled in one big folder 🥲
+</div>
+
+   <div> 
+   🥲Not the nice structure that CreateML recognises (actually most raw datasets do not have that nice structure.)
+   <br />
+   - We will prepare the dataset ourselves!😎
+   <br />
+    - Recall that data preparation is usually the first part of the ML development pipeline!🤗
+  
+  </div>
+ 
+      <div>
+
+      1. DATA PREP
+    <br /> - - data collection (p)
+     <br /> - - data pre-processing (p)
+     <br /> 2. TRAINING
+      <br /> - - fine tuning (p,c)
+     <br /> - - from scratch  (p,t)
+    <br /> 3. DEPLOYMENT (c)
+      
+      <br />
+      <small class=nowrap>p: python 🐍</small>
+      <br />
+      <small class=nowrap>C: CoreML and CreateML 🍎🤖</small>
+    </div>
+  
+  <div>     
+🤗Interactive classroom Q&A time: 
+ <br /> 
+where can I find the labels/classes information for this dataset?
+</div>
+
+<div>     
+Let's preview meta/esc50.csv
+ <br /> - btw what is csv...? Let's google!
+</div>
+ 
+<div>     
+Here, each row in "meta/esc50.csv" contains the mapping relation from a filename to its category
+</div>
+  
+<div>     
+We need to use the information in the csv and organize the dataset into the NICE structure for createML!
+</div>
+  
+<div>     
+let's write a cool python script that does the organization! 🧑‍🎤
+</div>
+  
+<div>     
+Prepare our Python development environment (the software to use for write and run python code):
+  <br /> 1. Download  <a href="https://docs.anaconda.com/anaconda/install/mac-os/">anaconda</a>
+  
+   <br /> 2. Install Anaconda and open it
+  
+  
+   <br /> 3. Install Spyder from Anaconda and open it
+  
+
+</div>
+  
+ 
+<div>     
+Familiarise ourselves with Spyder interface, it is quite nice!
+</div>
+  
+<div>     
+Two tricks in Spyder: 
+   <br />
+ -  enter #%% to create new cell
+ <br />
+- press shift + enter to run one cell, just like colab notebook!
+</div>
+  
+ <div>     
+Python time!
+- the code is <a href="https://github.com/red-x-silver/2023MLTwo-Lec02"> prepared here </a>
+</div>
+  
+<div>     
+<br />- 🌶️🌶️🌶️ we can start from scrach, 
+<br />- 🌶️🌶️ or from the DataPrep-todo.py,
+<br />- 🌶️ or directly run the DataPrep-complete.py that will do the job
+</div>
+  
+<div>     
+Keywords: 
+   <br />
+  create new directory(folder) using python code,
+   <br />csv, 
+   <br />dataframe, 
+   <br />iterate rows in a dataframe,
+  <br /> copy-paste files
+</div>
+  
+ 
+<div>     
+Step 1 Data preparation done!!! 😎
+</div>
+  
+              <div>     
+Next: summon CreateML 😈
+</div>
+  
+    <div>
+Step 2 Train the (sound classification) model: import the prepared dataset into CreateML and train
+</div>
+  
+<div>     
+Let's bring the model to our App!
+</div>  
+  
+    <div>
+Step 3 Deploy the (sound classification) model: export the trained model from CreateML, and import that into the template IOS App "SCDemo-Improved"
+<br /> play with it!
+  </div>
+  
+<div>     
+🌶🌶Our second AI project done!🌶🌶
+</div>
+  
+<div>     
+🌶🌶A little summary for today's practice🌶🌶
+
+<br /> We wrote some Python code for data pre-processing 🔨:
+     
+     <br /> -- From the "os" library,
+     <br /> --- use "makedirs" function to create new folders 🛸
+     <br /> -- From the "pandas" library, 
+     <br /> ---  use "dataframe" object for handling csv file data, and basically any tabular data!🍱 
+
+</div>  
+  
+  
+  
+ <div>     
+😎🛸Fun AI time: AI for audio applications
+</div>
+  
+                 <div> 
+    Example applications - 🔊🍱 Classification tasks 
+
+      <br /> Example: sound source identification, music genre classification, etc. 
+     <br /> - <a href="https://birdnet.cornell.edu/ ">BirdNET</a>
+      <br /> - <a href="https://huggingface.co/keras-io/speaker-recognition">Speaker recognition</a>        
+      </div>
+        
+      
+                     <div> 
+ Example applications - Music related (there are so many and what listed below are very much non-exhaustive)
+
+<br />- 🤌 Music source separation
+       <br />-- commercial products:  <a href="https://www.lalal.ai/">lalal.ai</a>,  <a href="https://vocali.se/en">vocali</a>, etc.
+       <br />-- research/open source projects:  <a href="https://github.com/facebookresearch/demucs">demucs</a>,  <a href="https://github.com/deezer/spleeter">spleeter</a>, etc. 
+<br />- 🤌 Music generation / audio synthesis
+                         
+          <br /> -- <a href="https://deepmind.google/discover/blog/wavenet-a-generative-model-for-raw-audio/">WaveNet</a> (based on CNN model)
+         <br /> -- <a href="https://www.riffusion.com/">Riffusion</a> (based on diffusion model, to be introduced later in ML Two! )
+         <br /> -- <a href="https://github.com/marcoppasini/musika">Musika</a> (based on GAN, to be introduced next week! )
+                          
+<br /> -- Great explanation and demo from the author's <a href="https://www.youtube.com/live/KS7REAEhyJQ?si=ds9WwRxuRoGlCQt8">PhD defense</a>, demo starts at 42:20     
+      </div>
+  
+                       <div> 
+ Example applications - Music related (there are so many and what listed below are very much non-exhaustive)
+
+<br />- 🤌 <a href="https://github.com/acids-ircam/RAVE">RAVE</a>
+       <br />-- A audio synthesis (generation) model. 
+       <br />-- A real-time audio synthesis (generation) model.
+<br />-- Great impact on the creative community, experimented by artists including <a href="https://www.instagram.com/hexorcismos/">hexorcismos</a>, <a href="https://portraitxo.space/">portrait xo</a>, <a href="https://dadabots.com/faq.php">dadabots</a>, etc.
+                         
+          <br /> -- Techniques include self-supervised learning (VAE), Convolution neural network(conv layers and residual blocks), GAN, etc.
+  </div>
+  
+  <div>     
+  We'll see you next week same time same place! 🫡
+</div>
+  
+
+  
+  
+</body>
+</html>
