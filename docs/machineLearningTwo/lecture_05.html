@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+  
+</head>
+<body class="light">
+
+<div>
+      ML Two 
+    <br />
+    Lecture 05
+      <br />
+    🤗Object detection with CreateML + Live Capture App😎
+    </div>
+  
+    <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+    <div> First of all, don't forget to confirm your attendence on <a href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!  </a></div>
+  
+   <div>as usual, an AI-related <a href="https://vimeo.com/467769464"> cool project </a> to wake us up</div>
+  
+  <div>and another AI-related <a href="https://vimeo.com/438439810"> cool project </a> to wake us up one more time</div>
+  
+     <div> our previous classification app: </div>
+  
+  <div class=layout style='grid-template-columns: 50% 50%;'>
+  <img src='https://cdn.glitch.global/ef6898a8-fa1c-4173-83f0-de38487dafc7/prev_app.png?v=1681314112337'/>
+  <div> it works on a single static image</div>
+</div>
+
+   <div> the <a href="https://vimeo.com/816963541/bbaf410e7d"> final product </a>  of today's app </div>
+  
+  <div> it works on live capture "video" in real time!!! </div>
+  
+  
+                <div>     
+after today's lecture:
+       <br /> -- object detection: how to prepare dataset, how to train 🤖          
+       <br /> -- a live capture app that recognises sea creatures 🦈
+</div>
+  
+  
+  <div> What's the difference between a static image, a static video, a live capture video? </div>
+  
+  <div> on digital devices, video is nothing more than a sequence of images(frames) 
+   <br />
+     =>
+    <br /> 
+  most video processings eventually boil down to good old image processings
+    <br />
+  =>
+    <br /> 
+    all the image-based AIs in our toolbox are ready to go for video processing 
+  
+  </div>
+  
+ 
+  <div> One key difference between static video and live capture video is that static video is pre-recorded📽️🎞️, while live capture video is captured in real-time📸🤳 
+   <br /> 
+  </div>
+  
+  <div> 
+      
+  pre-recorded video: a fixed set of frames
+    <br /> 
+    vs.
+       <br /> 
+  live capture video: a dynamic set of frames that keeps flowing in 
+    
+  </div>
+  
+  
+   <div> 
+<a href="https://www.youtube.com/watch?v=M1Gq53Hf0_Y">real-time processing</a> is an interesting topic (think about digital music instrument)
+     <br /> 
+where processing speed imposes bottleneck for how "real time" the output is
+
+  </div>
+  
+  <div>  
+ In Apple framework, we have AVFundation doing live capture for us    
+        <br />      
+and we are counting on CoreML and optimised chips to have fast AI computation that brings smooth real time experience rather than  <a href="https://www.youtube.com/watch?v=0K-F8rMmFfE"> laggging </a> 
+  </div>
+  
+  
+    <div> Let's play with the <a href="https://developer.apple.com/documentation/vision/recognizing_objects_in_live_capture">app</a> first
+   <br /> - Preferably run it on your phone not the simulator     
+   <br /> - Don't forget to change the "Team" to your account under "Signings & Capabilities" tab
+  </div>
+  
+
+<div> 
+next: train our own object detection model using CreateML (no python this time) and integrate it into the app
+</div>
+  
+  
+  
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='  https://cdn.glitch.global/ef6898a8-fa1c-4173-83f0-de38487dafc7/workflow.png?v=1681319377207
+'/>
+  <div> the re-occuring machine learning workflow throughout our unit</div>
+</div>
+  
+   <div> 
+             
+a <a href="https://developer.apple.com/machine-learning/models/">gentle reminder</a> of object detection  
+  </div>
+
+     <div> 
+part 1: data collection
+ <br />   
+CreateML has its own data format for training, check it out <a href="https://developer.apple.com/documentation/createml/building-an-object-detector-data-source">here</a>
+  <br /> 
+10 mins read, take a note of keywords and alien words!
+  </div>
+  
+   <div> 
+to save us some headaches from finding data, annotating and formatting
+  <br /> 
+introduce... <a href="https://universe.roboflow.com/roboflow-100/">roboflow</a> 
+  </div>
+ 
+    <div> 
+These datasets are annotated, split and you can choose to download from a range of formats including CreateML format 🥰
+  </div>
+  
+  
+  <div> 
+15 mins browsing this dataset library, find one dataset that you like
+ <br />  
+take a note of:
+  <br />  
+-- how many images are there?
+     <br />  
+-- what are the classes available?
+     <br />  
+-- have you seen the annotation window?
+     <br />  
+-- does each image have the same dimension?
+  </div>
+
+    <div> 
+also ask chatgpt why dataset is split into training/validation/testing sets for training an AI?
+  </div>
+
+      <div> 
+validation, evaluation and testing are very similar notions
+<br />  
+they all seek to answer this question "how does my model perform on *unseen* data?"
+  </div>
+  
+    <div> 
+The keyword to model performance is *generalizability* which can only be evaluated on unseen data.
+      <br />  
+- using a set for training or even just hyper parameter searching will "pollute" its unseenness
+      <br />  
+-- ☝️we need valiadation set for monitoring performance during training
+      <br />  
+-- ✌️we need testing set for selecting the best model after training
+            <br />  
+-- 👌we need evaluation set for evluating the final best model
+  </div>
+    
+    <div> 
+let's try the aquarium dataset!
+<br />  
+after clicking the "Download" button
+<br />  
+don't forget to select the life-saving "CreateML" format
+  </div>
+  
+ 
+    <div> 
+CreateML time! 
+  </div>  
+  
+    <div> 
+your turn:
+ <br /> 
+--1. add train/val/test data folder into the data sources
+ <br /> 
+--2. select transfer learning
+<br /> 
+--3. enter a smaller number of iteration (e.g. 1k)
+<br />       
+this is just for lecture demonstration purpose, in practice you can try a larger number of iterations
+<br /> 
+--4. fire off the training!!!
+      
+  </div>  
+ 
+<div> 
+🎉 
+</div>
+  
+ 
+<div>
+👁️ Two art projects with object(Face) detection models in live capture:
+<br /> -  <a href="https://www.youtube.com/watch?v=XSFP6JHnn9c"> Female figure by Jordan Wolfson </a>
+<br />  - <a href="https://www.youtube.com/watch?v=N-3NwGkF8Pw"> Hello by XuZhen </a>  
+ </div>
+
+  
+  
+<div> 
+what does I/U mean?
+<br />       
+it is a metric for measuring the similarity of two bounding boxes (the groudtruth box and the box predicted by the newbie AI)
+<br /> 
+15 mins read <a href="https://developer.apple.com/documentation/createml/mlobjectdetectormetrics?changes=_2.">here</a>     
+<br /> 
+-- what does I/U 50% mean?
+</div>
+  
+  
+  
+   <div> 
+preview the result and export the model
+  </div>
+  
+
+  
+  
+    <div> 
+import the model to our live capture APP and change this line:
+  </div>
+  
+
+<div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='  https://cdn.glitch.global/ef6898a8-fa1c-4173-83f0-de38487dafc7/swapmodel?v=1681322697984
+'/>
+  <div> change the model name in line 24 to your model class name </div>
+</div>
+ 
+<div> 
+play with the app!  
+</div>
+  
+<div> 
+question 1: from the entire pipeline 
+ 
+  <br />  
+  -- data collection -- training -- integration 
+  
+  
+ <br />   
+  where do we specify/input the target classes information?
+</div>
+
+<div> 
+this is equivalent to ask, if i don't want a sea creature live detector but a car model live detector insteads, what are the steps to go?
+</div>
+  
+  
+<div> 
+question 2: can you think of possible extension/modification of this app to do some cool AR stuff?
+</div>
+  
+<div> 
+🔥
+<br /> 
+✊
+</div>
+  
+<div> 
+<a href=" https://www.youtube.com/watch?v=FiJc1Fh4ros"> 👟⚽️ </a>
+</div>
+  
+
+<div> 
+20-30 mins lil exercise: 
+ <br />   
+-- select another dataset on Roboflow and download
+<br />  
+-- train an abject detector using CreateML (enter small interation number)
+<br />  
+-- update your app with the new model
+</div>
+  
+<div> 
+🎉 
+</div>
+ 
+  <div> 
+
+today we talked about:
+  <br />  
+-- static vs. live capture content 
+     <br />  
+-- real-time processing, computation speed as bottleneck
+     <br />  
+-- object detection datasets on Roboflow
+     <br />  
+-- object detection training using CreateML
+<br />  
+-- object detection evaluation metric
+  <br /> 
+-- integrate new model into live capture app
+  </div>
+  
+
+<div> 
+a recent AI <a href="https://reverie.herokuapp.com/arXiv_Demo/"> paper&project</a>, SimCity of AIs!
+
+</div>
+
+
+  <div>     
+  We'll see you next week same time same place! 🫡
+</div>
+  
+ 
+</body>
+</html>
+
