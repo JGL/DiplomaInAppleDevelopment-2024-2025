@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning One</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+  
+</head>
+<body class="light">
+
+ <div>
+      ML Two 
+    <br />
+    Lecture 06
+      <br />
+    🤗Style Transfer with CreateML😎
+    </div>
+  
+    <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+    <div> First of all, don't forget to confirm your attendence on <a href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!  </a></div>
+  
+   <div> <a href="https://reiinakano.com/arbitrary-image-stylization-tfjs/"> Style Transfer fun demo 01 </a> </div>
+  
+   <div> <a href="https://huggingface.co/spaces/Q-b1t/Neural-Style-Transfer-Demo"> Style Transfer fun demo 02 </a> </div>
+ 
+   <div> <a href="https://www.youtube.com/watch?v=8iVlnyrDyP4"> A little example of style transfering a video  </a> </div>
+  
+  <div> It's a nice algorithm for human-AI co-creation 🧚 </div>
+  
+                  <div>     
+after today's lecture:
+       <br /> -- Neural Style Transfer : how does it work🤖          
+       <br /> -- Neural Style Transfer with CreateML 🦈
+</div>
+  
+   <div> Neural Style Transfer </div>
+  
+  <div> "Neural": it leverages deep learning technique (it uses neural networks for producing images) </div>
+  
+   <div> Style transfer🤔 </div>
+  
+   <div> Style transfer - level 1 understanding
+  <br /> - Input: two images
+  <br /> -- one is called "content image", the other one called "style image"
+   <br /> - Output: one image
+    <br /> -- an image that mirrors the content of the "content image" in the style of the "style image"
+  </div>
+  
+ <div> Style transfer - level 2 understanding
+  <br /> - How does a ST system produce the blended output from two input images? 
+  <br /> -- Step 1. It initialises a random noise image like <a href="https://img1.wsimg.com/isteam/ip/921d4cf0-f53a-4e5e-a7dc-7da0982b57d1/random_noise.jpg/:/rs=w:1280.">this </a>     
+   <br /> -- Step 2. It gradually refine the noise image to be more similar to the "content image" in its content and more similar to the "style image" in its style.
+  </div>
+  
+   <div> Style transfer - level 2 understanding
+  <br /> - How does the refinement process work?
+  <br /> -- It uses gradient descent to interatively update the pixel values in the initialized image, to minimise the content loss and style loss calculated.  
+  </div>
+  
+   <div> Style transfer - level 3 understanding
+  <br /> - What are the content loss and style loss? 
+  <br />  (p.s. this is where the neural network comes into play!)
+ </div>
+  
+     <div> Convolution neural network recap 👀
+  <br /> - It extracts hierarchical features where the early layers extract low-level features like vertical lines, the deeper layers extract high-level features like more complex shapes.
+  <br /> (<a href="https://swift-morning-print.glitch.me/#76">relevant slides from ML One </a>) 
+ </div>
+  
+     <div> Style transfer - level 3 understanding
+  <br /> - What are the content loss and style loss? 
+  <br />  We'll use some pre-trained CNN to extract features of initialised image, content image, and style image at different levels and calculate their distances.
+ </div>
+  
+     <div> Style transfer - level 3 understanding
+  <br /> Content: Two images are similar in content if their high-level features as extracted by a pre-trained image recognition
+system are similar.
+ </div>
+ 
+       <div> Style transfer - level 3 understanding
+  <br />  Style: Two images are similar in style if their low-level features as extracted by a pre-trained image recognition
+system share the same spatial statistics.
+ </div>
+  
+     <div> Style transfer - level 3 understanding
+  <br /> But what is "a pre-trained image recognition system"? 
+  <br /> - We have seen a few already! 
+  <br /> - Check out all the image classification models <a href="https://developer.apple.com/machine-learning/models/">here</a>. 
+ </div>
+  
+    <div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='https://www.researchgate.net/publication/354239716/figure/fig2/AS:1062850231549964@1630414650846/Illustration-of-concept-of-neural-style-transfer-using-original-work-101.png'/>
+  <div> An illustration of NST </div>
+</div>
+  
+       <div> Style transfer - Summary
+  <br /> How does it work?
+  <br /> - We pick a pre-trained image classification model. 
+  <br /> - We specify an input Content image and an input Style image.
+   <br /> - The system initialises a random noise image.
+ <br /> - The system computes the content and style losses between initialised image and input content images, based on the image classification model.
+ <br /> - The system refines the initialised image iteratively using gradient descent to minimise the content and style losses.
+ </div>
+  
+  
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='https://www.researchgate.net/publication/354239716/figure/fig2/AS:1062850231549964@1630414650846/Illustration-of-concept-of-neural-style-transfer-using-original-work-101.png'/>
+  <div> An illustration of NST again</div>
+</div>
+  
+     <div> 
+A detailed <a href="https://www.youtube.com/watch?v=B22nIUhXo4E">explanation YTB video </a>
+  </div>  
+  
+  
+ 
+    <div> 
+CreateML time! 
+  </div>  
+  
+    <div> 
+your turn:
+ <br /> 
+--1. summon CreateML
+ <br /> 
+--2. select Style Transfer
+<br /> 
+--3. drop in your cool Training Style Image
+<br />       
+--4. drop in your cool Content Images
+<br />    
+--5. Train and see the result
+<br />    
+--6. Play with hyperparameters "Iterations", "Style Strength" and "Syle Density" (re-train and see the result!)
+  </div>  
+ 
+<div> 
+🎉 
+</div>
+  
+ 
+<div>
+👁️ References
+<br /> -  <a href="https://arxiv.org/pdf/1508.06576.pdf"> A Neural Algorithm of Artistic Style </a>
+<br />  - <a href="https://arxiv.org/pdf/1705.06830.pdf"> Exploring the structure of a real-time, arbitrary neural
+artistic stylization network </a>  
+ </div>
+
+<div>
+Maybe you'd like to have an IOS app running style transfer on camera input?
+<br /> <a href="https://fritz.ai/train-and-run-a-create-ml-style-transfer-model-in-an-ios-camera-application/">Here </a> is a related project.
+</div>
+  
+
+
+  <div> 
+
+today we talked about:
+  <br />  
+-- Style transfer: what is it
+     <br />  
+--- input a content image and a style image, output a blended image
+     <br />  
+-- Style transfer: how does it work
+     <br />  
+--- Use pre-trained image classifier to compute content loss and style loss
+     <br />  
+--- Refine a randomly initialsed noise image via gradient descent for minimising the content and style losses
+<br />  
+-- Style transfer with CreateML, done easily 🫡
+  </div>
+  
+
+  <div>     
+  We'll see you next week same time same place! 🫡
+</div>
+  
+ 
+</body>
+</html>
+ 
