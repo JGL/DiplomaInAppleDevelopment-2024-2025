@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning Two</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+  
+</head>
+<body class="light">
+
+  <div>
+      ML Two 
+    <br />
+    Lecture 07
+      <br />
+    🤗NLP 101: basic tasks with Apple Natural Language Framework😎
+    </div>
+  
+    <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+    <div> First of all, don't forget to confirm your attendence on <a href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!  </a></div>
+  
+  
+  <div> 
+Two cover versions of Aphex Twin:
+    
+  <br> --  <a href="https://www.youtube.com/watch?v=XGGiNbtz-48"> Alberto Balsalm but I ran it through Adobe Enhance Speech </a>  
+   <br> --  <a href="https://www.youtube.com/watch?v=1HBappnahHw"> alberto balsalm chair cover </a>  
+    
+  </div>  
+                  <div>     
+after today's lecture:
+       <br /> -- Natural Language Processing basic tasks🤖          
+       <br /> --- Lemmatisation 
+      <br /> --- Named Entity Recognition
+       <br /> --- Part-of-speech tagging 
+      <br /> --- Language Identification       
+</div>
+  
+        <div> 
+NLP: 
+ <br /> 
+        
+        Natural Language Processing
+         <br /> 
+-- recall data modality?
+
+  </div> 
+  
+      <div> 
+data modality:
+         <br /> 
+image, text, audio, sensor data, etc.
+
+  </div> 
+  
+ 
+      <div> 
+for example, 
+         <br /> 
+object detection is about image data
+
+  </div> 
+  
+        <div> 
+NLP?
+         <br /> 
+-- look it up on wikipedia
+ <br />           
+    -- "the application of computational techniques to the analysis and synthesis of natural language and speech.""
+ <br />   
+    --  it is an interdisciplinary subfield 
+  </div> 
+  
+   <div> Example applications of NLP:
+  <br />  text-to-speech 🗣️
+  <br />  speech-to-text 👂
+   <br />  machine translation 🧠
+     <br />  image captioning 🧑‍🏫 
+     <br />  text-to-image generation 🧑‍🎨
+     
+   <br />  etc.
+  
+  </div>
+  
+ <div> 
+also NLP:
+         <br /> 
+-- Lemmatization 
+ <br />           
+    -- Named Entity Recognition
+ <br />   
+    --  Part-of-speech tagging
+  <br />   
+   etc. 
+    <br /> 
+   ❓❓❓
+  </div> 
+  
+   <div> While engaging with languages is very natural to us, 
+      <br /> 
+     (it is a given, we can use it without fully understanding how our language system works)
+     </div>
+  
+    <div>  NLP can be quite complex and comprises many low-level sub tasks, including: </div>
+  
+ <div> 
+-- <a href="https://developer.apple.com/documentation/naturallanguage/identifying_the_language_in_text"> Language identification </a>  
+ <br />  
+-- <a href="https://developer.apple.com/documentation/naturallanguage/nltagscheme/2976609-lemma"> Lemmatization </a>  
+ <br />           
+    --  <a href="https://developer.apple.com/documentation/naturallanguage/identifying_people_places_and_organizations"> Named Entity Recognition </a>   
+ <br />   
+    --  <a href="https://developer.apple.com/documentation/naturallanguage/identifying_parts_of_speech"> Part-of-speech tagging </a>   
+  <br />  
+   --  <a href="https://developer.apple.com/documentation/naturallanguage/tokenizing_natural_language_text"> Tokenization </a>   
+  <br />  
+   etc. 
+    <br /> 
+  </div> 
+  
+  <div> For today's lecture, we will go through each one of these basic tasks with a reference to 
+     <br /> 
+  🍎 Apple's Natural Language Framework.
+   <br /> 
+  - We are not going to look deep into the AI models, instead we just need to know how to use them👐
+  </div>
+
+
+  
+  <div>
+    open an xcode playground, import the framework:
+    <pre>import NaturalLanguage </pre>
+     <pre>import Foundation </pre>
+     <pre>import CoreML</pre>
+</div>
+  
+      <div>
+  <a href="https://developer.apple.com/documentation/naturallanguage/identifying_the_language_in_text"> Language identification </a>  
+  <br /> 
+  --1. what is it about? 🥷
+  <br /> 
+  --- try answer by filling out blanks in: Given an input of __, the solution model should produce an output of  __
+  <br /> 
+  --2. what are the possible use cases? 🧑‍🍳
+        <br /> 
+  --3. paste and run the example codes! 🕹️
+        
+  </div>
+  
+    
+      <div>
+  <a href="https://developer.apple.com/documentation/naturallanguage/identifying_people_places_and_organizations"> Named Entity Recognition </a>  
+  <br /> 
+  --1. what is it about? 🥷
+  <br /> 
+  --- try answer by filling out blanks in: Given an input of __, the solution model should produce an output of  __
+  <br /> 
+  --2. what are the possible use cases? 🧑‍🍳
+        <br /> 
+  --3. paste and run the example codes! 🕹️
+        
+  </div>
+  
+    
+  
+  <div> 
+Jon Rafman made a MV for Kanye and <a href="https://www.youtube.com/watch?v=e2ec8rD55D4"> this guy </a> 
+    is re-making it using AI tools
+
+  </div>    
+ 
+  
+      <div>
+  <a href="https://developer.apple.com/documentation/naturallanguage/identifying_parts_of_speech"> Part-of-speech tagging </a>   
+  <br /> 
+  --1. what is it about? 🥷
+  <br /> 
+  --- try answer by filling out blanks in: Given an input of __, the solution model should produce an output of  __
+  <br /> 
+  --2. what are the possible use cases? 🧑‍🍳
+        <br /> 
+  --3. paste and run the example codes! 🕹️
+        
+  </div>
+  
+    
+      <div>
+  <a href="https://developer.apple.com/documentation/naturallanguage/tokenizing_natural_language_text"> Tokenization </a> 
+  <br /> 
+  --1. what is it about? 🥷
+  <br /> 
+  --- try answer by filling out blanks in: Given an input of __, the solution model should produce an output of  __
+  <br /> 
+  --2. what are the possible use cases? 🧑‍🍳
+        <br /> 
+  --3. paste and run the example codes! 🕹️
+        
+  </div>
+  
+ 
+<div> 
+🎉 
+</div>
+  
+ 
+
+  <div> 
+
+Today we talked about:
+  <br />  
+-- Lemmatisation
+     <br />  
+-- Named Entity Recognition
+     <br />  
+-- Part-of-speech tagging 
+     <br />  
+-- Language Identification       
+<br />  
+in what these tasks are about and how to use Apple Natural Language Framework for these tasks!
+  </div>
+  
+
+  <div>     
+  We'll see you next week same time same place! 🫡
+</div>
+  
+ 
+</body>
+</html>
