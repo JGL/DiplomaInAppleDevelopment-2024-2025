@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning Two</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+  
+</head>
+<body class="light">
+
+<div>
+      ML Two 
+    <br />
+    Lecture 08
+      <br />
+    🤗NLP 102: Sentiment Analysis with CreateML😎
+    </div>
+  
+    <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+    <div> First of all, don't forget to confirm your attendence on <a href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!  </a></div>
+  
+      <div> a Linkin Park <a href="https://www.youtube.com/watch?v=7NK_JOkuSVY"> MV </a> to wake us up </div>
+
+
+                  <div>     
+after today's lecture:
+       <br /> -- A few more NLP basic tasks with Apple Natural Language Framework
+       <br /> -- Advanced NLP: Sentiment analysis
+</div>
+  
+  <div> 
+Recap on last week
+  <br />  
+       <br /> -- Introduction to NLP 🎃
+     <br /> -- Some basic NLP tasks solved with Apple NL framework
+      <br /> --- Language identification
+              <br /> --- Named Entity Recognition
+    <br /> ---  Part-of-speech tagging
+  </div>
+  
+  
+        <div> 
+NLP:
+         <br /> 
+from wikipedia:
+ <br />           
+    -- "the application of computational techniques to the analysis and synthesis of natural language and speech.""
+ <br />   
+    --  it is an interdisciplinary subfield 
+  </div> 
+  
+   <div> Example applications of NLP:
+  <br />  text-to-speech 🗣️
+  <br />  speech-to-text 👂
+   <br />  machine translation 🧠
+     <br />  image captioning 🧑‍🏫 
+     <br />  text-to-image generation 🧑‍🎨
+     
+   <br />  etc.
+  
+  </div>
+  
+  <div> 
+Extend to this week
+  <br />  
+     <br /> Basic NLP tasks
+      <br /> --- Language identification
+              <br /> --- Named Entity Recognition
+    <br /> ---  Part-of-speech tagging
+      
+       <br /> --- Lemmatization (NEW❤️‍🔥)
+    <br /> ---  Tokennization (NEW❤️‍🔥)
+     <br />Higher-level NLP tasks
+        <br /> --- Sentiment analysis (NEW❤️‍🔥)
+        
+  </div>
+   <div> this <a href="https://github.com/red-x-silver/MLTwo-NLP102/tree/main"> one playground </a>  containing all basic NLP tasks in Apple NL framework </div>
+  
+    <div> download and revise 🎃
+      
+       <br /> ---Language identification (line 1-57)
+      
+       <br /> ---Named Entity Recognition (line 59-101)
+      
+       <br /> ---Part-of-speech tagging (line 144-181)
+  </div>
+
+  
+  <div>
+    Your turn: open a new xcode playground, import the framework:
+    <pre>import NaturalLanguage </pre>
+     <pre>import Foundation </pre>
+     <pre>import CoreML</pre>
+</div>
+  
+         <div>
+ <a href="https://developer.apple.com/documentation/naturallanguage/tokenizing_natural_language_text"> Tokenization </a> 
+  <br /> 
+  --1. Read about Tokenization: what is it about? 🥷
+ <br /> 
+  --2. Copy relevant <a href="https://github.com/red-x-silver/MLTwo-NLP102/tree/main/NLP_basic_tasks.playground.zip"> code </a>  from
+        <br /> 
+        line 103-142
+ <br /> 
+  --3. paste and run the example codes! 🕹️
+        
+  </div> 
+  
+  
+      <div>
+  <a href="https://developer.apple.com/documentation/naturallanguage/nltagscheme/2976609-lemma"> Lemmatization</a>  
+  <br /> 
+  --1. Read about Lemmatization: what is it about? 🥷
+ <br /> 
+  --2. Copy relevant <a href="https://github.com/red-x-silver/MLTwo-NLP102/tree/main/NLP_basic_tasks.playground.zip"> code </a>  from
+        <br /> 
+        line 183-212
+ <br /> 
+  --3. paste and run the example codes! 🕹️
+        
+  </div>
+ 
+  
+ <div> Higher level NLP task - 
+    <br /> 
+  Sentiment Analysis
+  </div>
+  
+    <div> 
+  
+      EASY AND HANDY!
+  </div>
+  
+   <div> It's a classification task 
+    <br /> 
+    input: text (a sentence, a paragraph, etc.)
+     <br /> 
+  output: what are the output classes?
+  </div>
+  
+     <div> 
+  output: 
+    <br /> 
+       positive or negative
+      <br /> 
+      (or neutral)
+  </div>
+  
+       <div> 
+  Sentiment analysis:
+     <br /> 
+   "the process of computationally identifying and categorizing opinions expressed in a piece of text, especially in order to determine whether the writer's attitude towards a particular topic, product, etc. is positive, negative, or neutral."  
+  </div>
+  
+            <div> 
+Sounds familiar?
+  </div>
+  
+              <div> 
+  It is a classification task with two or three categories: negative/positive/(neutral).
+  </div>
+  
+       <div> 
+  It is a classification task, which means it has almost the same principles as image classification 🥰
+     <br /> 
+  The only difference 😈 : different data modality, one takes text as input vs. takes image as input
+  </div>
+  
+         <div> 
+ CreateML takes good care for us again!
+  </div>
+  
+           <div> 
+ Training:
+  <br /> 
+<a href="http://boston.lti.cs.cmu.edu/classes/95-865-K/HW/HW3/"> Data </a>
+   <br />  (epinions3.zip )                    
+  </div>
+  
+          <div> 
+Let's take a look at what "sentiment analysis" data should look like
+  </div>
+
+            <div> 
+the data: pairs of text with its label
+  </div>
+  
+  
+            <div> 
+ Training:
+  <br /> 
+-- 1. Download and unzip <a href="http://boston.lti.cs.cmu.edu/classes/95-865-K/HW/HW3/"> Data </a>
+                <br /> 
+-- 2. Read through this <a href="https://developer.apple.com/documentation/createml/creating-a-text-classifier-model"> Apple Document </a>
+          <br /> 
+-- 3. Use this <a href="https://github.com/red-x-silver/MLTwo-NLP102/tree/main/training.playground.zip"> Playground </a> for training
+   <br /> 
+              (don't forget to change the corresponding file path! )
+     <br /> 
+              (specify a cooler model name)
+             
+          
+  </div>
+  
+              <div> 
+ Deployment:
+  <br /> 
+-- 1. Download and unzip <a href="https://github.com/red-x-silver/MLTwo-NLP102/tree/main/SentimentAnalysis-Complete"> app code </a>
+                <br /> 
+-- 2. Drop in your freshly trained model 
+                <br /> 
+-- 3. Run! (tested on MacOS)   
+          
+  </div>
+  
+  
+  
+    <div> ai artist of this week: <a href="https://sofiacrespo.com/ "> Sofia Crespo </a>
+  
+   <br /> 
+      keywords:
+   <br /> 
+      biology-inspired AI; artificial biodiversity
+  </div>
+ 
+  
+ 
+<div> 
+🎉 
+</div>
+  
+ 
+ <div> 
+today we talked about:
+  <br />  
+     <br /> Basic NLP tasks solved with Apple NL framework
+
+       <br /> --- Lemmatization
+    <br /> ---  Tokennization
+  <br /> Higher level NLP task - sentiment analysis
+
+       <br /> --- CreateML training done on playground!!!
+
+  </div>
+  
+      <div> A weekly gentle reminder of the <a href="https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025?tab=readme-ov-file#block-2-assessment"> final assessment presentation </a>✌️🥁 </div>
+  
+
+  <div>     
+  We'll see you next week same time same place! 🫡
+</div>
+  
+ 
+</body>
+</html>
+
+
+  
