@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning Two</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+  
+</head>
+<body class="light">
+ <div>
+      ML Two 
+    <br />
+    Lecture 10
+      <br />
+    🤗Recommender system😎
+    - Movie Recommender
+
+
+    <br />
+    with CreateML
+    </div>
+  
+    <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+    <div> First of all, don't forget to confirm your attendence on <a href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!  </a></div>
+
+                  <div>     
+Today's lecture:
+       <br /> -- Introduction to recommendation system 🤑
+       <br /> -- A simple movie recommender </div>
+ 
+  
+       
+  
+  <div> <a href="https://www.youtube.com/watch?v=reUZRyXxUs4"> money talks 🤑 </a>   </div>
+    
+                    <div>     
+money-related AI:
+       <br /> -- recommendation system
+       <br /> -- market price prediction
+      <br /> -- etc.
+                      
+
+</div>
+  
+  
+    <div>  <a href="https://youtu.be/4ti-DjN94Gw?t=1185"> art work prices prediction </a>  </div>
+  
+  <div> art analytics: <a href="https://www.artnome.com/"> artnome </a>  </div>
+
+  
+ 
+    <div> Recommendation System!
+     <br />
+     (RS) </div>
+  
+  
+   <div> before talking about what RS is, let's start by examining the data </div>
+  
+  
+<div> 
+ Training:
+  <br /> 
+<a href="https://www.kaggle.com/datasets/netflix-inc/netflix-prize-data"> Data </a>
+   <br />  Netflix Prize data            
+  </div>
+  
+          <div> 
+There are two entities in RS: user and item (movie)
+  </div>
+
+            <div> 
+There is one important quantity of user-item interaction: rating
+  </div>
+
+            <div> 
+What does the dataset look like: to organise user, item and ratings together in a dataset we'd use a tabular data format.
+  <br />
+(sketch on the whiteboard)  
+  </div>
+  
+              <div> 
+Recommendation system paradigms:
+  <br /> -- content-based: find similar items OR users without using user-item interaction data.
+  
+  <br /> -- collaborative filtering: find similar user-item iteraction history 
+  
+  <br /> -- hybrid, etc.
+  
+  </div>
+  
+  <div> 
+ keyword: embedding(aka some sort of represenation of user/item) and similarity
+  <br /> 
+  -- more explanations 
+<a href="https://developers.google.com/machine-learning/recommendation/collaborative/basics"> here</a>         
+  </div>
+  
+  
+             <div> 
+Let's do some data pre-processing and training!
+               <br /> 
+  all code <a href="https://github.com/red-x-silver/MLTwo-RecSys/tree/main"> here </a> 🥰    
+  </div>
+             
+    <div>
+      Hard mode:
+      <br />
+    open a terminal:
+    <pre>cd to/the/code/folder </pre>
+     <pre>conda create -n RecPrepEnv python=3.6 </pre>
+     <pre>conda activate RecPrepEnv </pre>
+      <br /> 
+      put "netflix-prize-data" to the same directory as preparation.py (why?)
+
+    
+</div>
+  
+      <div>
+              Hard mode:
+      <br />
+    open a terminal:
+    <pre>cd to/the/code/folder </pre>
+     <pre>conda create -n RecPrepEnv python=3.6 </pre>
+     <pre>conda activate RecPrepEnv </pre>
+
+
+      <pre>python preparation.py </pre>
+       <br /> 
+       then, a new "netflix-prize-data.csv" will appear in the folder "netflix-prize-data", check it out!
+    
+</div>
+  
+    <div> 
+  🙌 Hands-on session
+  <br />   
+ 1.  Open CreateML, set up new project and select "recommendation" template.
+  <br /> 
+2. Drop the "netflix-prize-data.csv" to the training data.
+   <br />  
+3. Assign users/items/ratings dropdown menu. 
+    <br />  
+4. Click on training! 
+    <br />    
+5. Preview and download the model
+  </div>
+    
+<div>
+        Next:
+    <br />          
+run the training playground to see what the output of the recommender ML model is
+          
+</div>
+  
+  <div>     
+Human autonomy issue in recommender system: <a href="https://youtu.be/_PH5NQqlYQ8?si=0zKQIala7H5KQ5zC&t=463"> Lorenz Curve </a>
+</div>
+  
+      <div> 
+ 🙌 Reading session
+  <br /> 
+  Let's have a look at a legal framework of AI governance     
+  <br /> 
+-- 1. AI Act - <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai">a summary</a> and <a href="https://www.europarl.europa.eu/thinktank/en/document/EPRS_BRI(2021)698792">another summary</a> .
+  <br /> 
+-- 2. AI Act -  <a href="https://www.europarl.europa.eu/RegData/etudes/BRIE/2021/698792/EPRS_BRI(2021)698792_EN.pdf">the briefing</a>. 
+   <br />  
+  
+  </div>
+  
+        <div> 
+ 🙌 Reading session
+  <br /> 
+  Let's have a look at the UK government response for AI regulation     
+  <br /> 
+-- 1. Read through <a href="https://www2.deloitte.com/uk/en/blog/emea-centre-for-regulatory-strategy/2024/the-uks-framework-for-ai-regulation.html">this summary article</a>.
+  <br /> 
+-- 2. Think about one or more sectors/applications that you are interested in, have a glance over the <a href="https://www.gov.uk/government/consultations/ai-regulation-a-pro-innovation-approach-policy-proposals/outcome/a-pro-innovation-approach-to-ai-regulation-government-response">response</a> and think about how those sectors/applications will be impacted. 
+   <br />  
+  
+  </div>
+  
+<div> 
+🎉 
+</div>
+  
+ 
+ <div> 
+Today we talked about:
+ 
+     <br /> - 1. Recommendation system: user, item, user-item interaction.
+
+       <br /> - 2. Movie Recommender as an example.
+   
+    <br /> - 3. Discussions on ethics of recommender system.
+   </div>
+  
+<div> A weekly gentle reminder of the <a href="https://github.com/JGL/DiplomaInAppleDevelopment-2024-2025/tree/main?tab=readme-ov-file#block-2-assessment"> final assessment presentation </a>✌️🥁 </div>
+  
+
+
+  <div>     
+  We'll see you next week same time same place! 🫡
+</div>
+  
+  
+ 
+</body>
+</html>
+
+
