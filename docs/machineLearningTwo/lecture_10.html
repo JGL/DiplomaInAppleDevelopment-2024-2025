@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning Two</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+
+  </head>
+<body class="light">
+
+
+  <div>
+      ML Two 
+    <br />
+    Lecture 09
+      <br />
+    🤗NLP 103 the finale: Embed ChatGPT (and other OpenAI AI models) in your App😎
+    </div>
+  
+    <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+
+    <div> First of all, don't forget to confirm your attendence on <a href="https://jgl.github.io/DiplomaInAppleDevelopment-AutumnWinter2023/codingOne/lecture_01.html#6"> Seats App!  </a></div>
+
+                  <div>     
+After today's lecture:
+       <br /> -- A "ChatGPT-powered" APP built on your phone
+       <br /> -- Knowing how to incorporate ANY OpenAI model in your future Apps (via the magic named "API")             
+</div>
+  
+  <div> 
+Recap on last two weeks of NLP series 🤌
+     <br /> Basic NLP tasks
+      <br /> --- Language identification
+              <br /> --- Named Entity Recognition
+    <br /> ---  Part-of-speech tagging
+      
+       <br /> --- Lemmatization
+    <br /> ---  Tokennization
+     <br />Higher-level NLP tasks
+        <br /> --- Sentiment analysis
+  </div>
+  
+  
+      
+  
+  <div> 
+   An emoji summerising up previous NLP models: 👶 
+  </div>
+  
+  <div> 
+  Today we are going to interact with Large Language Model (e.g. GPT models by OpenAI)!
+  </div>
+  
+    
+   <div> The evolution pathway of ChatGPT 🛣️
+  
+  
+         <br /> -- architecture improvement: 
+     <br /> 
+     the "T" in GPT: transformer (attention mechanism)
+       <br /> -- upscaled data:
+     <br /> 
+     570GB of data obtained from various sources
+      <br /> -- upscaled model:
+      <br /> 
+     175 Billion parameters
+     <br /> -- upscaled computation resource:
+      <br /> 
+     ~10,000 GPUs
+     <br /> 
+     etc.
+  
+  </div>
+                      <div>     
+Let's bring this gem into our phone (any ios app actually).
+</div>
+  
+  <div> 
+ Example App code
+  <br /> 
+<a href="https://github.com/red-x-silver/MLTwo-NLP103/tree/main"> here </a>
+   <br />  
+    
+  </div>
+  
+ <div> ✋We are not copying pasting the large language models themselves into our phone (check how large they are).
+    <br /> 
+   👍Instead we will use OpenAI APIs to communicate with large language models stored on their servers. 
+    <br /> 
+   To be able to use Open APIs, we need "API key"🗝️. 
+  </div>
+  
+   <div> API key ??? </div>
+  
+    <div> 
+ 🙌 Reading session (VERY IMPORTANT)
+  <br />   
+-- 1. Have a read on the OpenAI API document <a href="https://platform.openai.com/docs/introduction"> here </a>
+  <br /> 
+-- 2. Have a read on how to get an OpenAI API key <a href="https://www.howtogeek.com/885918/how-to-get-an-openai-api-key/"> here </a>
+   <br />  
+  
+  </div>
+  
+       <div> 
+Just a quick quiz: what's the model name for speech recognition?
+  </div>
+  
+  <div> 
+  🙌 Hands-on session
+  <br />   
+ 1. Generate a new OpenAI API key <a href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key"> here </a>.
+  <br /> 
+2. Paste that into the code："OpenAIConnector" file -> Line 18 let openAIKey = "" 
+   <br />  
+3. Build the App.  (you need to comment out line 17)
+    <br />  
+    me demo 💅
+  </div>
+  
+
+    <div> 
+To incorporate this to any other app:
+   <br />    
+See how the example code generates request(input) and handles response(output), both in JSON
+
+  </div>
+  
+    <div> 
+A little exercise: how to turn this app into an auto-summary app?
+      <br /> 
+     - that is to,
+  <br /> 
+     📲 input a paragraph to be summarised,
+   <br /> 
+   🔘 click a button,
+    <br /> 
+    🏂 output a summary of that paragraph!
+  </div>
+    
+      <div> 
+But the response is slow 🥲:
+   <br /> 
+      --  There are <a href="https://platform.openai.com/docs/guides/text-generation"> other language models </a> that are faster!
+   <br /> 
+      -- check the timeout parameter in line 94 from OpenAIConnector.         
+  </div>
+  
+<div> 
+🎉 
+</div>
+  
+ 
+ <div> 
+Today we talked about:
+ 
+     <br /> 1. OpenAI APIs and how to get your API key.
+       <br /> 2. Example of embedding OpenAI models into your APP via the API.
+  </div>
+  
+<div> A weekly gentle reminder of the <a href="https://github.com/JGL/DiplomaInAppleDevelopment-SpringSummer2024?tab=readme-ov-file#block-2-assessment"> final assessment presentation </a>✌️🥁 </div>
+  
+  <div>     
+Video time:
+<a href="https://www.youtube.com/watch?v=_6pA5xsnnwo"> 2022 Art Show: NeurIPS Workshop on Machine Learning for Creativity and Design </a>
+</div>
+
+  <div>     
+  We'll see you next week same time same place! 🫡
+</div>
+  
+  
+ 
+</body>
+</html>
