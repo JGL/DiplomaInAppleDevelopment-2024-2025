@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Machine Learning Two</title>
+  <!-- This whole presentation was made with Big: https://github.com/tmcw/big -->
+  
+  <link href="../big/big.css" rel="stylesheet" type="text/css" />
+  <script src="../big/big.js"></script>
+  <link href="../big/themes/lightWhite.css" rel="stylesheet" type="text/css" />
+
+  <!-- Favicon link below, via https://emojitofavicon.com -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍴</text></svg>"></link>
+  
+  <style>
+    body {
+      background-color: #EDDD6E;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+      /* font-weight: 700;*/
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-size: 21px;
+    }
+  </style>
+
+  </head>
+<body class="light">
+
+<div>
+      ML Two 
+    <br />
+    Lecture 11
+      <br />
+    🤗Make Stable Diffusion models running on our Macbook!😎
+    </div>
+  
+    <div>Welcome 👩‍🎤🧑‍🎤👨‍🎤</div>
+   
+        <div> 
+        Today: 
+       <br />
+        1. A very gentle introduction to stable diffusion model.
+      <br />    
+        2. Play with different versions of stable diffusion models on Hugging Face.
+      <br />
+        3. Three routes (out of many) to have a stable diffusion model running on your MacBook.
+  </div>
+  
+
+        <div> 
+        Stable diffusion:
+       <br />
+       - It is a text-to-image generative model.
+      <br />
+       - It is a <a href="https://github.com/CompVis/latent-diffusion">Latent Diffusion model</a> developed by researchers from the Machine Vision and Learning group at LMU Munich, a.k.a CompVis.
+        <br />
+      - Its model checkpoints (the actual model files) were publicly released at the end of August 2022 by a collaboration of Stability AI, CompVis, and Runway with support from EleutherAI and LAION. For more information, you can check out the <a href="https://stability.ai/blog/stable-diffusion-public-release">official blog post</a>.     
+  </div>
+  
+      <div> 
+        Stable diffusion:
+       <br />
+       - Since its public release the community has done several iterations of modification/improvement 
+    and there are different versions of stable diffusion models (<a href="https://replicate.com/guides/stable-diffusion/#the-models">version list here</a>).
+      <br />
+       - One common place to play with SD models is Hugging Face. They have computers storing the model files (quite large!) and running the actual computation for you. 
+        <br />
+      - You can play with stable diffusion v1-5 <a href="https://huggingface.co/spaces/runwayml/stable-diffusion-v1-5">here</a>.
+       <br />
+      - Or you can play with stable diffusion v2-1 <a href="https://huggingface.co/spaces/stabilityai/stable-diffusion">here</a>.
+  </div>
+  
+        <div> 
+🥲But sometimes their computers are busy and the queueing time can be long.
+   <br /> What can we do?
+    <br /> - Let's make stable diffusion models running locally on our machines and no queueing anymore yay!😎
+  </div>
+
+ 
+                <div>     
+🌶️Easy mode:
+       <br /> Download <a href="https://apps.apple.com/us/app/diffusers/id1666309574?mt=12">this APP</a> from APP Store and run.
+       <br /> -- 🫱Your turn🫲!
+</div>
+  
+                  <div>    
+🌶️🌶️Normal mode:
+       <br /> - The APP from previous slide is actually open-source.
+       <br /> - We can download its source code from github <a href="https://github.com/huggingface/swift-coreml-diffusers">here</a> and build this xcode project!
+     <br /> -- 🫱Your turn🫲!
+                     <br /> -- Download the zip file from that Github repo (the green "Code" button), put it into your ML Two folder (or anywhere), and unzip.🤐 
+                    <br /> -- On first launch, it will automatically download a zipped archive with a Core ML version of Stability AI's Stable Diffusion v2 base from <a href="https://huggingface.co/pcuenq/coreml-stable-diffusion-2-base/tree/main">here</a> and it can take 10-20 minutes.🫷🫸
+                    <br /> -- Once the download finishes, it is ready to play!😈
+</div>
+  
+  <div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='https://cdn.glitch.global/aadeea2f-d3e4-49b5-bfe4-8303a0abdc36/download.png?v=1709509314162'/>
+  <div>The downloading page (for downloading the model files) on first launch 🚀  </div>
+</div>
+  
+    <div class='layout' style='grid-template-rows:75% 25%;'>
+  <img src='https://cdn.glitch.global/aadeea2f-d3e4-49b5-bfe4-8303a0abdc36/app-ui.png?v=1709509361167'/>
+  <div> What the app looks like running on Xiaowan's 2020 13-inch Macbook Pro M1, 16GB RAM, MacOS Ventura 13.6.1🧃</div>
+</div>
+  
+<div>     
+🌶️🌶️🌶️Hard mode:
+       <br /> - The open-source project from last slide uses a ready-for-Apple (aka the nice CoreML version) stable diffusion model. 
+       <br /> - The teams behind stable diffusion models primarily release the model in the PyTorch🔥 format (named "checkpoint").
+        <br /> - To be able to run AI models natively in Apple ecosystem, we need the models in CoreML format (with an extension of ".mlmodelc").
+</div>
+  
+  
+  <div>     
+🌶️🌶️🌶️Hard mode:
+ <br /> - The previous two approaches save us from the process of converting the model from Pytorch checkpoints to CoreML format. 
+      <br /> - You can also find a list of already converted model files <a href=" https://hf.co/apple">here</a> and use those model files in your app (like shown in <a href="https://github.com/ynagatomo/ImgGenSD2">this</a> project from GitHub). 
+</div>
+  
+<div>     
+🌶️🌶️🌶️🌶️Warrior mode: 
+       <br /> - What if we want to use a customized stable diffusion model like this <a href="https://huggingface.co/yehiaserag/anime-pencil-diffusion">anime pencil diffusion</a>✍️🎨 ? 
+  <br /> - Sadly there is no converted-to-coreml models available 😥    
+  <br /> - Let's just convert the model into CoreML format ourselves:
+       <br /> -- We can convert the model following the official instructions <a href="https://github.com/apple/ml-stable-diffusion?tab=readme-ov-file#-converting-models-to-core-ml">here</a>.
+      <br /> -- As the process may slightly vary from machine to machine, we will provide individual support on your tour - find a stable diffusion model that you like and we will help you with the model converting process using your machine.✋🤓🤚
+</div>
+  
+  
+  <div>     
+ Lecture references:
+   <br /> -  <a href="https://huggingface.co/blog/diffusers-coreml">Using Stable Diffusion with Core ML on Apple Silicon</a>
+   <br /> - <a href="https://github.com/apple/ml-stable-diffusion">Run Stable Diffusion on Apple Silicon with Core ML</a>
+     <br /> - <a href="https://huggingface.co/docs/diffusers/v0.13.0/en/stable_diffusion">The Stable Diffusion Guide 🎨</a>
+    
+    <br /> - <a href="https://replicate.com/guides/stable-diffusion">A guide to Stable Diffusion</a>
+</div> 
+  
+  
+  <div>     
+  We'll see you next week same time same place! 🫡
+</div>
+  
+  
+  
+  
+
+  
+  
+</body>
+</html>
